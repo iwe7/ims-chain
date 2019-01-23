@@ -13,6 +13,7 @@
     "multihashing-async": "^0.5.2",
     "peer-book": "^0.9.1",
     "peer-id": "^0.12.2",
-    "peer-info": "^0.15.1"
+    "peer-info": "^0.15.1",
+    "reflect-metadata": "^0.1.13"
   }
 }

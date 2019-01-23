@@ -1,11 +1,3 @@
 # `ims-core`
 
-> TODO: description
-
-## Usage
-
-```
-const imsCore = require('ims-core');
-
-// TODO: DEMONSTRATE API
-```
+> 依赖注入功能模块
