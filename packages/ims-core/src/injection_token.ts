@@ -19,12 +19,12 @@ export class InjectionToken<T = any> {
     return `[${this.name}]:${this.desc}`;
   }
 
-  static fromString(name: string, desc?: string) {
-    return new InjectionToken(name, desc || "");
+  static fromString<T = any>(name: string, desc?: string) {
+    return new InjectionToken<T>(name, desc || "");
   }
 
-  static fromType(token: any) {
-    return new InjectionToken(token.name, `${stringify(token)}`);
+  static fromType<T = any>(token: any) {
+    return new InjectionToken<T>(token.name, `${stringify(token)}`);
   }
 }
 

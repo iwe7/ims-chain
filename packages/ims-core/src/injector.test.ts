@@ -2,22 +2,18 @@ import { Injector } from "./injector";
 import { InjectionToken } from "./injection_token";
 let token = new InjectionToken("demo", "demo");
 
-let injector = new Injector(
-  [
+async function bootstrap() {
+  let injector = await Injector.create([
     {
       provide: token,
-      useFactory: () => {
+      useFactory: async () => {
         return {
           demo: "title"
         };
       },
       deps: []
     }
-  ],
-  null
-);
-
-async function bootstrap() {
+  ]);
   let ref = await injector.get(token);
   debugger;
 }

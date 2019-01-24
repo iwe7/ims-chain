@@ -1,11 +1,3 @@
 # `ims-common`
 
-> TODO: description
-
-## Usage
-
-```
-const imsCommon = require('ims-common');
-
-// TODO: DEMONSTRATE API
-```
+> 提供装饰器`Module`和`Injectable`

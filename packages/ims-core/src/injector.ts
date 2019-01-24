@@ -2,10 +2,11 @@ import { InjectionToken } from "./injection_token";
 import { StaticProvider, isStaticProviderFn } from "./provider";
 
 export interface Record<T = any> {
-  fn: (injector: Injector) => T;
+  fn: (injector: Injector) => Promise<T>;
   useCache?: boolean;
   multi?: boolean;
   value: T;
+  deps: string[];
 }
 
 export class Injector {
@@ -20,7 +21,7 @@ export class Injector {
     return injector;
   }
 
-  private records: Map<string, Record> = new Map();
+  public records: Map<string, Record> = new Map();
 
   constructor(
     public providers: StaticProvider[] = [],
@@ -29,7 +30,11 @@ export class Injector {
 
   async init() {
     this.set(InjectionToken.fromType(Injector), {
-      fn: () => this,
+      fn: () =>
+        new Promise<Injector>((resolve, reject) => {
+          resolve(this);
+        }),
+      deps: [],
       value: this,
       useCache: true,
       multi: false
@@ -71,14 +76,16 @@ export class Injector {
           }),
           useCache: !!provider.cache,
           value: undefined,
-          multi: !!provider.multi
+          multi: !!provider.multi,
+          deps
         });
       } else {
         this.set(provider.provide, {
           fn: provider.useFactory,
           useCache: !!provider.cache,
           value: undefined,
-          multi: !!provider.multi
+          multi: !!provider.multi,
+          deps
         });
       }
     }
@@ -86,29 +93,36 @@ export class Injector {
 
   async getRecord(token: InjectionToken<any>) {
     let hash = await token.hash;
-    if (this.records.has(hash)) {
-      let record = this.records.get(hash);
-      if (record) return record;
+    return this.getRecordByHash(hash);
+  }
+  getRecordByHash(hash: string): Record | undefined {
+    let record = this.records.get(hash);
+    if (record) return record;
+    if (this.parent) {
+      return this.parent.getRecordByHash(hash);
     }
   }
-  async get<T>(token: InjectionToken<T>, notFound?: T): Promise<T | T[]> {
-    let record = await this.getRecord(token);
-    let hash = await token.hash;
+  async getByHash<T>(hash: string, notFound?: T) {
+    let record = this.getRecordByHash(hash);
     if (record) {
       if (record.value && record.useCache) {
         return record.value;
       } else {
-        record.value = record.fn(this);
+        if (record.deps.length > 0) {
+          await Promise.all(record.deps.map(dep => this.getByHash(dep)));
+        }
+        record.value = await record.fn(this);
         this.records.set(hash, record);
         return record.value;
       }
     }
-    if (this.parent) {
-      return this.parent.get(token, notFound);
-    }
-    console.error(`not found ${token.name}`);
-    return notFound as T;
+    return notFound;
   }
+  async get<T>(token: InjectionToken<T>, notFound?: T): Promise<T | T[]> {
+    let hash = await token.hash;
+    return await this.getByHash(hash, notFound);
+  }
+
   async set<T>(token: InjectionToken<T>, factory: Record) {
     let hash = await token.hash;
     this.records.set(hash, factory);
