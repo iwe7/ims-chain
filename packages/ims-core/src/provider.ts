@@ -2,10 +2,19 @@ import { InjectionToken } from "./injection_token";
 import { Injector } from "./injector";
 export interface FactorySansProvider {
   useFactory: (injector: Injector) => any;
-  deps: InjectionToken[];
+  deps?: InjectionToken[];
   cache?: boolean;
 }
+
 export interface FactoryProvider extends FactorySansProvider {
+  provide: InjectionToken;
+  multi?: boolean;
+}
+
+export interface ValueSansProvider {
+  useValue: any;
+}
+export interface ValueProvider extends ValueSansProvider {
   provide: InjectionToken;
   multi?: boolean;
 }
@@ -18,7 +27,7 @@ export function isStaticProviderFn(val: any): val is StaticProviderFn {
   return typeof val === "function";
 }
 
-export type StaticProvider = FactoryProvider | StaticProviderFn;
+export type StaticProvider = FactoryProvider | ValueProvider | StaticProviderFn;
 
 export function isFactoryProvider(val: any): val is FactoryProvider {
   return Reflect.has(val, "provide") && Reflect.has(val, "useFactory");

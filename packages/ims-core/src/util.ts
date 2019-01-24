@@ -10,3 +10,7 @@ export function getClosureSafeProperty<T>(objWithPropertyToExtract: T): string {
 export function isFunction(val: any): val is Function {
   return typeof val === "function";
 }
+
+export function isPromise(val: any): val is Promise<any> {
+  return val && typeof val.then === "function";
+}

@@ -17,11 +17,6 @@ import {
   MetadataFactory,
   MetadataDef
 } from "./type";
-import {
-  getDesignParamTypes,
-  getDesignType,
-  getDesignReturnType
-} from "./util";
 import { InjectionToken } from "ims-core";
 export interface IDecorator<T> extends Function {
   (o?: T): any;
@@ -64,14 +59,12 @@ export function makeDecorator<T>(
           }
           // constructor
           let config = MakeDecoratorCache.get(target) as MakeDecoratorItem;
-          const types = getDesignParamTypes(target);
           let def: ConstructorMetadata = {
             metadataType: MetadataType.constructor,
             metadataDef,
             target,
             token,
-            parameterIndex: descriptorOrParameterIndex,
-            parameterType: types[descriptorOrParameterIndex]
+            parameterIndex: descriptorOrParameterIndex
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
           // 收集constructor 装饰器
@@ -89,15 +82,13 @@ export function makeDecorator<T>(
             });
           }
           let config = MakeDecoratorCache.get(target) as MakeDecoratorItem;
-          const types = getDesignParamTypes(target, propertyKey);
           let def: ParameterMetadata = {
             metadataType: MetadataType.parameter,
             metadataDef,
             target,
             token,
             propertyKey,
-            parameterIndex: descriptorOrParameterIndex,
-            parameterType: types[descriptorOrParameterIndex]
+            parameterIndex: descriptorOrParameterIndex
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
           // 收集方法参数装饰器
@@ -139,14 +130,12 @@ export function makeDecorator<T>(
             });
           }
           let config = MakeDecoratorCache.get(target) as MakeDecoratorItem;
-          const propertyType = getDesignType(target, propertyKey);
           let def: PropertyMetadata = {
             metadataType: MetadataType.class,
             metadataDef,
             target,
             token,
-            propertyKey,
-            propertyType
+            propertyKey
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
           config.propertys.push(def);
@@ -163,7 +152,6 @@ export function makeDecorator<T>(
             methods
           });
         }
-        const returnType = getDesignReturnType(target, propertyKey);
         let config = MakeDecoratorCache.get(target) as MakeDecoratorItem;
         let def: MethodMetadata = {
           metadataType: MetadataType.method,
@@ -171,8 +159,7 @@ export function makeDecorator<T>(
           target,
           token,
           parameters: config.parameters,
-          propertyKey: propertyKey as PropertyKey,
-          returnType
+          propertyKey: propertyKey as PropertyKey
         };
         def.metadataDef = !!getDef ? getDef(def) : metadataDef;
         // 清空

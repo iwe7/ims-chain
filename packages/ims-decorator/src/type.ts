@@ -21,24 +21,20 @@ export interface ClassMetadata<T = any> extends BaseMetadata<T> {
 
 export interface ConstructorMetadata<T = any> extends BaseMetadata<T> {
   parameterIndex: number;
-  parameterType: any;
 }
 
 export interface PropertyMetadata<T = any> extends BaseMetadata<T> {
   propertyKey: PropertyKey;
-  propertyType: any;
 }
 
 export interface MethodMetadata<T = any> extends BaseMetadata<T> {
   propertyKey: PropertyKey;
-  returnType: any;
   parameters: ParameterMetadata[];
 }
 
 export interface ParameterMetadata<T = any> extends BaseMetadata<T> {
   propertyKey: PropertyKey;
   parameterIndex: number;
-  parameterType: any;
 }
 
 export type MetadataDef<T = any> =

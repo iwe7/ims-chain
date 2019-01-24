@@ -2,14 +2,15 @@ import { makeDecorator, MetadataFactory, ClassMetadata } from "ims-decorator";
 import { InjectionToken, Injector, StaticProvider } from "ims-core";
 export const INJECTABLE = InjectionToken.fromString("injectable");
 export interface Injectable {
+  provide?: InjectionToken;
   useFactory?: (injector: Injector) => Promise<any>;
   deps?: [];
   useCache?: boolean;
 }
 export class InjectableMetadataFactory extends MetadataFactory {
   type(def: ClassMetadata<Injectable>): any {
-    let opt = def.metadataDef;
-    let token = InjectionToken.fromType(def.target);
+    let opt = def.metadataDef || {};
+    let token = opt.provide || InjectionToken.fromType(def.target);
     if (opt && opt.useFactory) {
       let provider = <StaticProvider>{
         provide: token,

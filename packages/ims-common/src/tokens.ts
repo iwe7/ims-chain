@@ -1,4 +1,4 @@
-import { InjectionToken, Injector } from "ims-core";
+import { InjectionToken, Injector, Type } from "ims-core";
 export interface AppInitialization {
   (injector: Injector): Promise<void>;
 }

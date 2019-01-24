@@ -63,16 +63,7 @@ export class ModuleFactory {
     injector = injector || (await Injector.create([]));
     instance.onInit && (await instance.onInit(injector));
     instance.setInjector(injector);
-    let appInits = await injector.get(AppInitialization);
-    if (Array.isArray(appInits)) {
-      for (let init of appInits) {
-        if (Array.isArray(init)) {
-          throw new Error(`app initialization 不支持多级嵌套`);
-        } else {
-          await init(injector);
-        }
-      }
-    }
+
     return instance;
   }
 }

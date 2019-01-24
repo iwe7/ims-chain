@@ -1,5 +1,11 @@
 import { InjectionToken } from "./injection_token";
-import { StaticProvider, isStaticProviderFn } from "./provider";
+import {
+  StaticProvider,
+  isStaticProviderFn,
+  FactoryProvider,
+  isFactoryProvider,
+  ValueProvider
+} from "./provider";
 
 export interface Record<T = any> {
   fn: (injector: Injector) => Promise<T>;
@@ -44,49 +50,94 @@ export class Injector {
       await this.handlerStaticProvider(provider);
     }
   }
+
+  private async handlerFactory(provider: FactoryProvider) {
+    let deps: string[] = [];
+    if (provider) {
+      for (let i of provider.deps || []) {
+        deps.push(await i.hash);
+      }
+    }
+    let multi = !!provider.multi;
+    let token = provider.provide;
+    let record = await this.getRecord(token);
+    if (record && record.multi) {
+      if (!multi) {
+        throw new Error(`${token.name} is should be multi`);
+      }
+    }
+    if (multi) {
+      let value = await this.get(token);
+      // 如果存在
+      if (!Array.isArray(value)) {
+        value = [];
+      }
+      this.set(token, {
+        fn: new Proxy(provider.useFactory, {
+          apply(target: any, thisArg: any, argArray?: any) {
+            let val = Reflect.apply(target, thisArg, argArray);
+            return value.concat(val);
+          }
+        }),
+        useCache: !!provider.cache,
+        value: undefined,
+        multi: !!provider.multi,
+        deps
+      });
+    } else {
+      this.set(provider.provide, {
+        fn: provider.useFactory,
+        useCache: !!provider.cache,
+        value: undefined,
+        multi: !!provider.multi,
+        deps
+      });
+    }
+  }
+
+  private async handlerValue(provider: ValueProvider) {
+    let multi = !!provider.multi;
+    let token = provider.provide;
+    let record = await this.getRecord(token);
+    if (record && record.multi) {
+      if (!multi) {
+        throw new Error(`${token.name} is should be multi`);
+      }
+    }
+    if (multi) {
+      let value = await this.get(token);
+      // 如果存在
+      if (!Array.isArray(value)) {
+        value = [];
+      }
+      this.set(token, {
+        fn: async () => {
+          return value.concat(provider.useValue);
+        },
+        useCache: true,
+        value: undefined,
+        multi: true,
+        deps: []
+      });
+    } else {
+      this.set(token, {
+        fn: async () => {
+          return provider.useValue;
+        },
+        useCache: true,
+        value: undefined,
+        multi: false,
+        deps: []
+      });
+    }
+  }
   async handlerStaticProvider(provider: StaticProvider) {
     if (isStaticProviderFn(provider)) {
       provider = await provider(this);
       await this.handlerStaticProvider(provider);
     } else {
-      let deps: string[] = [];
-      for (let i of provider.deps) {
-        deps.push(await i.hash);
-      }
-      let multi = !!provider.multi;
-      let token = provider.provide;
-      let record = await this.getRecord(token);
-      if (record && record.multi) {
-        if (!multi) {
-          throw new Error(`${token.name} is should be multi`);
-        }
-      }
-      if (multi) {
-        let value = await this.get(token);
-        // 如果存在
-        if (!Array.isArray(value)) {
-          value = [];
-        }
-        this.set(token, {
-          fn: new Proxy(provider.useFactory, {
-            apply(target: any, thisArg: any, argArray?: any) {
-              let val = Reflect.apply(target, thisArg, argArray);
-              return value.concat(val);
-            }
-          }),
-          useCache: !!provider.cache,
-          value: undefined,
-          multi: !!provider.multi,
-          deps
-        });
-      } else {
-        this.set(provider.provide, {
-          fn: provider.useFactory,
-          useCache: !!provider.cache,
-          value: undefined,
-          multi: !!provider.multi,
-          deps
-        });
+      if (isFactoryProvider(provider)) {
+        await this.handlerFactory(provider);
       }
     }
   }
@@ -118,7 +169,7 @@ export class Injector {
     }
     return notFound;
   }
-  async get<T>(token: InjectionToken<T>, notFound?: T): Promise<T | T[]> {
+  async get<T>(token: InjectionToken<T>, notFound?: T): Promise<T> {
     let hash = await token.hash;
     return await this.getByHash(hash, notFound);
   }
