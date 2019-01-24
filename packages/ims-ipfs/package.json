@@ -1,11 +1,11 @@
 {
-  "name": "ims-util",
+  "name": "ims-ipfs",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "",
   "license": "ISC",
-  "main": "lib/ims-util.js",
+  "main": "lib/ims-ipns.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"

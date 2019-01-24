@@ -1,11 +1,11 @@
-# `ims-util`
+# `ims-fs-server`
 
 > TODO: description
 
 ## Usage
 
 ```
-const imsUtil = require('ims-util');
+const imsFsServer = require('ims-fs-server');
 
 // TODO: DEMONSTRATE API
 ```

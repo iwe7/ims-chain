@@ -15,6 +15,7 @@ import { Config, Routes, Fetch } from "ims-cloud";
             injector.set(route, {
               fn: async (injector: Injector) => {
                 let hash = await route.hash;
+                console.log(hash);
                 let fetch = await injector.get(Fetch);
                 return new Proxy(function() {}, {
                   get(target: any, p: PropertyKey, receiver: any) {
@@ -28,10 +29,10 @@ import { Config, Routes, Fetch } from "ims-cloud";
                             config.port
                           }/${hash}/${p as string}`,
                           {
-                            method: "post",
+                            method: "POST",
                             body: JSON.stringify(argArray)
                           }
-                        ).then(res => res.text());
+                        ).then(res => res.json());
                       }
                     });
                   }
