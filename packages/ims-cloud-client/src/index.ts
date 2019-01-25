@@ -32,7 +32,13 @@ import { Config, Routes, Fetch } from "ims-cloud";
                             method: "POST",
                             body: JSON.stringify(argArray)
                           }
-                        ).then(res => res.json());
+                        ).then(res => {
+                          try {
+                            return res.json();
+                          } catch (e) {
+                            return res.text();
+                          }
+                        });
                       }
                     });
                   }

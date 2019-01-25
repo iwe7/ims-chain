@@ -5,11 +5,21 @@ import { Ipfs } from "ims-ipfs";
 @Injectable()
 export class ImsFsServer {
   get node() {
-    return this._node || this.injector.get(Ipfs);
+    if (this._node) return this._node;
+    return this.injector.get(Ipfs).then(node => {
+      this._node = node;
+      return node;
+    });
   }
   _node: any;
-  constructor(private injector: Injector) {
-    this.injector.get(Ipfs).then(node => (this._node = node));
+  constructor(private injector: Injector) {}
+  async cat(hash: string) {
+    let node = await this.node;
+    hash = hash || "QmbSnCcHziqhjNRyaunfcCvxPiV3fNL3fWL8nUrp5yqwD5";
+    let buf = await node.cat(`/ipfs/${hash}`);
+    if (buf) {
+      return buf.toString("utf8");
+    }
   }
   async add(
     options: {
@@ -22,7 +32,7 @@ export class ImsFsServer {
     let files = options.map(opt => {
       return {
         path: opt.path,
-        content: Buffer.from("content")
+        content: Buffer.from(opt.content)
       };
     });
     if (files.length > 0) {
