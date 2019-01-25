@@ -1,6 +1,5 @@
 import { makeDecorator, ClassMetadata, MetadataFactory } from "ims-decorator";
 import { InjectionToken, Type, StaticProvider, Injector } from "ims-core";
-import { AppInitialization } from "./tokens";
 export interface Module {
   providers?: StaticProvider[];
   imports?: Type<any>[];

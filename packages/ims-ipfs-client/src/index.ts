@@ -7,9 +7,7 @@ import { IpfsApi } from "ims-ipfs";
   providers: [
     {
       provide: Routes,
-      useFactory: () => IpfsApi,
-      deps: [],
-      multi: true
+      useFactory: () => IpfsApi
     },
     {
       provide: Config,
@@ -22,8 +20,7 @@ import { IpfsApi } from "ims-ipfs";
     },
     {
       provide: Fetch,
-      useFactory: () => require("node-fetch"),
-      deps: []
+      useFactory: () => require("node-fetch")
     }
   ],
   imports: [ImsCloudClientModule]

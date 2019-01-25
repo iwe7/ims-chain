@@ -13,18 +13,27 @@ export class InjectionToken<T = any> {
     });
   }
 
-  constructor(public name: string, public desc: string) {}
+  constructor(
+    public name: string,
+    public desc: string,
+    public multi: boolean = false
+  ) {}
 
   toString(): string {
     return `[${this.name}]:${this.desc}`;
   }
 
-  static fromString<T = any>(name: string, desc?: string) {
-    return new InjectionToken<T>(name, desc || "");
+  static fromString<T = any>(
+    name: string,
+    desc?: string,
+    multi: boolean = false
+  ) {
+    return new InjectionToken<T>(name, desc || "", multi);
   }
 
-  static fromType<T = any>(token: any) {
-    return new InjectionToken<T>(token.name, `${stringify(token)}`);
+  static fromType<T = any>(token: any, multi: boolean = false) {
+    if (token instanceof InjectionToken) return token;
+    return new InjectionToken<T>(token.name, `${stringify(token)}`, multi);
   }
 }
 

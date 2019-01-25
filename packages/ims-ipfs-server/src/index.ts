@@ -10,8 +10,7 @@ const IPFS = require("ipfs");
   providers: [
     {
       provide: IpfsApi,
-      useFactory: (injector: Injector) => new ImsFsServer(injector),
-      deps: []
+      useFactory: (injector: Injector) => new ImsFsServer(injector)
     },
     {
       provide: After,
@@ -28,9 +27,7 @@ const IPFS = require("ipfs");
             }
           }
         };
-      },
-      deps: [],
-      multi: true
+      }
     },
     {
       provide: Ipfs,
@@ -43,8 +40,7 @@ const IPFS = require("ipfs");
           });
         });
       },
-      cache: true,
-      deps: []
+      cache: true
     },
     {
       provide: IpfsConfig,
@@ -56,9 +52,7 @@ const IPFS = require("ipfs");
     },
     {
       provide: Routes,
-      useFactory: () => IpfsApi,
-      deps: [],
-      multi: true
+      useFactory: () => IpfsApi
     }
   ],
   imports: [ImsCloudServerModule]

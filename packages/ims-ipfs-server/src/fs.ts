@@ -18,6 +18,7 @@ export class ImsFsServer {
     hash = hash || "QmbSnCcHziqhjNRyaunfcCvxPiV3fNL3fWL8nUrp5yqwD5";
     return await node.cat(`/ipfs/${hash}`);
   }
+
   async add(
     options: {
       path: string;

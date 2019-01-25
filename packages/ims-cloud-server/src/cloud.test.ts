@@ -14,7 +14,7 @@ export class TestIndex {
   providers: [
     {
       provide: Routes,
-      useValue: [InjectionToken.fromType(TestIndex)]
+      useFactory: () => InjectionToken.fromType(TestIndex)
     }
   ],
   imports: [ImsCloudServerModule]

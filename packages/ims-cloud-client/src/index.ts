@@ -44,15 +44,13 @@ import { Config, Routes, Fetch } from "ims-cloud";
                   }
                 });
               },
+              token: route,
               useCache: true,
-              multi: false,
-              value: undefined,
-              deps: []
+              value: undefined
             });
           }
         }
-      },
-      deps: []
+      }
     }
   ]
 })

@@ -73,8 +73,7 @@ import { toString } from "./util";
           );
         });
         return app;
-      },
-      deps: []
+      }
     }
   ]
 })

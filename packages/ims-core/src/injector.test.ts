@@ -10,8 +10,7 @@ async function bootstrap() {
         return {
           demo: "title"
         };
-      },
-      deps: []
+      }
     }
   ]);
   let ref = await injector.get(token);

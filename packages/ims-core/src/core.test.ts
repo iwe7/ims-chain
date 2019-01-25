@@ -5,18 +5,14 @@ async function bootstraaap() {
   let injector = await Injector.create([
     {
       provide: InjectionToken.fromString("demo"),
-      useFactory: injector => "demo1",
-      deps: [],
-      multi: true
+      useFactory: injector => "demo1"
     }
   ]);
   let ij = await Injector.create(
     [
       {
         provide: InjectionToken.fromString("demo"),
-        useFactory: injector => "demo",
-        deps: [],
-        multi: true
+        useFactory: injector => "demo"
       }
     ],
     injector

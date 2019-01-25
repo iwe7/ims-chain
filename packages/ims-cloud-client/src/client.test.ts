@@ -13,11 +13,11 @@ export class TestIndex {
   providers: [
     {
       provide: Fetch,
-      useValue: require("node-fetch")
+      useFactory: () => require("node-fetch")
     },
     {
       provide: Routes,
-      useValue: [InjectionToken.fromType(TestIndex)]
+      useFactory: () => InjectionToken.fromType(TestIndex)
     }
   ]
 })

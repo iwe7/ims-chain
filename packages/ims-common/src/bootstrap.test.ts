@@ -14,8 +14,7 @@ export class InjectableTest {}
       provide: InjectionToken.fromString("test"),
       useFactory: async () => {
         return "test";
-      },
-      deps: []
+      }
     }
   ]
 })
@@ -27,16 +26,14 @@ export class TestModule {}
       provide: InjectionToken.fromString("test2"),
       useFactory: async () => {
         return "test";
-      },
-      deps: []
+      }
     },
     {
       provide: AppInitialization,
       useFactory: async (injector: Injector) => {
         console.log("app initialization");
         return "trest";
-      },
-      deps: []
+      }
     }
   ],
   imports: [TestModule]
