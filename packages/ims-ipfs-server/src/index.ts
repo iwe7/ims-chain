@@ -20,7 +20,7 @@ const IPFS = require("ipfs");
           InjectionToken.fromType<ImsFsServer>(ImsFsServer)
         );
         return {
-          path: "/ipfs/:hash",
+          path: "/fs/:hash",
           handler: async (req: any, res: any, next: any) => {
             let params = req.params;
             if (params.hash) {

@@ -20,10 +20,9 @@ import { toString } from "./util";
             afters.forEach(async after => {
               let item = await after;
               app.all(item.path, async (req, res, next) => {
-                let json = await item.handler(req, res, next);
-                if (json) {
-                  res.end(toString(json));
-                }
+                item &&
+                  item.handler &&
+                  res.end(await item.handler(req, res, next));
               });
             });
           }

@@ -30,7 +30,15 @@ export interface IpfsConfig {
     dht?: boolean;
   };
   config?: object;
-  libp2p?: object;
-  connectionManager?: object;
+  libp2p?: {
+    modules: {
+      transport: object;
+      peerDiscovery: object[];
+    };
+    config: object;
+  };
+  connectionManager?: {
+    peerDiscovery: object;
+  };
 }
 export const IpfsConfig = InjectionToken.fromString("IpfsConfig");

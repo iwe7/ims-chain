@@ -16,10 +16,7 @@ export class ImsFsServer {
   async cat(hash: string) {
     let node = await this.node;
     hash = hash || "QmbSnCcHziqhjNRyaunfcCvxPiV3fNL3fWL8nUrp5yqwD5";
-    let buf = await node.cat(`/ipfs/${hash}`);
-    if (buf) {
-      return buf.toString("utf8");
-    }
+    return await node.cat(`/ipfs/${hash}`);
   }
   async add(
     options: {
