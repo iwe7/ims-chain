@@ -1,7 +1,6 @@
 import { InjectionToken } from "ims-core";
-import { Command } from "commander";
-export const Commander = InjectionToken.fromString<Command>("Commander");
-export const Commands = InjectionToken.fromString<Command[]>(
+export const Commander = InjectionToken.fromString<any>("Commander");
+export const Commands = InjectionToken.fromString<any[]>(
   "Commands",
   "Commands",
   true

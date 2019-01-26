@@ -1,6 +1,8 @@
 import { Module, AppInitialization } from "ims-common";
 import { Injector } from "ims-core";
 import express = require("express");
+import http = require("http");
+
 import bodyParser = require("body-parser");
 import { Routes, Config, After } from "ims-cloud";
 import { toString } from "./util";
@@ -11,9 +13,9 @@ import { toString } from "./util";
       provide: AppInitialization,
       useFactory: async (injector: Injector) => {
         let app = express();
+        let server = new http.Server(app);
         app.use(bodyParser.urlencoded({ extended: true }));
         app.use(bodyParser.json());
-
         let afters = await injector.get(After);
         if (afters) {
           if (Array.isArray(afters)) {
@@ -53,26 +55,35 @@ import { toString } from "./util";
                   let instance = await injector.get(route);
                   let params = req.params;
                   if (Reflect.has(instance, params.method)) {
-                    let json = await instance[params.method](...args);
-                    res.end(toString(json));
-                    return;
+                    try {
+                      console.log(args);
+                      let json = await instance[params.method](...args);
+                      res.end(toString(json));
+                      return;
+                    } catch (e) {
+                      res.end(
+                        toString({
+                          message: e.message
+                        })
+                      );
+                      return;
+                    }
                   }
                 });
               });
             }
           }
         }
-
         let config: any = await injector.get(Config);
         if (!config) config = { port: 4802, host: "localhost" };
-        app.listen(config.port, (err: Error) => {
+        server.listen(config.port, (err: Error) => {
           if (err) throw err;
           console.log(
             `app start at http://${config.host || "localhost"}:${config.port ||
               "4200"}`
           );
         });
-        return app;
+        return server;
       }
     }
   ]

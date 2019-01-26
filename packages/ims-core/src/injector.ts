@@ -5,6 +5,7 @@ import {
   FactoryProvider,
   isFactoryProvider
 } from "./provider";
+import { stringify } from "querystring";
 
 export interface Record<T = any> {
   fn: (injector: Injector) => Promise<T>;
@@ -95,16 +96,17 @@ export class Injector {
     return this.getRecordByHash(hash);
   }
 
-  getRecordByHash(hash: string): Record | undefined {
+  getRecordByHash(hash: string): Record {
     let record = this.records.get(hash);
     if (record) return record;
     if (this.parent) {
       return this.parent.getRecordByHash(hash);
     }
+    return undefined as any;
   }
 
   async getByHash<T>(hash: string, notFound?: T) {
-    let record = this.getRecordByHash(hash);
+    let record: Record<any> = this.getRecordByHash(hash) as Record<any>;
     if (record) {
       if (record.value && record.useCache) {
         return record.value;
@@ -113,6 +115,9 @@ export class Injector {
         this.records.set(hash, record);
         return record.value;
       }
+    }
+    if (record) {
+      throw new Error(`not found ${stringify((record as Record).token)}`);
     }
     return notFound;
   }

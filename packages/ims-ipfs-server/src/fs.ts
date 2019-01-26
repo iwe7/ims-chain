@@ -1,6 +1,7 @@
 import { Injectable } from "ims-common";
 import { Injector } from "ims-core";
 import { Ipfs } from "ims-ipfs";
+const pull = require("pull-stream");
 
 @Injectable()
 export class ImsFsServer {
@@ -13,10 +14,16 @@ export class ImsFsServer {
   }
   _node: any;
   constructor(private injector: Injector) {}
+
   async cat(hash: string) {
     let node = await this.node;
     hash = hash || "QmbSnCcHziqhjNRyaunfcCvxPiV3fNL3fWL8nUrp5yqwD5";
     return await node.cat(`/ipfs/${hash}`);
+  }
+
+  async ls(ipfsPath: string) {
+    let node = await this.node;
+    return await node.ls(ipfsPath);
   }
 
   async add(
@@ -34,7 +41,19 @@ export class ImsFsServer {
       };
     });
     if (files.length > 0) {
-      return await node.add(files);
+      const stream = node.addPullStream();
+      return await new Promise((resolve, reject) => {
+        pull(
+          pull.values(files),
+          stream,
+          pull.collect((err: Error, values: any) => {
+            console.log({ err, values });
+            resolve(values);
+          })
+        );
+      });
+      // return await node.add(files);
     }
+    return undefined;
   }
 }

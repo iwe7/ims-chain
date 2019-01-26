@@ -42,5 +42,6 @@ export class Test2Module {}
 
 bootstrapModule(Test2Module).then(async res => {
   let test = await res.injector.get(InjectionToken.fromType(InjectableTest));
+  console.log(test);
   debugger;
 });
