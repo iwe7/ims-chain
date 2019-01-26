@@ -19,5 +19,6 @@
   "dependencies": {
     "cids": "*",
     "multihashing-async": "*"
-  }
+  },
+  "gitHead": "1996ff3b20acd739ecde0e35294db34a54c8e158"
 }
