@@ -21,6 +21,25 @@ export class ImsFsServer {
     return await node.cat(`/ipfs/${hash}`);
   }
 
+  async mkdir(path: string) {
+    if (!path.startsWith("/")) {
+      path = `/${path}`;
+    }
+    let stat = await this.stat(path);
+    if (stat.hash) {
+      return stat;
+    } else {
+      let node = await this.node;
+      await node.files.mkdir(path);
+      return await node.files.stat(path);
+    }
+  }
+
+  async stat(path: string) {
+    let node = await this.node;
+    return await node.files.stat(path);
+  }
+
   async ls(ipfsPath: string) {
     let node = await this.node;
     return await node.ls(ipfsPath);
@@ -35,24 +54,17 @@ export class ImsFsServer {
     options = options || [];
     let node = await this.node;
     let files = options.map(opt => {
-      return {
-        path: opt.path,
-        content: Buffer.from(opt.content)
-      };
+      if (typeof opt.content === "string") {
+        return {
+          path: opt.path,
+          content: Buffer.from(opt.content)
+        };
+      } else {
+        return opt;
+      }
     });
     if (files.length > 0) {
-      const stream = node.addPullStream();
-      return await new Promise((resolve, reject) => {
-        pull(
-          pull.values(files),
-          stream,
-          pull.collect((err: Error, values: any) => {
-            console.log({ err, values });
-            resolve(values);
-          })
-        );
-      });
-      // return await node.add(files);
+      return await node.add(files);
     }
     return undefined;
   }

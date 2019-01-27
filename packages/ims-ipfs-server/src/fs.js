@@ -22,6 +22,24 @@ let ImsFsServer = class ImsFsServer {
         hash = hash || "QmbSnCcHziqhjNRyaunfcCvxPiV3fNL3fWL8nUrp5yqwD5";
         return await node.cat(`/ipfs/${hash}`);
     }
+    async mkdir(path) {
+        if (!path.startsWith("/")) {
+            path = `/${path}`;
+        }
+        let stat = await this.stat(path);
+        if (stat.hash) {
+            return stat;
+        }
+        else {
+            let node = await this.node;
+            await node.files.mkdir(path);
+            return await node.files.stat(path);
+        }
+    }
+    async stat(path) {
+        let node = await this.node;
+        return await node.files.stat(path);
+    }
     async ls(ipfsPath) {
         let node = await this.node;
         return await node.ls(ipfsPath);
@@ -30,19 +48,18 @@ let ImsFsServer = class ImsFsServer {
         options = options || [];
         let node = await this.node;
         let files = options.map(opt => {
-            return {
-                path: opt.path,
-                content: Buffer.from(opt.content)
-            };
+            if (typeof opt.content === "string") {
+                return {
+                    path: opt.path,
+                    content: Buffer.from(opt.content)
+                };
+            }
+            else {
+                return opt;
+            }
         });
         if (files.length > 0) {
-            const stream = node.addPullStream();
-            return await new Promise((resolve, reject) => {
-                pull(pull.values(files), stream, pull.collect((err, values) => {
-                    console.log({ err, values });
-                    resolve(values);
-                }));
-            });
+            return await node.add(files);
         }
         return undefined;
     }

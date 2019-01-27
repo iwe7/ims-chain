@@ -19,7 +19,7 @@ const IPFS = require("ipfs");
           InjectionToken.fromType<ImsFsServer>(ImsFsServer)
         );
         return {
-          path: "/fs/:hash",
+          path: "/static/:hash",
           handler: async (req: any, res: any, next: any) => {
             let params = req.params;
             if (params.hash) {
@@ -77,4 +77,4 @@ const IPFS = require("ipfs");
   ],
   imports: [ImsCloudServerModule]
 })
-export class ImsFsServerModule {}
+export class ImsIpfsServerModule {}

@@ -8,9 +8,9 @@ const ims_core_1 = require("ims-core");
 const ims_cloud_1 = require("ims-cloud");
 const fs_1 = require("./fs");
 const IPFS = require("ipfs");
-let ImsFsServerModule = class ImsFsServerModule {
+let ImsIpfsServerModule = class ImsIpfsServerModule {
 };
-ImsFsServerModule = tslib_1.__decorate([
+ImsIpfsServerModule = tslib_1.__decorate([
     ims_common_1.Module({
         providers: [
             {
@@ -22,7 +22,7 @@ ImsFsServerModule = tslib_1.__decorate([
                 useFactory: async (injector) => {
                     let api = await injector.get(ims_core_1.InjectionToken.fromType(fs_1.ImsFsServer));
                     return {
-                        path: "/fs/:hash",
+                        path: "/static/:hash",
                         handler: async (req, res, next) => {
                             let params = req.params;
                             if (params.hash) {
@@ -81,6 +81,6 @@ ImsFsServerModule = tslib_1.__decorate([
         ],
         imports: [ims_cloud_server_1.ImsCloudServerModule]
     })
-], ImsFsServerModule);
-exports.ImsFsServerModule = ImsFsServerModule;
+], ImsIpfsServerModule);
+exports.ImsIpfsServerModule = ImsIpfsServerModule;
 //# sourceMappingURL=index.js.map

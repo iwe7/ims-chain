@@ -37,7 +37,7 @@
     /* Additional Checks */
     "noUnusedLocals": false /* Report errors on unused locals. */,
     "noUnusedParameters": false /* Report errors on unused parameters. */,
-    "noImplicitReturns": true /* Report error when not all code paths in function return a value. */,
+    "noImplicitReturns": false /* Report error when not all code paths in function return a value. */,
     "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */,
 
     /* Module Resolution Options */
@@ -74,5 +74,5 @@
     "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */
   },
   "include": ["packages"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "packages/**/*.test.ts"]
 }

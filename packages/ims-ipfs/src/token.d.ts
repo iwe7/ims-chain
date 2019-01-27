@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { InjectionToken } from "ims-core";
 export interface IpfsApi {
     add(content: {
@@ -7,6 +8,26 @@ export interface IpfsApi {
         path: string;
         hash: string;
         size: number;
+    }[]>;
+    addReadableStream(options?: {
+        ["cid-version"]?: 0 | 1;
+        progress?: Function;
+        hash?: string;
+        wrapWithDirectory?: boolean;
+        pin?: boolean;
+    }): Promise<{
+        path: string;
+        content: Buffer;
+    }>;
+    mkdir(dir: string): Promise<{
+        blocks: number;
+        cumulativeSize: number;
+        hash: string;
+        local: any;
+        size: number;
+        sizeLocal: number;
+        type: string;
+        withLocality: boolean;
     }>;
 }
 export declare const Ipfs: InjectionToken<any>;

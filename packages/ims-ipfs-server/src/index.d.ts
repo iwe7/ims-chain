@@ -1,3 +1,3 @@
-export declare class ImsFsServerModule {
+export declare class ImsIpfsServerModule {
 }
 //# sourceMappingURL=index.d.ts.map

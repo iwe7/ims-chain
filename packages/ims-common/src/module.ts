@@ -62,7 +62,6 @@ export class ModuleFactory {
     injector = injector || (await Injector.create([]));
     instance.onInit && (await instance.onInit(injector));
     instance.setInjector(injector);
-
     return instance;
   }
 }
