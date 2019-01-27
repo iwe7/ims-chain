@@ -36,14 +36,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
           name,
           watch: dev ? true : false,
           entry: {
-            main: [path.join(__dirname, "test", "index.ts")]
+            main: [path.join(__dirname, "test", "index.tsx")]
           },
           output: {
             path: path.join(__dirname, "dist"),
             filename: `[name].js`
           },
           resolve: {
-            extensions: [".ts", ".tsx", ".js"]
+            extensions: [".tsx", ".ts", ".jsx", ".js"]
           },
           module: {
             rules: [
