@@ -85,7 +85,10 @@ ImsWebpackModule = tslib_1.__decorate([
                                 console.error("webpack:error", messages);
                                 return;
                             }
-                            console.log("webpack:success", stats.toJson());
+                            if (stats.hasWarnings()) {
+                                stats.toJson().warnings.map((warn) => console.warn(warn));
+                                return;
+                            }
                         });
                     }
                     else {

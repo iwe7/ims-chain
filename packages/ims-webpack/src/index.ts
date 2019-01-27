@@ -81,7 +81,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
               console.error("webpack:error", messages);
               return;
             }
-            console.log("webpack:success", stats.toJson());
+            if (stats.hasWarnings()) {
+              stats.toJson().warnings.map((warn: any) => console.warn(warn));
+              return;
+            }
           });
         } else {
           webpack(cfg).run((err: Error, stats: webpack.Stats) => {
