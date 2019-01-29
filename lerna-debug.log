@@ -1,14 +1,823 @@
-17 error Error: Command failed: git remote update
-17 error error: cannot lock ref 'refs/remotes/origin/master': is at 26c54e4565b466e62e1e89b8f006e1438efc59ed but expected a53a19f09aad5a2b4390892c25ded0836c8bfe51
-17 error From github.com:iwe7/ims-chain
-17 error  ! a53a19f..26c54e4  master     -> origin/master  (unable to update local ref)
-17 error error: Could not fetch origin
-17 error
-17 error Fetching origin
-17 error
-17 error     at makeError (/Volumes/meepo/ims-chain/node_modules/execa/index.js:174:9)
-17 error     at Function.module.exports.sync (/Volumes/meepo/ims-chain/node_modules/execa/index.js:338:15)
-17 error     at Object.execSync (/Volumes/meepo/ims-chain/node_modules/@lerna/child-process/index.js:22:16)
-17 error     at updateRemote (/Volumes/meepo/ims-chain/node_modules/@lerna/version/lib/is-behind-upstream.js:26:16)
-17 error     at isBehindUpstream (/Volumes/meepo/ims-chain/node_modules/@lerna/version/lib/is-behind-upstream.js:11:3)
-17 error     at VersionCommand.initialize (/Volumes/meepo/ims-chain/node_modules/@lerna/version/index.js:120:7)
+0 silly argv { _: [ 'publish' ],
+0 silly argv   composed: 'publish',
+0 silly argv   lernaVersion: '3.10.7',
+0 silly argv   '$0': 'lerna' }
+1 notice cli v3.10.7
+2 verbose rootPath /Volumes/meepo/ims-chain
+3 verbose session e8cad5b24e826d6c
+4 verbose user-agent lerna/3.10.7/node@v10.15.0+x64 (darwin)
+5 verbose git-describe undefined => "v0.1.13-1-g52d0cf3"
+6 silly git-describe parsed => {"lastTagName":"v0.1.13","lastVersion":"v0.1.13","refCount":"1","sha":"52d0cf3","isDirty":false}
+7 silly argv { _: [ 'publish' ], composed: 'publish', lernaVersion: '3.10.7' }
+8 verbose rootPath /Volumes/meepo/ims-chain
+9 info current version 0.1.13
+10 silly isAnythingCommitted
+11 verbose isAnythingCommitted 1
+12 silly currentBranch
+13 verbose currentBranch master
+14 silly remoteBranchExists
+15 silly isBehindUpstream
+16 silly isBehindUpstream master is behind origin/master by 0 commit(s) and ahead by 0
+17 silly hasTags
+18 verbose hasTags true
+19 silly git-describe.sync "v0.1.13-1-g52d0cf3" => {"lastTagName":"v0.1.13","lastVersion":"v0.1.13","refCount":"1","sha":"52d0cf3","isDirty":false}
+20 info Looking for changed packages since v0.1.13
+21 silly diffSinceIn v0.1.13 packages/ims-addons
+22 silly diff
+23 silly diffSinceIn v0.1.13 packages/ims-admin-v1
+24 silly diff
+25 silly diffSinceIn v0.1.13 packages/ims-cli
+26 silly diff packages/ims-cli/src/index.js
+26 silly diff packages/ims-cli/src/index.ts
+27 silly diffSinceIn v0.1.13 packages/ims-cloud-client
+28 silly diff
+29 silly diffSinceIn v0.1.13 packages/ims-cloud-server
+30 silly diff packages/ims-cloud-server/src/index.js
+30 silly diff packages/ims-cloud-server/src/index.ts
+31 silly diffSinceIn v0.1.13 packages/ims-cloud
+32 silly diff
+33 silly diffSinceIn v0.1.13 packages/ims-common
+34 silly diff packages/ims-common/src/bootstrap.js
+34 silly diff packages/ims-common/src/bootstrap.ts
+34 silly diff packages/ims-common/src/module.ts
+35 silly diffSinceIn v0.1.13 packages/ims-core
+36 silly diff
+37 silly diffSinceIn v0.1.13 packages/ims-decorator
+38 silly diff
+39 silly diffSinceIn v0.1.13 packages/ims-gulp
+40 silly diff
+41 silly diffSinceIn v0.1.13 packages/ims-ipfs-client
+42 silly diff
+43 silly diffSinceIn v0.1.13 packages/ims-ipfs-server
+44 silly diff packages/ims-ipfs-server/src/fs.test.ts
+44 silly diff packages/ims-ipfs-server/src/index.js
+44 silly diff packages/ims-ipfs-server/src/index.ts
+45 silly diffSinceIn v0.1.13 packages/ims-ipfs
+46 silly diff
+47 silly diffSinceIn v0.1.13 packages/ims-repo
+48 silly diff
+49 silly diffSinceIn v0.1.13 packages/ims-router-redux
+50 silly diff
+51 silly diffSinceIn v0.1.13 packages/ims-starter
+52 silly diff
+53 silly diffSinceIn v0.1.13 packages/ims-store
+54 silly diff
+55 silly diffSinceIn v0.1.13 packages/ims-webpack-dll
+56 silly diff
+57 silly diffSinceIn v0.1.13 packages/ims-webpack
+58 silly diff
+59 verbose updated ims-cli
+60 verbose updated ims-cloud-client
+61 verbose updated ims-cloud-server
+62 verbose updated ims-common
+63 verbose updated ims-gulp
+64 verbose updated ims-ipfs-client
+65 verbose updated ims-ipfs-server
+66 verbose updated ims-starter
+67 verbose updated ims-webpack-dll
+68 verbose updated ims-webpack
+69 verbose git-describe undefined => "v0.1.13-1-g52d0cf3"
+70 silly git-describe parsed => {"lastTagName":"v0.1.13","lastVersion":"v0.1.13","refCount":"1","sha":"52d0cf3","isDirty":false}
+71 silly batched [ PackageGraphNode {
+71 silly batched     name: 'ims-common',
+71 silly batched     externalDependencies: Map { 'ims-core' => [Object], 'ims-decorator' => [Object] },
+71 silly batched     localDependencies: Map {},
+71 silly batched     localDependents:
+71 silly batched      Map {
+71 silly batched        'ims-cli' => [PackageGraphNode],
+71 silly batched        'ims-cloud-client' => [PackageGraphNode],
+71 silly batched        'ims-cloud-server' => [PackageGraphNode],
+71 silly batched        'ims-gulp' => [PackageGraphNode],
+71 silly batched        'ims-ipfs-client' => [PackageGraphNode],
+71 silly batched        'ims-ipfs-server' => [PackageGraphNode],
+71 silly batched        'ims-webpack-dll' => [PackageGraphNode],
+71 silly batched        'ims-webpack' => [PackageGraphNode] } } ]
+72 silly batched [ PackageGraphNode {
+72 silly batched     name: 'ims-cloud-client',
+72 silly batched     externalDependencies: Map { 'ims-cloud' => [Object], 'ims-core' => [Object] },
+72 silly batched     localDependencies: Map {},
+72 silly batched     localDependents:
+72 silly batched      Map {
+72 silly batched        'ims-ipfs-client' => [PackageGraphNode],
+72 silly batched        'ims-ipfs-server' => [PackageGraphNode] } },
+72 silly batched   PackageGraphNode {
+72 silly batched     name: 'ims-cloud-server',
+72 silly batched     externalDependencies:
+72 silly batched      Map {
+72 silly batched        'express' => [Object],
+72 silly batched        'ims-cloud' => [Object],
+72 silly batched        'ims-core' => [Object] },
+72 silly batched     localDependencies: Map {},
+72 silly batched     localDependents: Map { 'ims-cli' => [PackageGraphNode] } } ]
+73 silly batched [ PackageGraphNode {
+73 silly batched     name: 'ims-ipfs-client',
+73 silly batched     externalDependencies: Map { 'ims-cloud' => [Object], 'ims-ipfs' => [Object] },
+73 silly batched     localDependencies: Map {},
+73 silly batched     localDependents: Map { 'ims-gulp' => [PackageGraphNode] } },
+73 silly batched   PackageGraphNode {
+73 silly batched     name: 'ims-ipfs-server',
+73 silly batched     externalDependencies:
+73 silly batched      Map {
+73 silly batched        'ims-cloud' => [Object],
+73 silly batched        'ims-ipfs' => [Object],
+73 silly batched        'ipfs' => [Object] },
+73 silly batched     localDependencies: Map {},
+73 silly batched     localDependents:
+73 silly batched      Map {
+73 silly batched        'ims-cli' => [PackageGraphNode],
+73 silly batched        'ims-webpack-dll' => [PackageGraphNode],
+73 silly batched        'ims-webpack' => [PackageGraphNode] } } ]
+74 silly batched [ PackageGraphNode {
+74 silly batched     name: 'ims-cli',
+74 silly batched     externalDependencies:
+74 silly batched      Map {
+74 silly batched        'commander' => [Object],
+74 silly batched        'ims-core' => [Object],
+74 silly batched        'ims-decorator' => [Object],
+74 silly batched        'tslib' => [Object] },
+74 silly batched     localDependencies: Map {},
+74 silly batched     localDependents: Map { 'ims-starter' => [PackageGraphNode] } },
+74 silly batched   PackageGraphNode {
+74 silly batched     name: 'ims-gulp',
+74 silly batched     externalDependencies:
+74 silly batched      Map {
+74 silly batched        'gulp' => [Object],
+74 silly batched        'ims-core' => [Object],
+74 silly batched        'ims-ipfs' => [Object],
+74 silly batched        'through2' => [Object] },
+74 silly batched     localDependencies: Map {},
+74 silly batched     localDependents: Map {} },
+74 silly batched   PackageGraphNode {
+74 silly batched     name: 'ims-webpack-dll',
+74 silly batched     externalDependencies:
+74 silly batched      Map {
+74 silly batched        'ims-core' => [Object],
+74 silly batched        'neo-async' => [Object],
+74 silly batched        'webpack' => [Object] },
+74 silly batched     localDependencies: Map {},
+74 silly batched     localDependents: Map { 'ims-webpack' => [PackageGraphNode] } } ]
+75 silly batched [ PackageGraphNode {
+75 silly batched     name: 'ims-starter',
+75 silly batched     externalDependencies: Map { 'pm2' => [Object] },
+75 silly batched     localDependencies: Map {},
+75 silly batched     localDependents: Map {} },
+75 silly batched   PackageGraphNode {
+75 silly batched     name: 'ims-webpack',
+75 silly batched     externalDependencies:
+75 silly batched      Map {
+75 silly batched        'html-webpack-plugin' => [Object],
+75 silly batched        'ims-cloud' => [Object],
+75 silly batched        'ims-core' => [Object],
+75 silly batched        'ims-ipfs' => [Object],
+75 silly batched        'mini-css-extract-plugin' => [Object],
+75 silly batched        'react' => [Object],
+75 silly batched        'react-dom' => [Object],
+75 silly batched        'webpack' => [Object] },
+75 silly batched     localDependencies: Map {},
+75 silly batched     localDependents: Map {} } ]
+76 silly lifecycle No script for "preversion" in "ims-chain", continuing
+77 silly lifecycle No script for "preversion" in "ims-common", continuing
+78 silly lifecycle No script for "version" in "ims-common", continuing
+79 silly lifecycle No script for "preversion" in "ims-cloud-client", continuing
+80 silly lifecycle No script for "preversion" in "ims-cloud-server", continuing
+81 silly lifecycle No script for "version" in "ims-cloud-client", continuing
+82 silly lifecycle No script for "version" in "ims-cloud-server", continuing
+83 silly lifecycle No script for "preversion" in "ims-ipfs-client", continuing
+84 silly lifecycle No script for "preversion" in "ims-ipfs-server", continuing
+85 silly lifecycle No script for "version" in "ims-ipfs-server", continuing
+86 silly lifecycle No script for "version" in "ims-ipfs-client", continuing
+87 silly lifecycle No script for "preversion" in "ims-cli", continuing
+88 silly lifecycle No script for "preversion" in "ims-gulp", continuing
+89 silly lifecycle No script for "preversion" in "ims-webpack-dll", continuing
+90 silly lifecycle No script for "version" in "ims-webpack-dll", continuing
+91 silly lifecycle No script for "version" in "ims-cli", continuing
+92 silly lifecycle No script for "version" in "ims-gulp", continuing
+93 silly lifecycle No script for "preversion" in "ims-starter", continuing
+94 silly lifecycle No script for "preversion" in "ims-webpack", continuing
+95 silly lifecycle No script for "version" in "ims-webpack", continuing
+96 silly lifecycle No script for "version" in "ims-starter", continuing
+97 silly lifecycle No script for "version" in "ims-chain", continuing
+98 silly gitAdd [ '/Volumes/meepo/ims-chain/packages/ims-common/package.json',
+98 silly gitAdd   '/Volumes/meepo/ims-chain/packages/ims-cloud-client/package.json',
+98 silly gitAdd   '/Volumes/meepo/ims-chain/packages/ims-cloud-server/package.json',
+98 silly gitAdd   '/Volumes/meepo/ims-chain/packages/ims-ipfs-server/package.json',
+98 silly gitAdd   '/Volumes/meepo/ims-chain/packages/ims-ipfs-client/package.json',
+98 silly gitAdd   '/Volumes/meepo/ims-chain/packages/ims-webpack-dll/package.json',
+98 silly gitAdd   '/Volumes/meepo/ims-chain/packages/ims-cli/package.json',
+98 silly gitAdd   '/Volumes/meepo/ims-chain/packages/ims-gulp/package.json',
+98 silly gitAdd   '/Volumes/meepo/ims-chain/packages/ims-webpack/package.json',
+98 silly gitAdd   '/Volumes/meepo/ims-chain/packages/ims-starter/package.json',
+98 silly gitAdd   '/Volumes/meepo/ims-chain/lerna.json' ]
+99 silly gitCommit v0.1.14
+100 verbose git [ 'commit', '-m', 'v0.1.14' ]
+101 silly gitTag v0.1.14
+102 verbose git [ 'tag', 'v0.1.14', '-m', 'v0.1.14' ]
+103 silly lifecycle No script for "postversion" in "ims-cli", continuing
+104 silly lifecycle No script for "postversion" in "ims-cloud-client", continuing
+105 silly lifecycle No script for "postversion" in "ims-cloud-server", continuing
+106 silly lifecycle No script for "postversion" in "ims-common", continuing
+107 silly lifecycle No script for "postversion" in "ims-gulp", continuing
+108 silly lifecycle No script for "postversion" in "ims-ipfs-client", continuing
+109 silly lifecycle No script for "postversion" in "ims-ipfs-server", continuing
+110 silly lifecycle No script for "postversion" in "ims-starter", continuing
+111 silly lifecycle No script for "postversion" in "ims-webpack-dll", continuing
+112 silly lifecycle No script for "postversion" in "ims-webpack", continuing
+113 silly lifecycle No script for "postversion" in "ims-chain", continuing
+114 info git Pushing tags...
+115 silly gitPush origin master
+116 silly batched [ PackageGraphNode {
+116 silly batched     name: 'ims-common',
+116 silly batched     externalDependencies: Map { 'ims-core' => [Object], 'ims-decorator' => [Object] },
+116 silly batched     localDependencies: Map {},
+116 silly batched     localDependents:
+116 silly batched      Map {
+116 silly batched        'ims-cli' => [PackageGraphNode],
+116 silly batched        'ims-cloud-client' => [PackageGraphNode],
+116 silly batched        'ims-cloud-server' => [PackageGraphNode],
+116 silly batched        'ims-gulp' => [PackageGraphNode],
+116 silly batched        'ims-ipfs-client' => [PackageGraphNode],
+116 silly batched        'ims-ipfs-server' => [PackageGraphNode],
+116 silly batched        'ims-webpack-dll' => [PackageGraphNode],
+116 silly batched        'ims-webpack' => [PackageGraphNode] } } ]
+117 silly batched [ PackageGraphNode {
+117 silly batched     name: 'ims-cloud-client',
+117 silly batched     externalDependencies: Map { 'ims-cloud' => [Object], 'ims-core' => [Object] },
+117 silly batched     localDependencies: Map {},
+117 silly batched     localDependents:
+117 silly batched      Map {
+117 silly batched        'ims-ipfs-client' => [PackageGraphNode],
+117 silly batched        'ims-ipfs-server' => [PackageGraphNode] } },
+117 silly batched   PackageGraphNode {
+117 silly batched     name: 'ims-cloud-server',
+117 silly batched     externalDependencies:
+117 silly batched      Map {
+117 silly batched        'express' => [Object],
+117 silly batched        'ims-cloud' => [Object],
+117 silly batched        'ims-core' => [Object] },
+117 silly batched     localDependencies: Map {},
+117 silly batched     localDependents: Map { 'ims-cli' => [PackageGraphNode] } } ]
+118 silly batched [ PackageGraphNode {
+118 silly batched     name: 'ims-ipfs-client',
+118 silly batched     externalDependencies: Map { 'ims-cloud' => [Object], 'ims-ipfs' => [Object] },
+118 silly batched     localDependencies: Map {},
+118 silly batched     localDependents: Map { 'ims-gulp' => [PackageGraphNode] } },
+118 silly batched   PackageGraphNode {
+118 silly batched     name: 'ims-ipfs-server',
+118 silly batched     externalDependencies:
+118 silly batched      Map {
+118 silly batched        'ims-cloud' => [Object],
+118 silly batched        'ims-ipfs' => [Object],
+118 silly batched        'ipfs' => [Object] },
+118 silly batched     localDependencies: Map {},
+118 silly batched     localDependents:
+118 silly batched      Map {
+118 silly batched        'ims-cli' => [PackageGraphNode],
+118 silly batched        'ims-webpack-dll' => [PackageGraphNode],
+118 silly batched        'ims-webpack' => [PackageGraphNode] } } ]
+119 silly batched [ PackageGraphNode {
+119 silly batched     name: 'ims-cli',
+119 silly batched     externalDependencies:
+119 silly batched      Map {
+119 silly batched        'commander' => [Object],
+119 silly batched        'ims-core' => [Object],
+119 silly batched        'ims-decorator' => [Object],
+119 silly batched        'tslib' => [Object] },
+119 silly batched     localDependencies: Map {},
+119 silly batched     localDependents: Map { 'ims-starter' => [PackageGraphNode] } },
+119 silly batched   PackageGraphNode {
+119 silly batched     name: 'ims-gulp',
+119 silly batched     externalDependencies:
+119 silly batched      Map {
+119 silly batched        'gulp' => [Object],
+119 silly batched        'ims-core' => [Object],
+119 silly batched        'ims-ipfs' => [Object],
+119 silly batched        'through2' => [Object] },
+119 silly batched     localDependencies: Map {},
+119 silly batched     localDependents: Map {} },
+119 silly batched   PackageGraphNode {
+119 silly batched     name: 'ims-webpack-dll',
+119 silly batched     externalDependencies:
+119 silly batched      Map {
+119 silly batched        'ims-core' => [Object],
+119 silly batched        'neo-async' => [Object],
+119 silly batched        'webpack' => [Object] },
+119 silly batched     localDependencies: Map {},
+119 silly batched     localDependents: Map { 'ims-webpack' => [PackageGraphNode] } } ]
+120 silly batched [ PackageGraphNode {
+120 silly batched     name: 'ims-starter',
+120 silly batched     externalDependencies: Map { 'pm2' => [Object] },
+120 silly batched     localDependencies: Map {},
+120 silly batched     localDependents: Map {} },
+120 silly batched   PackageGraphNode {
+120 silly batched     name: 'ims-webpack',
+120 silly batched     externalDependencies:
+120 silly batched      Map {
+120 silly batched        'html-webpack-plugin' => [Object],
+120 silly batched        'ims-cloud' => [Object],
+120 silly batched        'ims-core' => [Object],
+120 silly batched        'ims-ipfs' => [Object],
+120 silly batched        'mini-css-extract-plugin' => [Object],
+120 silly batched        'react' => [Object],
+120 silly batched        'react-dom' => [Object],
+120 silly batched        'webpack' => [Object] },
+120 silly batched     localDependencies: Map {},
+120 silly batched     localDependents: Map {} } ]
+121 info publish Publishing packages to npm...
+122 info Verifying npm credentials
+123 verbose Retrieving npm user profile
+124 http fetch GET 200 https://registry.npmjs.org/-/npm/v1/user 1808ms
+125 silly npm profile get received {"tfa":false,"name":"imeepos2","email":"1037483576@qq.com","email_verified":true,"created":"2017-12-12T03:37:48.830Z","updated":"2017-12-21T12:46:50.913Z","cidr_whitelist":null}
+126 silly npm whoami received {"username":"imeepos2"}
+127 silly verifyNpmPackageAccess
+128 http fetch GET 200 https://registry.npmjs.org/-/org/imeepos2/package?format=cli 328ms
+129 warn ENOLICENSE Packages ims-cli, ims-cloud-client, ims-cloud-server, ims-common, ims-gulp, ims-ipfs-client, ims-ipfs-server, ims-starter, ims-webpack-dll, ims-webpack are missing a license
+130 silly getCurrentSHA
+131 verbose getCurrentSHA 3104499a01728008ea1f7fb78b3998700764cc35
+132 silly lifecycle No script for "prepublish" in "ims-chain", continuing
+133 silly lifecycle No script for "prepare" in "ims-chain", continuing
+134 silly lifecycle No script for "prepublishOnly" in "ims-chain", continuing
+135 silly lifecycle No script for "prepack" in "ims-chain", continuing
+136 verbose pack-directory packages/ims-common
+137 silly lifecycle No script for "prepublish" in "ims-common", continuing
+138 silly lifecycle No script for "prepare" in "ims-common", continuing
+139 silly lifecycle No script for "prepublishOnly" in "ims-common", continuing
+140 silly lifecycle No script for "prepack" in "ims-common", continuing
+141 silly lifecycle No script for "postpack" in "ims-common", continuing
+142 verbose packed ims-common packages/ims-common
+143 verbose pack-directory packages/ims-cloud-client
+144 verbose pack-directory packages/ims-cloud-server
+145 silly lifecycle No script for "prepublish" in "ims-cloud-client", continuing
+146 silly lifecycle No script for "prepublish" in "ims-cloud-server", continuing
+147 silly lifecycle No script for "prepare" in "ims-cloud-client", continuing
+148 silly lifecycle No script for "prepare" in "ims-cloud-server", continuing
+149 silly lifecycle No script for "prepublishOnly" in "ims-cloud-client", continuing
+150 silly lifecycle No script for "prepublishOnly" in "ims-cloud-server", continuing
+151 silly lifecycle No script for "prepack" in "ims-cloud-client", continuing
+152 silly lifecycle No script for "prepack" in "ims-cloud-server", continuing
+153 silly lifecycle No script for "postpack" in "ims-cloud-client", continuing
+154 verbose packed ims-cloud-client packages/ims-cloud-client
+155 silly lifecycle No script for "postpack" in "ims-cloud-server", continuing
+156 verbose packed ims-cloud-server packages/ims-cloud-server
+157 verbose pack-directory packages/ims-ipfs-client
+158 verbose pack-directory packages/ims-ipfs-server
+159 silly lifecycle No script for "prepublish" in "ims-ipfs-client", continuing
+160 silly lifecycle No script for "prepublish" in "ims-ipfs-server", continuing
+161 silly lifecycle No script for "prepare" in "ims-ipfs-client", continuing
+162 silly lifecycle No script for "prepare" in "ims-ipfs-server", continuing
+163 silly lifecycle No script for "prepublishOnly" in "ims-ipfs-client", continuing
+164 silly lifecycle No script for "prepublishOnly" in "ims-ipfs-server", continuing
+165 silly lifecycle No script for "prepack" in "ims-ipfs-client", continuing
+166 silly lifecycle No script for "prepack" in "ims-ipfs-server", continuing
+167 silly lifecycle No script for "postpack" in "ims-ipfs-client", continuing
+168 verbose packed ims-ipfs-client packages/ims-ipfs-client
+169 silly lifecycle No script for "postpack" in "ims-ipfs-server", continuing
+170 verbose packed ims-ipfs-server packages/ims-ipfs-server
+171 verbose pack-directory packages/ims-cli
+172 verbose pack-directory packages/ims-gulp
+173 verbose pack-directory packages/ims-webpack-dll
+174 silly lifecycle No script for "prepublish" in "ims-cli", continuing
+175 silly lifecycle No script for "prepublish" in "ims-gulp", continuing
+176 silly lifecycle No script for "prepublish" in "ims-webpack-dll", continuing
+177 silly lifecycle No script for "prepare" in "ims-cli", continuing
+178 silly lifecycle No script for "prepare" in "ims-gulp", continuing
+179 silly lifecycle No script for "prepare" in "ims-webpack-dll", continuing
+180 silly lifecycle No script for "prepublishOnly" in "ims-gulp", continuing
+181 silly lifecycle No script for "prepublishOnly" in "ims-webpack-dll", continuing
+182 silly lifecycle No script for "prepublishOnly" in "ims-cli", continuing
+183 silly lifecycle No script for "prepack" in "ims-webpack-dll", continuing
+184 silly lifecycle No script for "prepack" in "ims-gulp", continuing
+185 silly lifecycle No script for "prepack" in "ims-cli", continuing
+186 silly lifecycle No script for "postpack" in "ims-gulp", continuing
+187 verbose packed ims-gulp packages/ims-gulp
+188 silly lifecycle No script for "postpack" in "ims-cli", continuing
+189 verbose packed ims-cli packages/ims-cli
+190 silly lifecycle No script for "postpack" in "ims-webpack-dll", continuing
+191 verbose packed ims-webpack-dll packages/ims-webpack-dll
+192 verbose pack-directory packages/ims-starter
+193 verbose pack-directory packages/ims-webpack
+194 silly lifecycle No script for "prepublish" in "ims-starter", continuing
+195 silly lifecycle No script for "prepublish" in "ims-webpack", continuing
+196 silly lifecycle No script for "prepare" in "ims-starter", continuing
+197 silly lifecycle No script for "prepare" in "ims-webpack", continuing
+198 silly lifecycle No script for "prepublishOnly" in "ims-starter", continuing
+199 silly lifecycle No script for "prepublishOnly" in "ims-webpack", continuing
+200 silly lifecycle No script for "prepack" in "ims-starter", continuing
+201 silly lifecycle No script for "prepack" in "ims-webpack", continuing
+202 silly lifecycle No script for "postpack" in "ims-starter", continuing
+203 verbose packed ims-starter packages/ims-starter
+204 silly lifecycle No script for "postpack" in "ims-webpack", continuing
+205 verbose packed ims-webpack packages/ims-webpack
+206 silly lifecycle No script for "postpack" in "ims-chain", continuing
+207 verbose publish ims-common
+208 silly lifecycle No script for "publish" in "ims-common", continuing
+209 silly lifecycle No script for "postpublish" in "ims-common", continuing
+210 success published ims-common 0.1.14
+211 notice
+212 notice 📦  ims-common@0.1.14
+213 notice === Tarball Contents ===
+214 notice 724B  package.json
+214 notice 57B   README.md
+214 notice 193B  src/bootstrap.d.ts
+214 notice 286B  src/bootstrap.d.ts.map
+214 notice 1.1kB src/bootstrap.js
+214 notice 628B  src/bootstrap.js.map
+214 notice 157B  src/bootstrap.test.d.ts
+214 notice 180B  src/bootstrap.test.d.ts.map
+214 notice 1.8kB src/bootstrap.test.js
+214 notice 1.2kB src/bootstrap.test.js.map
+214 notice 1.0kB src/bootstrap.test.ts
+214 notice 1.0kB src/bootstrap.ts
+214 notice 146B  src/index.d.ts
+214 notice 179B  src/index.d.ts.map
+214 notice 326B  src/index.js
+214 notice 148B  src/index.js.map
+214 notice 111B  src/index.ts
+214 notice 594B  src/injectable.d.ts
+214 notice 555B  src/injectable.d.ts.map
+214 notice 1.4kB src/injectable.js
+214 notice 1.2kB src/injectable.js.map
+214 notice 1.3kB src/injectable.ts
+214 notice 1.0kB src/module.d.ts
+214 notice 965B  src/module.d.ts.map
+214 notice 2.5kB src/module.js
+214 notice 2.1kB src/module.js.map
+214 notice 77B   src/module.test.d.ts
+214 notice 129B  src/module.test.d.ts.map
+214 notice 371B  src/module.test.js
+214 notice 272B  src/module.test.js.map
+214 notice 112B  src/module.test.ts
+214 notice 2.3kB src/module.ts
+214 notice 254B  src/tokens.d.ts
+214 notice 267B  src/tokens.d.ts.map
+214 notice 231B  src/tokens.js
+214 notice 194B  src/tokens.js.map
+214 notice 272B  src/tokens.ts
+215 notice === Tarball Details ===
+216 notice name:          ims-common
+216 notice version:       0.1.14
+216 notice filename:      ims-common-0.1.14.tgz
+216 notice package size:  6.6 kB
+216 notice unpacked size: 25.3 kB
+216 notice shasum:        8d74ed145bd0dc2bb3324bc917ac5d817401a2f6
+216 notice integrity:     sha512-V172sZVrvEuW5[...]H1vHhQDYr0dPw==
+216 notice total files:   37
+217 notice
+218 verbose publish ims-cloud-client
+219 verbose publish ims-cloud-server
+220 http fetch PUT 200 https://registry.npmjs.org/ims-common 6218ms
+221 silly lifecycle No script for "publish" in "ims-cloud-client", continuing
+222 silly lifecycle No script for "postpublish" in "ims-cloud-client", continuing
+223 success published ims-cloud-client 0.1.14
+224 notice
+225 notice 📦  ims-cloud-client@0.1.14
+226 notice === Tarball Contents ===
+227 notice 755B  package.json
+227 notice 46B   README.md
+227 notice 136B  src/client.test.d.ts
+227 notice 161B  src/client.test.d.ts.map
+227 notice 1.1kB src/client.test.js
+227 notice 841B  src/client.test.js.map
+227 notice 648B  src/client.test.ts
+227 notice 81B   src/index.d.ts
+227 notice 120B  src/index.d.ts.map
+227 notice 3.1kB src/index.js
+227 notice 1.6kB src/index.js.map
+227 notice 1.9kB src/index.ts
+228 notice === Tarball Details ===
+229 notice name:          ims-cloud-client
+229 notice version:       0.1.14
+229 notice filename:      ims-cloud-client-0.1.14.tgz
+229 notice package size:  3.1 kB
+229 notice unpacked size: 10.6 kB
+229 notice shasum:        c968d46f6bcc45ad385069544aa3f6b613f4ad4e
+229 notice integrity:     sha512-ceWcurYPLDGo/[...]O+X/IVS5S4CGw==
+229 notice total files:   12
+230 notice
+231 http fetch PUT 200 https://registry.npmjs.org/ims-cloud-client 5347ms
+232 silly lifecycle No script for "publish" in "ims-cloud-server", continuing
+233 silly lifecycle No script for "postpublish" in "ims-cloud-server", continuing
+234 success published ims-cloud-server 0.1.14
+235 notice
+236 notice 📦  ims-cloud-server@0.1.14
+237 notice === Tarball Contents ===
+238 notice 775B  package.json
+238 notice 46B   README.md
+238 notice 140B  src/cloud.test.d.ts
+238 notice 159B  src/cloud.test.d.ts.map
+238 notice 973B  src/cloud.test.js
+238 notice 583B  src/cloud.test.js.map
+238 notice 507B  src/cloud.test.ts
+238 notice 81B   src/index.d.ts
+238 notice 120B  src/index.d.ts.map
+238 notice 5.2kB src/index.js
+238 notice 3.0kB src/index.js.map
+238 notice 3.3kB src/index.ts
+238 notice 84B   src/util.d.ts
+238 notice 138B  src/util.d.ts.map
+238 notice 551B  src/util.js
+238 notice 511B  src/util.js.map
+238 notice 365B  src/util.ts
+239 notice === Tarball Details ===
+240 notice name:          ims-cloud-server
+240 notice version:       0.1.14
+240 notice filename:      ims-cloud-server-0.1.14.tgz
+240 notice package size:  4.3 kB
+240 notice unpacked size: 16.5 kB
+240 notice shasum:        d4ffa862d25c8b417ac54b7e4cce9cba618535be
+240 notice integrity:     sha512-I+x17tt0VH9Yw[...]mJ5OHW3bTyL8w==
+240 notice total files:   17
+241 notice
+242 verbose publish ims-ipfs-client
+243 verbose publish ims-ipfs-server
+244 http fetch PUT 200 https://registry.npmjs.org/ims-cloud-server 5631ms
+245 silly lifecycle No script for "publish" in "ims-ipfs-client", continuing
+246 silly lifecycle No script for "postpublish" in "ims-ipfs-client", continuing
+247 success published ims-ipfs-client 0.1.14
+248 notice
+249 notice 📦  ims-ipfs-client@0.1.14
+250 notice === Tarball Contents ===
+251 notice 789B  package.json
+251 notice 136B  README.md
+251 notice 52B   src/client.test.d.ts
+251 notice 109B  src/client.test.d.ts.map
+251 notice 538B  src/client.test.js
+251 notice 465B  src/client.test.js.map
+251 notice 368B  src/client.test.ts
+251 notice 80B   src/index.d.ts
+251 notice 120B  src/index.d.ts.map
+251 notice 1.1kB src/index.js
+251 notice 607B  src/index.js.map
+251 notice 581B  src/index.ts
+252 notice === Tarball Details ===
+253 notice name:          ims-ipfs-client
+253 notice version:       0.1.14
+253 notice filename:      ims-ipfs-client-0.1.14.tgz
+253 notice package size:  2.0 kB
+253 notice unpacked size: 5.0 kB
+253 notice shasum:        70249aa5cb6815a925c0de40f859ecdeb1b2c5c8
+253 notice integrity:     sha512-mHUlCmsMgLgOt[...]Z7ImBLxjNH3uA==
+253 notice total files:   12
+254 notice
+255 http fetch PUT 200 https://registry.npmjs.org/ims-ipfs-client 6867ms
+256 silly lifecycle No script for "publish" in "ims-ipfs-server", continuing
+257 silly lifecycle No script for "postpublish" in "ims-ipfs-server", continuing
+258 success published ims-ipfs-server 0.1.14
+259 notice
+260 notice 📦  ims-ipfs-server@0.1.14
+261 notice === Tarball Contents ===
+262 notice 806B  package.json
+262 notice 130B  README.md
+262 notice 446B  src/fs.d.ts
+262 notice 440B  src/fs.d.ts.map
+262 notice 2.1kB src/fs.js
+262 notice 2.0kB src/fs.js.map
+262 notice 48B   src/fs.test.d.ts
+262 notice 101B  src/fs.test.d.ts.map
+262 notice 559B  src/fs.test.js
+262 notice 476B  src/fs.test.js.map
+262 notice 167B  src/fs.test.ts
+262 notice 1.6kB src/fs.ts
+262 notice 80B   src/index.d.ts
+262 notice 120B  src/index.d.ts.map
+262 notice 82B   src/index.html
+262 notice 3.4kB src/index.js
+262 notice 2.0kB src/index.js.map
+262 notice 2.3kB src/index.ts
+263 notice === Tarball Details ===
+264 notice name:          ims-ipfs-server
+264 notice version:       0.1.14
+264 notice filename:      ims-ipfs-server-0.1.14.tgz
+264 notice package size:  4.8 kB
+264 notice unpacked size: 16.8 kB
+264 notice shasum:        0669bc7bd4210be73c1615f8f6f8bafd0677b622
+264 notice integrity:     sha512-4PyPzAg1nyTf6[...]SvPRAGP4GqJ8Q==
+264 notice total files:   18
+265 notice
+266 verbose publish ims-cli
+267 verbose publish ims-gulp
+268 verbose publish ims-webpack-dll
+269 http fetch PUT 200 https://registry.npmjs.org/ims-ipfs-server 8538ms
+270 silly lifecycle No script for "publish" in "ims-cli", continuing
+271 silly lifecycle No script for "postpublish" in "ims-cli", continuing
+272 success published ims-cli 0.1.14
+273 notice
+274 notice 📦  ims-cli@0.1.14
+275 notice === Tarball Contents ===
+276 notice 908B  package.json
+276 notice 113B  README.md
+276 notice 73B   src/index.d.ts
+276 notice 118B  src/index.d.ts.map
+276 notice 3.4kB src/index.js
+276 notice 2.1kB src/index.js.map
+276 notice 2.3kB src/index.ts
+276 notice 186B  src/tokens.d.ts
+276 notice 204B  src/tokens.d.ts.map
+276 notice 275B  src/tokens.js
+276 notice 245B  src/tokens.js.map
+276 notice 209B  src/tokens.ts
+277 notice === Tarball Details ===
+278 notice name:          ims-cli
+278 notice version:       0.1.14
+278 notice filename:      ims-cli-0.1.14.tgz
+278 notice package size:  3.0 kB
+278 notice unpacked size: 10.2 kB
+278 notice shasum:        473d670f1ba5bccd20e918a2ce658247daba8389
+278 notice integrity:     sha512-GD6a5VDu5ED7q[...]fyKUe7BELfXQQ==
+278 notice total files:   12
+279 notice
+280 http fetch PUT 200 https://registry.npmjs.org/ims-cli 4047ms
+281 silly lifecycle No script for "publish" in "ims-gulp", continuing
+282 silly lifecycle No script for "postpublish" in "ims-gulp", continuing
+283 success published ims-gulp 0.1.14
+284 notice
+285 notice 📦  ims-gulp@0.1.14
+286 notice === Tarball Contents ===
+287 notice 818B  package.json
+287 notice 52B   README.md
+287 notice 74B   src/index.d.ts
+287 notice 119B  src/index.d.ts.map
+287 notice 2.2kB src/index.js
+287 notice 1.7kB src/index.js.map
+287 notice 1.6kB src/index.ts
+287 notice 199B  src/token.d.ts
+287 notice 251B  src/token.d.ts.map
+287 notice 183B  src/token.js
+287 notice 165B  src/token.js.map
+287 notice 174B  src/token.ts
+288 notice === Tarball Details ===
+289 notice name:          ims-gulp
+289 notice version:       0.1.14
+289 notice filename:      ims-gulp-0.1.14.tgz
+289 notice package size:  2.7 kB
+289 notice unpacked size: 7.5 kB
+289 notice shasum:        a70530d55a5ff3caa286641b804c4a220f642a8f
+289 notice integrity:     sha512-wFqbwVNpADdPB[...]E2BOEGlhfcUrQ==
+289 notice total files:   12
+290 notice
+291 http fetch PUT 200 https://registry.npmjs.org/ims-gulp 4714ms
+292 silly lifecycle No script for "publish" in "ims-webpack-dll", continuing
+293 silly lifecycle No script for "postpublish" in "ims-webpack-dll", continuing
+294 success published ims-webpack-dll 0.1.14
+295 notice
+296 notice 📦  ims-webpack-dll@0.1.14
+297 notice === Tarball Contents ===
+298 notice 802B    package.json
+298 notice 136B    README.md
+298 notice 131B    src/config.d.ts
+298 notice 132B    src/config.d.ts.map
+298 notice 225B    src/config.js
+298 notice 147B    src/config.ts
+298 notice 59B     src/config/config.json
+298 notice 224B    src/config/index.d.ts
+298 notice 274B    src/config/index.d.ts.map
+298 notice 492B    src/config/index.js
+298 notice 415B    src/config/index.ts
+298 notice 361B    src/dll.js
+298 notice 568B    src/dll.plugin.d.ts
+298 notice 560B    src/dll.plugin.d.ts.map
+298 notice 3.4kB   src/dll.plugin.js
+298 notice 1.5kB   src/dll.plugin.js.map
+298 notice 3.3kB   src/dll.plugin.ts
+298 notice 49B     src/dll.test.d.ts
+298 notice 103B    src/dll.test.d.ts.map
+298 notice 252B    src/dll.test.js
+298 notice 161B    src/dll.test.js.map
+298 notice 130B    src/dll.test.ts
+298 notice 136.2kB src/dll/manifest.json
+298 notice 170B    src/index.d.ts
+298 notice 214B    src/index.d.ts.map
+298 notice 1.9kB   src/index.js
+298 notice 805B    src/index.js.map
+298 notice 1.3kB   src/index.ts
+299 notice === Tarball Details ===
+300 notice name:          ims-webpack-dll
+300 notice version:       0.1.14
+300 notice filename:      ims-webpack-dll-0.1.14.tgz
+300 notice package size:  22.5 kB
+300 notice unpacked size: 154.1 kB
+300 notice shasum:        329b88b51b75b8fb1fae8627a92ebf4c1ed5b588
+300 notice integrity:     sha512-o1hj4xYPRUhn+[...]lyHTRagx6uAXg==
+300 notice total files:   28
+301 notice
+302 verbose publish ims-starter
+303 verbose publish ims-webpack
+304 http fetch PUT 200 https://registry.npmjs.org/ims-webpack-dll 7837ms
+305 silly lifecycle No script for "publish" in "ims-starter", continuing
+306 silly lifecycle No script for "postpublish" in "ims-starter", continuing
+307 success published ims-starter 0.1.14
+308 notice
+309 notice 📦  ims-starter@0.1.14
+310 notice === Tarball Contents ===
+311 notice 594B package.json
+311 notice 125B README.md
+312 notice === Tarball Details ===
+313 notice name:          ims-starter
+313 notice version:       0.1.14
+313 notice filename:      ims-starter-0.1.14.tgz
+313 notice package size:  516 B
+313 notice unpacked size: 719 B
+313 notice shasum:        b1af21b44a26d3d6a7a45834800d8272cd81aa45
+313 notice integrity:     sha512-OoF4I7shCVBzP[...]0hzGuN4Y4zNRA==
+313 notice total files:   2
+314 notice
+315 http fetch PUT 200 https://registry.npmjs.org/ims-starter 4189ms
+316 silly lifecycle No script for "publish" in "ims-webpack", continuing
+317 silly lifecycle No script for "postpublish" in "ims-webpack", continuing
+318 success published ims-webpack 0.1.14
+319 notice
+320 notice 📦  ims-webpack@0.1.14
+321 notice === Tarball Contents ===
+322 notice 973B    package.json
+322 notice 125B    README.md
+322 notice 1.1kB   src/dist/index.html
+322 notice 1.4MB   src/dist/vendors~main.js
+322 notice 1.0MB   src/dist/vendors~main~react.js
+322 notice 143B    src/index.d.ts
+322 notice 184B    src/index.d.ts.map
+322 notice 6.6kB   src/index.js
+322 notice 3.7kB   src/index.js.map
+322 notice 4.5kB   src/index.ts
+322 notice 268B    src/plugins/hash_module.d.ts
+322 notice 288B    src/plugins/hash_module.d.ts.map
+322 notice 485B    src/plugins/hash_module.js
+322 notice 393B    src/plugins/hash_module.js.map
+322 notice 437B    src/plugins/hash.d.ts
+322 notice 449B    src/plugins/hash.d.ts.map
+322 notice 1.1kB   src/plugins/hash.js
+322 notice 1.1kB   src/plugins/hash.js.map
+322 notice 179B    src/plugins/hello_world.d.ts
+322 notice 234B    src/plugins/hello_world.d.ts.map
+322 notice 378B    src/plugins/hello_world.js
+322 notice 295B    src/plugins/hello_world.js.map
+322 notice 774B    src/plugins/html.d.ts
+322 notice 697B    src/plugins/html.d.ts.map
+322 notice 2.9kB   src/plugins/html.js
+322 notice 2.8kB   src/plugins/html.ts
+322 notice 108B    src/plugins/index.d.ts
+322 notice 183B    src/plugins/index.d.ts.map
+322 notice 214B    src/plugins/index.js
+322 notice 109B    src/plugins/index.js.map
+322 notice 73B     src/plugins/index.ts
+322 notice 570B    src/plugins/ipfs.d.ts
+322 notice 491B    src/plugins/ipfs.d.ts.map
+322 notice 2.7kB   src/plugins/ipfs.js
+322 notice 2.5kB   src/plugins/ipfs.js.map
+322 notice 2.6kB   src/plugins/ipfs.ts
+322 notice 59B     src/shim.d.ts
+322 notice 116B    src/shim.d.ts.map
+322 notice 138B    src/shim.js
+322 notice 149B    src/shim.js.map
+322 notice 524.0kB src/test/1.js
+322 notice 58B     src/test/index.d.ts
+322 notice 117B    src/test/index.d.ts.map
+322 notice 846B    src/test/index.html
+322 notice 290B    src/test/index.js
+322 notice 234B    src/test/index.js.map
+322 notice 256B    src/test/index.jsx
+322 notice 241B    src/test/index.jsx.map
+322 notice 69B     src/test/index.scss
+322 notice 171B    src/test/index.tsx
+322 notice 73B     src/test/version.d.ts
+322 notice 130B    src/test/version.d.ts.map
+322 notice 100B    src/test/version.js
+322 notice 130B    src/test/version.js.map
+322 notice 28B     src/test/version.ts
+322 notice 427B    src/tokens.d.ts
+322 notice 342B    src/tokens.d.ts.map
+322 notice 601B    src/tokens.js
+322 notice 474B    src/tokens.js.map
+322 notice 615B    src/tokens.ts
+322 notice 53B     src/webpack.test.d.ts
+322 notice 111B    src/webpack.test.d.ts.map
+322 notice 270B    src/webpack.test.js
+322 notice 214B    src/webpack.test.js.map
+322 notice 141B    src/webpack.test.ts
+323 notice === Tarball Details ===
+324 notice name:          ims-webpack
+324 notice version:       0.1.14
+324 notice filename:      ims-webpack-0.1.14.tgz
+324 notice package size:  656.8 kB
+324 notice unpacked size: 3.1 MB
+324 notice shasum:        8d8f99197f2d56f6d9cb71bda374c6944aa94b18
+324 notice integrity:     sha512-3C/UT5cKGc9eO[...]8DGOciRSAJMxA==
+324 notice total files:   65
+325 notice
+326 silly lifecycle No script for "publish" in "ims-chain", continuing
+327 silly lifecycle No script for "postpublish" in "ims-chain", continuing
+328 silly gitCheckout [ 'package.json',
+328 silly gitCheckout   'packages/ims-cli/package.json',
+328 silly gitCheckout   'packages/ims-cloud-client/package.json',
+328 silly gitCheckout   'packages/ims-cloud-server/package.json',
+328 silly gitCheckout   'packages/ims-common/package.json',
+328 silly gitCheckout   'packages/ims-gulp/package.json',
+328 silly gitCheckout   'packages/ims-ipfs-client/package.json',
+328 silly gitCheckout   'packages/ims-ipfs-server/package.json',
+328 silly gitCheckout   'packages/ims-starter/package.json',
+328 silly gitCheckout   'packages/ims-webpack-dll/package.json',
+328 silly gitCheckout   'packages/ims-webpack/package.json' ]
+329 http fetch PUT 200 https://registry.npmjs.org/ims-webpack 15146ms
+330 error Error: Command failed: git checkout -- package.json packages/ims-cli/package.json packages/ims-cloud-client/package.json packages/ims-cloud-server/package.json packages/ims-common/package.json packages/ims-gulp/package.json packages/ims-ipfs-client/package.json packages/ims-ipfs-server/package.json packages/ims-starter/package.json packages/ims-webpack-dll/package.json packages/ims-webpack/package.json
+330 error error: pathspec 'packages/ims-starter/package.json' did not match any file(s) known to git.
+330 error
+330 error     at makeError (/Volumes/meepo/ims-chain/node_modules/execa/index.js:174:9)
+330 error     at Promise.all.then.arr (/Volumes/meepo/ims-chain/node_modules/execa/index.js:278:16)
