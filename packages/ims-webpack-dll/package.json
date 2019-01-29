@@ -1,6 +1,6 @@
 {
   "name": "ims-webpack-dll",
-  "version": "0.1.11",
+  "version": "0.1.13",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "https://github.com/iwe7/ims-chain#readme",
@@ -16,7 +16,7 @@
   "dependencies": {
     "ims-common": "^0.1.11",
     "ims-core": "^0.1.11",
-    "ims-ipfs-server": "^0.1.11",
+    "ims-ipfs-server": "^0.1.13",
     "neo-async": "*",
     "webpack": "*"
   },
