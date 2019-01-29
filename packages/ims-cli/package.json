@@ -1,6 +1,6 @@
 {
   "name": "ims-cli",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "https://github.com/iwe7/ims-chain#readme",
@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "commander": "*",
-    "ims-cloud-server": "^0.1.11",
+    "ims-cloud-server": "^0.1.12",
     "ims-common": "^0.1.11",
     "ims-core": "^0.1.11",
     "ims-decorator": "^0.1.11",
