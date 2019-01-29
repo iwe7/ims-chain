@@ -56,9 +56,11 @@ ImsIpfsServerModule = tslib_1.__decorate([
                     }
                     return new Promise((resolve, reject) => {
                         let node = new IPFS(config);
+                        console.log("create ipfs node");
                         node.on("ready", (err) => {
                             if (err)
                                 return reject(err);
+                            console.log("ipfs node ready");
                             resolve(node);
                         });
                         node.on("error", (err) => {
