@@ -1,15 +1,13 @@
+#!/usr/bin/env node
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const ims_common_1 = require("ims-common");
 const program = require("commander");
 const tokens_1 = require("./tokens");
-let root = process.cwd();
-const path = require("path");
-const fs = require("fs");
 const packages = require("../package.json");
-const ims_ipfs_1 = require("ims-ipfs");
 const src_1 = require("packages/ims-ipfs-client/src");
+const ims_ipfs_server_1 = require("ims-ipfs-server");
 let ImsCliModule = class ImsCliModule {
 };
 ImsCliModule = tslib_1.__decorate([
@@ -36,12 +34,7 @@ ImsCliModule = tslib_1.__decorate([
                         .option("-d, --dev", "项目名称")
                         .option("-p, --prod", "项目名称")
                         .action(async (project, options) => {
-                        let node = await injector.get(ims_ipfs_1.IpfsApi);
-                        let ROOT = path.join(root, project);
-                        let json = require(path.join(ROOT, "app.json"));
-                        let files = fs.readdirSync(ROOT);
-                        files.map(file => { });
-                        console.log(files);
+                        console.log("build");
                         debugger;
                     });
                 }
@@ -54,7 +47,8 @@ ImsCliModule = tslib_1.__decorate([
                         .command("start")
                         .option("-p, --project", "项目名称")
                         .action((...args) => {
-                        console.log(args);
+                        console.log("start");
+                        ims_common_1.bootstrapModule(ims_ipfs_server_1.ImsIpfsServerModule);
                     });
                 }
             },
