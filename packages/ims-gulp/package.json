@@ -1,6 +1,6 @@
 {
   "name": "ims-gulp",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "https://github.com/iwe7/ims-chain#readme",
@@ -14,12 +14,12 @@
     "src"
   ],
   "dependencies": {
-    "ims-core": "*",
-    "ims-common": "*",
-    "ims-ipfs": "*",
-    "through2": "*",
-    "ims-ipfs-client": "*",
-    "gulp": "*"
+    "gulp": "*",
+    "ims-common": "^0.1.11",
+    "ims-core": "^0.1.11",
+    "ims-ipfs": "^0.1.11",
+    "ims-ipfs-client": "^0.1.11",
+    "through2": "*"
   },
   "repository": {
     "type": "git",

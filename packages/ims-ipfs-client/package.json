@@ -1,6 +1,6 @@
 {
   "name": "ims-ipfs-client",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "https://github.com/iwe7/ims-chain#readme",
@@ -14,10 +14,10 @@
     "src"
   ],
   "dependencies": {
-    "ims-cloud-client": "*",
-    "ims-common": "*",
-    "ims-cloud": "*",
-    "ims-ipfs": "*"
+    "ims-cloud": "^0.1.11",
+    "ims-cloud-client": "^0.1.11",
+    "ims-common": "^0.1.11",
+    "ims-ipfs": "^0.1.11"
   },
   "repository": {
     "type": "git",

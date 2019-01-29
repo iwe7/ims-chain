@@ -1,6 +1,6 @@
 {
   "name": "ims-store",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "https://github.com/iwe7/ims-chain#readme",
@@ -14,7 +14,7 @@
     "src"
   ],
   "dependencies": {
-    "ims-core": "*"
+    "ims-core": "^0.1.11"
   },
   "repository": {
     "type": "git",
