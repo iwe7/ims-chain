@@ -1,5 +1,5 @@
 {
-  "name": "ims-admin",
+  "name": "ims-admin-v1",
   "version": "0.1.3",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
@@ -23,5 +23,5 @@
   "bugs": {
     "url": "https://github.com/iwe7/ims-chain/issues"
   },
-  "gitHead": "eb80cf03f71beba78e0f2b569fcd3157b0f36a92"
+  "gitHead": "0e8b396db0ffffa7094ff751c3c9aa82bf475d53"
 }
