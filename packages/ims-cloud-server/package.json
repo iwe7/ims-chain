@@ -16,7 +16,8 @@
   "dependencies": {
     "ims-cloud": "^0.1.11",
     "ims-common": "^0.1.11",
-    "ims-core": "^0.1.11"
+    "ims-core": "^0.1.11",
+    "express": "*"
   },
   "repository": {
     "type": "git",
