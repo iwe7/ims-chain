@@ -1,0 +1,14 @@
+17 error Error: Command failed: git remote update
+17 error error: cannot lock ref 'refs/remotes/origin/master': is at 26c54e4565b466e62e1e89b8f006e1438efc59ed but expected a53a19f09aad5a2b4390892c25ded0836c8bfe51
+17 error From github.com:iwe7/ims-chain
+17 error  ! a53a19f..26c54e4  master     -> origin/master  (unable to update local ref)
+17 error error: Could not fetch origin
+17 error
+17 error Fetching origin
+17 error
+17 error     at makeError (/Volumes/meepo/ims-chain/node_modules/execa/index.js:174:9)
+17 error     at Function.module.exports.sync (/Volumes/meepo/ims-chain/node_modules/execa/index.js:338:15)
+17 error     at Object.execSync (/Volumes/meepo/ims-chain/node_modules/@lerna/child-process/index.js:22:16)
+17 error     at updateRemote (/Volumes/meepo/ims-chain/node_modules/@lerna/version/lib/is-behind-upstream.js:26:16)
+17 error     at isBehindUpstream (/Volumes/meepo/ims-chain/node_modules/@lerna/version/lib/is-behind-upstream.js:11:3)
+17 error     at VersionCommand.initialize (/Volumes/meepo/ims-chain/node_modules/@lerna/version/index.js:120:7)
