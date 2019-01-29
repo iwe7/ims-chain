@@ -13,6 +13,9 @@
   "files": [
     "src"
   ],
+  "dependencies": {
+    "ims-core": "*"
+  },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },

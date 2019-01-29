@@ -13,6 +13,12 @@
   "files": [
     "src"
   ],
+  "dependencies": {
+    "ims-cloud-client": "*",
+    "ims-common": "*",
+    "ims-cloud": "*",
+    "ims-ipfs": "*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iwe7/ims-chain.git"

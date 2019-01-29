@@ -4,7 +4,6 @@ const tslib_1 = require("tslib");
 const ims_common_1 = require("ims-common");
 const ims_core_1 = require("ims-core");
 const ims_ipfs_1 = require("ims-ipfs");
-const pull = require("pull-stream");
 let ImsFsServer = class ImsFsServer {
     constructor(injector) {
         this.injector = injector;

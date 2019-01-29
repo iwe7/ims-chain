@@ -45,8 +45,7 @@ import { config } from "ims-webpack-dll";
           target: "web",
           entry: {
             main,
-            react: ["react", "react-dom", "react-router-dom", "redux"],
-            shim: [path.join(__dirname, "shim.ts")]
+            react: ["react", "react-dom", "react-router-dom", "redux"]
           },
           output: {
             path: path.join(__dirname, "dist"),

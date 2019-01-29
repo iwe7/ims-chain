@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "cids": "*",
-    "multihashing-async": "*"
+    "multihashing-async": "*",
+    "querystring": "*"
   },
   "gitHead": "0e8b396db0ffffa7094ff751c3c9aa82bf475d53"
 }

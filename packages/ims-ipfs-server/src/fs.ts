@@ -1,7 +1,6 @@
 import { Injectable } from "ims-common";
 import { Injector } from "ims-core";
 import { Ipfs } from "ims-ipfs";
-const pull = require("pull-stream");
 
 @Injectable()
 export class ImsFsServer {

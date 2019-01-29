@@ -13,6 +13,19 @@
   "files": [
     "src"
   ],
+  "dependencies": {
+    "ims-common": "*",
+    "ims-core": "*",
+    "ims-ipfs": "*",
+    "ims-cloud": "*",
+    "webpack": "*",
+    "ims-ipfs-server": "*",
+    "html-webpack-plugin": "*",
+    "mini-css-extract-plugin": "*",
+    "ims-webpack-dll": "*",
+    "react-dom": "*",
+    "react": "*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iwe7/ims-chain.git"

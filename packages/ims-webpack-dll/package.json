@@ -13,6 +13,13 @@
   "files": [
     "src"
   ],
+  "dependencies": {
+    "ims-core": "*",
+    "neo-async": "*",
+    "webpack": "*",
+    "ims-common": "*",
+    "ims-ipfs-server": "*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iwe7/ims-chain.git"
