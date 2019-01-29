@@ -4,7 +4,6 @@ import program = require("commander");
 import { Commander, Commands } from "./tokens";
 import { Injector } from "ims-core";
 const packages = require("../package.json");
-import { ImsIpfsClientModule } from "packages/ims-ipfs-client/src";
 import { ImsIpfsServerModule } from "ims-ipfs-server";
 
 @Module({
@@ -53,13 +52,13 @@ import { ImsIpfsServerModule } from "ims-ipfs-server";
       useFactory: (injector: Injector) => {
         return async () => {
           let commander = await injector.get(Commander);
-          let commands = await injector.get(Commands);
+          await injector.get(Commands);
           commander.parse(process.argv);
         };
       }
     }
   ],
-  imports: [ImsIpfsClientModule]
+  imports: []
 })
 export class ImsCliModule {}
 

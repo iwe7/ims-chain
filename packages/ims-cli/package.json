@@ -9,6 +9,13 @@
   "bin": {
     "ims": "./src/index.js"
   },
+  "dependencies": {
+    "tslib": "^1.9.3",
+    "commander": "*",
+    "ims-common": "*",
+    "ims-core": "*",
+    "ims-ipfs-server": "*"
+  },
   "directories": {
     "lib": "lib",
     "test": "__tests__"

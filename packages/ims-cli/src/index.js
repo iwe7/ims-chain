@@ -6,7 +6,6 @@ const ims_common_1 = require("ims-common");
 const program = require("commander");
 const tokens_1 = require("./tokens");
 const packages = require("../package.json");
-const src_1 = require("packages/ims-ipfs-client/src");
 const ims_ipfs_server_1 = require("ims-ipfs-server");
 let ImsCliModule = class ImsCliModule {
 };
@@ -57,13 +56,13 @@ ImsCliModule = tslib_1.__decorate([
                 useFactory: (injector) => {
                     return async () => {
                         let commander = await injector.get(tokens_1.Commander);
-                        let commands = await injector.get(tokens_1.Commands);
+                        await injector.get(tokens_1.Commands);
                         commander.parse(process.argv);
                     };
                 }
             }
         ],
-        imports: [src_1.ImsIpfsClientModule]
+        imports: []
     })
 ], ImsCliModule);
 exports.ImsCliModule = ImsCliModule;

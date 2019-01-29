@@ -58,6 +58,7 @@
     "through2": "^3.0.0",
     "ts-loader": "^5.3.3",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "tslib": "^1.9.3",
     "webcrypto-core": "^1.0.1",
     "webcrypto-shim": "^0.1.4",
     "webpack": "^4.29.0",
