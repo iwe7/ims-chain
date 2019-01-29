@@ -1,6 +1,6 @@
 {
   "name": "ims-cloud-server",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "https://github.com/iwe7/ims-chain#readme",
@@ -16,7 +16,7 @@
   "dependencies": {
     "express": "*",
     "ims-cloud": "^0.1.11",
-    "ims-common": "^0.1.14",
+    "ims-common": "^0.1.15",
     "ims-core": "^0.1.11"
   },
   "repository": {
