@@ -5,16 +5,18 @@ import webpack = require("webpack");
 import { LibManifestPlugin } from "./dll.plugin";
 import { Injector } from "ims-core";
 import { ImsIpfsServerModule } from "ims-ipfs-server";
+import config from "./config/index";
 
 @Module({
   providers: [
     {
       provide: AppInitialization,
       useFactory: (injector: Injector) => {
+        config.set("dll", []);
         let imsWebpackDllPlugin = new LibManifestPlugin(injector);
         const cfg: Configuration = {
           entry: {
-            react: ["react", "react-dom", "react-router-dom"]
+            react: ["react", "react-dom", "react-router-dom", "ipfs"]
           },
           output: {
             filename: `[name].js`
@@ -38,3 +40,4 @@ import { ImsIpfsServerModule } from "ims-ipfs-server";
 export class ImsWebpackDllModule {}
 
 export { config } from "./config";
+export { default as imsConfig } from "./config/index";

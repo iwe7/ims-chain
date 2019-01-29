@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const ims_ipfs_1 = require("ims-ipfs");
 const ims_cloud_1 = require("ims-cloud");
 const html = require("./html");
+const ims_webpack_dll_1 = require("ims-webpack-dll");
 class ImsWebpackIpfsPlugin {
     constructor(injector) {
         this.injector = injector;
@@ -48,6 +49,7 @@ class ImsWebpackIpfsPlugin {
         compiler.hooks.emit.tap("ImsWebpackPlugin", (compilation) => {
             let hooks = compilation.hooks;
             hooks.htmlWebpackPluginAfterEmit.tapAsync("ImsWebpackPlugin", async (item, callback) => {
+                ims_webpack_dll_1.imsConfig.get("dll").map(str => html.addScript(str));
                 await this.addStyle(compilation, "main.css");
                 await this.addScript(compilation, "shim.js");
                 await this.addScript(compilation, "vendors~main~react.js");

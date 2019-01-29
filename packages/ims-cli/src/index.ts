@@ -2,13 +2,9 @@ import { Module, bootstrapModule, AppInitialization } from "ims-common";
 import program = require("commander");
 import { Commander, Commands } from "./tokens";
 import { Injector } from "ims-core";
-let root = process.cwd();
-import path = require("path");
-import fs = require("fs");
-
 const packages = require("../package.json");
-import { IpfsApi } from "ims-ipfs";
 import { ImsIpfsClientModule } from "packages/ims-ipfs-client/src";
+import { ImsIpfsServerModule } from "ims-ipfs-server";
 
 @Module({
   providers: [
@@ -33,12 +29,7 @@ import { ImsIpfsClientModule } from "packages/ims-ipfs-client/src";
           .option("-d, --dev", "项目名称")
           .option("-p, --prod", "项目名称")
           .action(async (project: string, options: any[]) => {
-            let node = await injector.get(IpfsApi);
-            let ROOT = path.join(root, project);
-            let json = require(path.join(ROOT, "app.json"));
-            let files = fs.readdirSync(ROOT);
-            files.map(file => {});
-            console.log(files);
+            console.log("build");
             debugger;
           });
       }
@@ -51,7 +42,8 @@ import { ImsIpfsClientModule } from "packages/ims-ipfs-client/src";
           .command("start")
           .option("-p, --project", "项目名称")
           .action((...args: any[]) => {
-            console.log(args);
+            console.log("start");
+            bootstrapModule(ImsIpfsServerModule);
           });
       }
     },

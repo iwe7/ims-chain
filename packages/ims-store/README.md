@@ -1,11 +1,11 @@
-# `ims-config`
+# `ims-store`
 
 > TODO: description
 
 ## Usage
 
 ```
-const imsConfig = require('ims-config');
+const imsStore = require('ims-store');
 
 // TODO: DEMONSTRATE API
 ```

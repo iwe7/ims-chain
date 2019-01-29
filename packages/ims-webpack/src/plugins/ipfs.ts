@@ -3,6 +3,8 @@ import { Injector } from "ims-core";
 import { IpfsApi } from "ims-ipfs";
 import { Config } from "ims-cloud";
 import * as html from "./html";
+import { imsConfig } from "ims-webpack-dll";
+
 export class ImsWebpackIpfsPlugin {
   constructor(public injector: Injector) {}
   async uploadRes(compilation: compilation.Compilation, outputName: string) {
@@ -52,12 +54,14 @@ export class ImsWebpackIpfsPlugin {
           "ImsWebpackPlugin",
           async (item: any, callback: any) => {
             // index.html
+            imsConfig.get("dll").map(str => html.addScript(str));
             await this.addStyle(compilation, "main.css");
             await this.addScript(compilation, "shim.js");
             await this.addScript(compilation, "vendors~main~react.js");
             await this.addScript(compilation, "vendors~main.js");
             await this.addScript(compilation, "main.js");
             await this.addScript(compilation, "react.js");
+
             let htmlName = await this.handlerIndexHtml();
             let config = await this.injector.get<Config>(Config);
             if (!config) config = { port: 4802, host: "192.168.1.101" };

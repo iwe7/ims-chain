@@ -4,7 +4,7 @@ const asyncLib = require("neo-async");
 const SingleEntryDependency = require("webpack/lib/SingleEntryPlugin");
 const ims_core_1 = require("ims-core");
 const ims_ipfs_1 = require("ims-ipfs");
-const ims_config_1 = require("ims-config");
+const index_1 = require("./config/index");
 exports.LibManifestPluginOptions = ims_core_1.InjectionToken.fromString("LibManifestPluginOptions");
 class LibManifestPlugin {
     constructor(injector) {
@@ -71,9 +71,9 @@ class LibManifestPlugin {
                         content: manifestContent
                     }
                 ]);
-                let dll = ims_config_1.default.get("dll") || [];
+                let dll = index_1.default.get("dll") || [];
                 dll.push(result[0].hash);
-                ims_config_1.default.set("dll", dll);
+                index_1.default.set("dll", dll);
                 callback();
             }, callback);
         });

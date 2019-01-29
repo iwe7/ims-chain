@@ -1,11 +1,11 @@
 {
-  "name": "ims-config",
+  "name": "ims-store",
   "version": "0.1.4",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "https://github.com/iwe7/ims-chain#readme",
   "license": "ISC",
-  "main": "lib/ims-config.js",
+  "main": "lib/ims-store.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -22,6 +22,5 @@
   },
   "bugs": {
     "url": "https://github.com/iwe7/ims-chain/issues"
-  },
-  "gitHead": "0e8b396db0ffffa7094ff751c3c9aa82bf475d53"
+  }
 }

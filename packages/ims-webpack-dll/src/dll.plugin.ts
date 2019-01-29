@@ -3,7 +3,7 @@ import SingleEntryDependency = require("webpack/lib/SingleEntryPlugin");
 import { Compiler, compilation } from "webpack";
 import { Injector, InjectionToken } from "ims-core";
 import { IpfsApi } from "ims-ipfs";
-import config from "ims-config";
+import config from "./config/index";
 
 export interface LibManifestPluginOptions {
   type?: string;
