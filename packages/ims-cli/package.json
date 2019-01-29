@@ -1,6 +1,6 @@
 {
   "name": "ims-cli",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "https://github.com/iwe7/ims-chain#readme",
@@ -13,9 +13,9 @@
     "commander": "*",
     "ims-common": "^0.1.9",
     "ims-core": "^0.1.9",
+    "ims-decorator": "*",
     "ims-ipfs-server": "^0.1.9",
-    "tslib": "^1.9.3",
-    "ims-decorator": "*"
+    "tslib": "^1.9.3"
   },
   "directories": {
     "lib": "src",
