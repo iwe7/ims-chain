@@ -14,7 +14,8 @@
     "ims-common": "^0.1.9",
     "ims-core": "^0.1.9",
     "ims-ipfs-server": "^0.1.9",
-    "tslib": "^1.9.3"
+    "tslib": "^1.9.3",
+    "ims-decorator": "*"
   },
   "directories": {
     "lib": "src",
