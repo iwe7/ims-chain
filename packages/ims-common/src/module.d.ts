@@ -14,7 +14,7 @@ export declare class ModuleRef<T> {
     onInit: (injector: Injector) => Promise<void>;
     private _injector?;
     readonly injector: Injector;
-    constructor(instance: T, onInit: (injector: Injector) => Promise<void>, _injector?: Injector | undefined);
+    constructor(instance: T, onInit: (injector: Injector) => Promise<void>, _injector?: Injector);
     setInjector(injector: Injector): void;
 }
 export declare class ModuleFactory {

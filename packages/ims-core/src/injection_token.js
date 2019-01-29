@@ -55,4 +55,3 @@ function stringify(token) {
     return res;
 }
 exports.stringify = stringify;
-//# sourceMappingURL=injection_token.js.map

@@ -8,4 +8,3 @@ ImsAddonsModule = tslib_1.__decorate([
     ims_common_1.Module()
 ], ImsAddonsModule);
 exports.ImsAddonsModule = ImsAddonsModule;
-//# sourceMappingURL=index.js.map

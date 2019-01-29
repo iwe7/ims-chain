@@ -74,4 +74,3 @@ ImsCliModule = tslib_1.__decorate([
 ], ImsCliModule);
 exports.ImsCliModule = ImsCliModule;
 ims_common_1.bootstrapModule(ImsCliModule);
-//# sourceMappingURL=index.js.map

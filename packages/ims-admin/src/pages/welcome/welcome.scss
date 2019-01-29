@@ -1,0 +1,56 @@
+.welcome {
+  &_page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  &_body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &_title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 2em;
+      margin-top: 120px;
+    }
+    &_avatar {
+      height: 60px;
+      width: 60px;
+      border: 1px solid #ccc;
+      margin-bottom: 1em;
+    }
+    &_address {
+      font-size: 13px;
+      color: gray;
+      overflow: hidden;
+      max-width: 15em;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+  &_footer {
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &_account {
+      color: #0652ec;
+    }
+    &_tabs {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      div {
+        flex: 1;
+        padding: 0 10px;
+        color: #0652ec;
+      }
+    }
+  }
+}

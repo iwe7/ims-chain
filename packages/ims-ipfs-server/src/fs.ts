@@ -16,9 +16,13 @@ export class ImsFsServer {
   constructor(private injector: Injector) {}
 
   async cat(hash: string) {
-    let node = await this.node;
-    hash = hash || "QmbSnCcHziqhjNRyaunfcCvxPiV3fNL3fWL8nUrp5yqwD5";
-    return await node.cat(`/ipfs/${hash}`);
+    try {
+      let node = await this.node;
+      hash = hash || "QmbSnCcHziqhjNRyaunfcCvxPiV3fNL3fWL8nUrp5yqwD5";
+      return await node.cat(`/ipfs/${hash}`);
+    } catch (e) {
+      // debugger;
+    }
   }
 
   async mkdir(path: string) {

@@ -17,4 +17,3 @@ function isPromise(val) {
     return val && typeof val.then === "function";
 }
 exports.isPromise = isPromise;
-//# sourceMappingURL=util.js.map

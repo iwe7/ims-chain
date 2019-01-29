@@ -11,10 +11,13 @@ export const WebpackPlugin = InjectionToken.fromString(
   "WebpackPlugin",
   true
 );
-
 export const WebpackName = InjectionToken.fromString<string>(
   "WebpackName",
   "WebpackName"
+);
+export const WebpackMain = InjectionToken.fromString<string>(
+  "WebpackMain",
+  "WebpackMain"
 );
 export const WebpackDev = InjectionToken.fromString<boolean>(
   "WebpackDev",

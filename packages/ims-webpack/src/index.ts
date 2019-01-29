@@ -4,9 +4,11 @@ import webpack = require("webpack");
 import path = require("path");
 import { ImsWebpackIpfsPlugin } from "./plugins/index";
 import { ImsIpfsServerModule } from "ims-ipfs-server";
-import { WebpackName, WebpackDev } from "./tokens";
+import { WebpackName, WebpackDev, WebpackMain } from "./tokens";
 const HtmlPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+import { config } from "ims-webpack-dll";
+
 @Module({
   providers: [
     {
@@ -20,6 +22,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
       useFactory: () => "demo"
     },
     {
+      provide: WebpackMain,
+      useFactory: () => [path.join(__dirname, "test", "index.tsx")]
+    },
+    {
       provide: WebpackDev,
       useFactory: () => true
     },
@@ -30,20 +36,25 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
           InjectionToken.fromType(ImsWebpackIpfsPlugin)
         );
         let name = await injector.get(WebpackName);
+        let main = await injector.get(WebpackMain);
         let dev = await injector.get(WebpackDev);
         let cfg: webpack.Configuration = {
           mode: dev ? "development" : "production",
           name,
           watch: dev ? true : false,
+          target: "web",
           entry: {
-            main: [path.join(__dirname, "test", "index.tsx")]
+            main,
+            react: ["react", "react-dom", "react-router-dom", "redux"],
+            shim: [path.join(__dirname, "shim.ts")]
           },
           output: {
             path: path.join(__dirname, "dist"),
             filename: `[name].js`
           },
           resolve: {
-            extensions: [".tsx", ".ts", ".jsx", ".js"]
+            extensions: [".tsx", ".ts", ".jsx", ".js"],
+            modules: ["node_modules", "packages"]
           },
           module: {
             rules: [
@@ -58,6 +69,33 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
               }
             ]
           },
+          optimization: {
+            minimize: true,
+            providedExports: true,
+            usedExports: true,
+            sideEffects: true,
+            concatenateModules: true,
+            noEmitOnErrors: true,
+            splitChunks: {
+              chunks: "all",
+              minSize: 30000,
+              minChunks: 1,
+              maxAsyncRequests: 5,
+              maxInitialRequests: 3,
+              name: true,
+              cacheGroups: {
+                default: {
+                  minChunks: 2,
+                  priority: -20,
+                  reuseExistingChunk: true
+                },
+                vendors: {
+                  test: /[\\/]node_modules[\\/]/,
+                  priority: -10
+                }
+              }
+            }
+          },
           plugins: [
             imsWebpackIpfsPlugin,
             new MiniCssExtractPlugin({
@@ -68,7 +106,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
               title: "my app",
               filename: "index.html",
               template: path.join(__dirname, "test/index.html")
-            })
+            }),
+            new webpack.DllReferencePlugin(config)
           ]
         };
         if (dev) {
@@ -100,3 +139,5 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
   imports: [ImsIpfsServerModule]
 })
 export class ImsWebpackModule {}
+export * from "./tokens";
+export { html } from "./plugins/index";

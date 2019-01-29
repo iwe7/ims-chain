@@ -18,16 +18,17 @@ ImsIpfsServerModule = tslib_1.__decorate([
                 useFactory: (injector) => new fs_1.ImsFsServer(injector)
             },
             {
-                provide: ims_cloud_1.After,
+                provide: ims_cloud_1.Get,
                 useFactory: async (injector) => {
                     let api = await injector.get(ims_core_1.InjectionToken.fromType(fs_1.ImsFsServer));
                     return {
-                        path: "/static/:hash",
+                        path: "/:hash/:method?",
                         handler: async (req, res, next) => {
                             let params = req.params;
                             if (params.hash) {
                                 return await api.cat(params.hash);
                             }
+                            next();
                         }
                     };
                 }
@@ -83,4 +84,3 @@ ImsIpfsServerModule = tslib_1.__decorate([
     })
 ], ImsIpfsServerModule);
 exports.ImsIpfsServerModule = ImsIpfsServerModule;
-//# sourceMappingURL=index.js.map

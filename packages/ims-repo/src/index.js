@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const ims_common_1 = require("ims-common");
 const token_1 = require("./token");
+const ipfsBlockService = require("ipfs-block-service");
 const IpfsRepo = require("ipfs-repo");
 let ImsRepoModule = class ImsRepoModule {
 };
@@ -15,6 +16,16 @@ ImsRepoModule = tslib_1.__decorate([
                     return {
                         path: "./ip01"
                     };
+                }
+            },
+            {
+                provide: token_1.ImsBlockService,
+                useFactory: async (injector) => {
+                    let repos = await injector.get(token_1.ImsRepos);
+                    return Object.keys(repos).map(key => {
+                        let repo = repos[key];
+                        return new ipfsBlockService(repo);
+                    });
                 }
             },
             {
@@ -49,4 +60,3 @@ ImsRepoModule = tslib_1.__decorate([
     })
 ], ImsRepoModule);
 exports.ImsRepoModule = ImsRepoModule;
-//# sourceMappingURL=index.js.map

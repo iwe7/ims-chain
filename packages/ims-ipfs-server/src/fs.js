@@ -18,9 +18,13 @@ let ImsFsServer = class ImsFsServer {
         });
     }
     async cat(hash) {
-        let node = await this.node;
-        hash = hash || "QmbSnCcHziqhjNRyaunfcCvxPiV3fNL3fWL8nUrp5yqwD5";
-        return await node.cat(`/ipfs/${hash}`);
+        try {
+            let node = await this.node;
+            hash = hash || "QmbSnCcHziqhjNRyaunfcCvxPiV3fNL3fWL8nUrp5yqwD5";
+            return await node.cat(`/ipfs/${hash}`);
+        }
+        catch (e) {
+        }
     }
     async mkdir(path) {
         if (!path.startsWith("/")) {
@@ -69,4 +73,3 @@ ImsFsServer = tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [ims_core_1.Injector])
 ], ImsFsServer);
 exports.ImsFsServer = ImsFsServer;
-//# sourceMappingURL=fs.js.map

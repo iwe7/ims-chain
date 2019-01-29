@@ -32,4 +32,3 @@ ImsIpfsClientModule = tslib_1.__decorate([
     })
 ], ImsIpfsClientModule);
 exports.ImsIpfsClientModule = ImsIpfsClientModule;
-//# sourceMappingURL=index.js.map

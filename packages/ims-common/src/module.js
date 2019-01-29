@@ -62,4 +62,3 @@ exports.ModuleFactory = ModuleFactory;
 exports.Module = ims_decorator_1.makeDecorator(exports.MODULE, def => {
     return def.metadataDef;
 }, new ModuleMetadataFactory());
-//# sourceMappingURL=module.js.map

@@ -57,4 +57,3 @@ ImsGulpModule = tslib_1.__decorate([
 ], ImsGulpModule);
 exports.ImsGulpModule = ImsGulpModule;
 ims_common_1.bootstrapModule(ImsGulpModule).then(res => { });
-//# sourceMappingURL=index.js.map

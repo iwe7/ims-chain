@@ -5,8 +5,6 @@ const ims_core_1 = require("ims-core");
 const index_1 = require("./index");
 const fs_1 = require("./fs");
 try {
-    let model = index_1.ImsIpfsServerModule;
-    debugger;
     ims_common_1.bootstrapModule(index_1.ImsIpfsServerModule)
         .then(async (res) => {
         let fss = await res.injector.get(ims_core_1.InjectionToken.fromType(fs_1.ImsFsServer));

@@ -6,4 +6,3 @@ tslib_1.__exportStar(require("./injector"), exports);
 tslib_1.__exportStar(require("./provider"), exports);
 tslib_1.__exportStar(require("./type"), exports);
 tslib_1.__exportStar(require("./util"), exports);
-//# sourceMappingURL=index.js.map

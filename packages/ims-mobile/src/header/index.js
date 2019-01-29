@@ -7,4 +7,3 @@ class ImsMobileHeader extends react_1.Component {
     }
 }
 exports.ImsMobileHeader = ImsMobileHeader;
-//# sourceMappingURL=index.js.map

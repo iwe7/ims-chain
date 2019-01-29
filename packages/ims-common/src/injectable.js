@@ -35,4 +35,3 @@ exports.InjectableMetadataFactory = InjectableMetadataFactory;
 exports.Injectable = ims_decorator_1.makeDecorator(exports.INJECTABLE, def => {
     return def.metadataDef;
 }, new InjectableMetadataFactory());
-//# sourceMappingURL=injectable.js.map

@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "ts": "ts-node -r tsconfig-paths/register ",
-    "tsc": "tsc -p tsconfig.json --w"
+    "tsc": "tsc -p tsconfig.build.json --w"
   },
   "devDependencies": {
     "@types/commander": "^2.12.2",
@@ -11,6 +11,12 @@
     "@types/gulp": "^4.0.5",
     "@types/node": "^10.12.18",
     "@types/react": "^16.7.21",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-redux": "^7.0.1",
+    "@types/react-router": "^4.4.3",
+    "@types/react-router-dom": "^4.3.1",
+    "@types/react-router-redux": "^5.0.17",
+    "@types/redux": "^3.6.0",
     "@types/through2": "^2.0.34",
     "@types/webpack": "^4.4.24",
     "lerna": "^3.0.1",
@@ -19,7 +25,6 @@
     "typescript": "^3.2.4"
   },
   "dependencies": {
-    "@types/react-dom": "^16.0.11",
     "body-parser": "^1.18.3",
     "cids": "^0.5.7",
     "commander": "^2.19.0",
@@ -39,13 +44,22 @@
     "peer-info": "^0.15.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-redux": "^6.0.0",
     "react-render": "^3.0.0",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-router-redux": "^4.0.8",
+    "redux": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "through2": "^3.0.0",
     "ts-loader": "^5.3.3",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
-    "webpack": "^4.29.0"
+    "webcrypto-core": "^1.0.1",
+    "webcrypto-shim": "^0.1.4",
+    "webpack": "^4.29.0",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "weui": "^1.1.3"
   }
 }

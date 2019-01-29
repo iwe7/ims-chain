@@ -26,4 +26,3 @@ initIpld(path.join(root, "ifpsrepo"), (err, ipld) => {
     debugger;
     ipld.get();
 });
-//# sourceMappingURL=1.js.map

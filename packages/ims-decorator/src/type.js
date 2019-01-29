@@ -19,4 +19,3 @@ function getPropertyDef(def, p) {
     return def.propertys.filter(res => res.propertyKey === p);
 }
 exports.getPropertyDef = getPropertyDef;
-//# sourceMappingURL=type.js.map

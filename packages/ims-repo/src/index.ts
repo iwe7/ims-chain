@@ -1,7 +1,7 @@
 import { Module } from "ims-common";
 import { Injector } from "ims-core";
-import { ImsRepos, ImsReposOptions, ImsRepo } from "./token";
-
+import { ImsRepos, ImsReposOptions, ImsRepo, ImsBlockService } from "./token";
+const ipfsBlockService = require("ipfs-block-service");
 const IpfsRepo = require("ipfs-repo");
 @Module({
   providers: [
@@ -11,6 +11,16 @@ const IpfsRepo = require("ipfs-repo");
         return {
           path: "./ip01"
         } as ImsReposOptions;
+      }
+    },
+    {
+      provide: ImsBlockService,
+      useFactory: async (injector: Injector) => {
+        let repos = await injector.get(ImsRepos);
+        return Object.keys(repos).map(key => {
+          let repo = repos[key];
+          return new ipfsBlockService(repo);
+        });
       }
     },
     {

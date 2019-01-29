@@ -58,4 +58,3 @@ ImsCloudClientModule = tslib_1.__decorate([
     })
 ], ImsCloudClientModule);
 exports.ImsCloudClientModule = ImsCloudClientModule;
-//# sourceMappingURL=index.js.map

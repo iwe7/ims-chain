@@ -133,4 +133,3 @@ function makeDecorator(token, getDef, factory) {
     return item;
 }
 exports.makeDecorator = makeDecorator;
-//# sourceMappingURL=makeDecorator.js.map

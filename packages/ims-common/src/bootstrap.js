@@ -20,4 +20,3 @@ async function bootstrapModule(type) {
     return moduleRef;
 }
 exports.bootstrapModule = bootstrapModule;
-//# sourceMappingURL=bootstrap.js.map

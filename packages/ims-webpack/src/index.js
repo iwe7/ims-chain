@@ -10,6 +10,7 @@ const ims_ipfs_server_1 = require("ims-ipfs-server");
 const tokens_1 = require("./tokens");
 const HtmlPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ims_webpack_dll_1 = require("ims-webpack-dll");
 let ImsWebpackModule = class ImsWebpackModule {
 };
 ImsWebpackModule = tslib_1.__decorate([
@@ -26,6 +27,10 @@ ImsWebpackModule = tslib_1.__decorate([
                 useFactory: () => "demo"
             },
             {
+                provide: tokens_1.WebpackMain,
+                useFactory: () => [path.join(__dirname, "test", "index.tsx")]
+            },
+            {
                 provide: tokens_1.WebpackDev,
                 useFactory: () => true
             },
@@ -34,20 +39,25 @@ ImsWebpackModule = tslib_1.__decorate([
                 useFactory: async (injector) => {
                     let imsWebpackIpfsPlugin = await injector.get(ims_core_1.InjectionToken.fromType(index_1.ImsWebpackIpfsPlugin));
                     let name = await injector.get(tokens_1.WebpackName);
+                    let main = await injector.get(tokens_1.WebpackMain);
                     let dev = await injector.get(tokens_1.WebpackDev);
                     let cfg = {
                         mode: dev ? "development" : "production",
                         name,
                         watch: dev ? true : false,
+                        target: "web",
                         entry: {
-                            main: [path.join(__dirname, "test", "index.tsx")]
+                            main,
+                            react: ["react", "react-dom", "react-router-dom", "redux"],
+                            shim: [path.join(__dirname, "shim.ts")]
                         },
                         output: {
                             path: path.join(__dirname, "dist"),
                             filename: `[name].js`
                         },
                         resolve: {
-                            extensions: [".tsx", ".ts", ".jsx", ".js"]
+                            extensions: [".tsx", ".ts", ".jsx", ".js"],
+                            modules: ["node_modules", "packages"]
                         },
                         module: {
                             rules: [
@@ -62,6 +72,33 @@ ImsWebpackModule = tslib_1.__decorate([
                                 }
                             ]
                         },
+                        optimization: {
+                            minimize: true,
+                            providedExports: true,
+                            usedExports: true,
+                            sideEffects: true,
+                            concatenateModules: true,
+                            noEmitOnErrors: true,
+                            splitChunks: {
+                                chunks: "all",
+                                minSize: 30000,
+                                minChunks: 1,
+                                maxAsyncRequests: 5,
+                                maxInitialRequests: 3,
+                                name: true,
+                                cacheGroups: {
+                                    default: {
+                                        minChunks: 2,
+                                        priority: -20,
+                                        reuseExistingChunk: true
+                                    },
+                                    vendors: {
+                                        test: /[\\/]node_modules[\\/]/,
+                                        priority: -10
+                                    }
+                                }
+                            }
+                        },
                         plugins: [
                             imsWebpackIpfsPlugin,
                             new MiniCssExtractPlugin({
@@ -72,7 +109,8 @@ ImsWebpackModule = tslib_1.__decorate([
                                 title: "my app",
                                 filename: "index.html",
                                 template: path.join(__dirname, "test/index.html")
-                            })
+                            }),
+                            new webpack.DllReferencePlugin(ims_webpack_dll_1.config)
                         ]
                     };
                     if (dev) {
@@ -106,4 +144,6 @@ ImsWebpackModule = tslib_1.__decorate([
     })
 ], ImsWebpackModule);
 exports.ImsWebpackModule = ImsWebpackModule;
-//# sourceMappingURL=index.js.map
+tslib_1.__exportStar(require("./tokens"), exports);
+var index_2 = require("./plugins/index");
+exports.html = index_2.html;

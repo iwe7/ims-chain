@@ -5,4 +5,3 @@ function isType(v) {
     return typeof v === "function";
 }
 exports.isType = isType;
-//# sourceMappingURL=type.js.map

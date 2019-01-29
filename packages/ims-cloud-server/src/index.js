@@ -19,12 +19,12 @@ ImsCloudServerModule = tslib_1.__decorate([
                     let server = new http.Server(app);
                     app.use(bodyParser.urlencoded({ extended: true }));
                     app.use(bodyParser.json());
-                    let afters = await injector.get(ims_cloud_1.After);
-                    if (afters) {
-                        if (Array.isArray(afters)) {
-                            afters.forEach(async (after) => {
-                                let item = await after;
-                                app.all(item.path, async (req, res, next) => {
+                    let gets = await injector.get(ims_cloud_1.Get);
+                    if (gets) {
+                        if (Array.isArray(gets)) {
+                            gets.forEach(async (get) => {
+                                let item = await get;
+                                app.get(item.path, async (req, res, next) => {
                                     item &&
                                         item.handler &&
                                         res.end(await item.handler(req, res, next));
@@ -39,8 +39,8 @@ ImsCloudServerModule = tslib_1.__decorate([
                             }
                             else {
                                 let hash = await route.hash;
-                                console.log(hash);
-                                app.all(`/${hash}/:method`, async (req, res, next) => {
+                                app.post(`/${hash}/:method`, async (req, res, next) => {
+                                    debugger;
                                     res.writeHead(200, {
                                         "Content-Type": "text/html;charset=utf-8"
                                     });
@@ -72,6 +72,9 @@ ImsCloudServerModule = tslib_1.__decorate([
                                                 return;
                                             }
                                         }
+                                        else {
+                                            next();
+                                        }
                                     });
                                 });
                             }
@@ -79,7 +82,7 @@ ImsCloudServerModule = tslib_1.__decorate([
                     }
                     let config = await injector.get(ims_cloud_1.Config);
                     if (!config)
-                        config = { port: 4802, host: "localhost" };
+                        config = { port: 4802, host: "192.168.1.101" };
                     server.listen(config.port, (err) => {
                         if (err)
                             throw err;
@@ -93,4 +96,3 @@ ImsCloudServerModule = tslib_1.__decorate([
     })
 ], ImsCloudServerModule);
 exports.ImsCloudServerModule = ImsCloudServerModule;
-//# sourceMappingURL=index.js.map
