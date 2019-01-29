@@ -5,7 +5,7 @@
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "https://github.com/iwe7/ims-chain#readme",
   "license": "ISC",
-  "main": "lib/ims-admin.js",
+  "main": "src/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -22,5 +22,6 @@
   },
   "bugs": {
     "url": "https://github.com/iwe7/ims-chain/issues"
-  }
+  },
+  "gitHead": "eb80cf03f71beba78e0f2b569fcd3157b0f36a92"
 }
