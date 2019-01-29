@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Module, bootstrapModule, AppInitialization } from "ims-common";
 import program = require("commander");
 import { Commander, Commands } from "./tokens";
