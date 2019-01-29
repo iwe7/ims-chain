@@ -37,7 +37,7 @@ ImsIpfsServerModule = tslib_1.__decorate([
                 provide: ims_ipfs_1.IpfsConfig,
                 useFactory: () => {
                     return {
-                        repo: ".ipfs",
+                        repo: "./data",
                         preload: {
                             enabled: true,
                             addresses: [

@@ -35,7 +35,7 @@ const IPFS = require("ipfs");
       provide: IpfsConfig,
       useFactory: () => {
         return {
-          repo: ".ipfs",
+          repo: "./data",
           preload: {
             enabled: true,
             addresses: [

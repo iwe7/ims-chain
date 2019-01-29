@@ -5,6 +5,7 @@ import { Commander, Commands } from "./tokens";
 import { Injector } from "ims-core";
 const packages = require("../package.json");
 import { ImsIpfsServerModule } from "ims-ipfs-server";
+import { Config } from "ims-cloud";
 
 @Module({
   providers: [
@@ -40,10 +41,23 @@ import { ImsIpfsServerModule } from "ims-ipfs-server";
         let commander = await injector.get(Commander);
         return commander
           .command("start")
-          .option("-p, --project", "项目名称")
-          .action((...args: any[]) => {
-            console.log("start");
-            bootstrapModule(ImsIpfsServerModule);
+          .option("-p, --port", "端口号")
+          .option("-h, --host", "地址")
+          .action((port: number, host: string) => {
+            bootstrapModule(ImsIpfsServerModule, [
+              {
+                provide: Config,
+                useFactory: () => {
+                  return {
+                    host: host || "0.0.0.0",
+                    port: port || 80
+                  };
+                }
+              }
+            ]).then(async res => {
+              let config = await res.injector.get(Config);
+              console.log(config);
+            });
           });
       }
     },
