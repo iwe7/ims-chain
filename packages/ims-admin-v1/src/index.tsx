@@ -7,7 +7,6 @@ import { routerReducer } from "ims-router-redux";
 import * as pages from "./pages/index";
 import "./index.scss";
 
-console.log("load admin success");
 const store = createStore(
   combineReducers({
     routing: routerReducer

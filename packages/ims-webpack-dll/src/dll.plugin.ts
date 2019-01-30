@@ -24,80 +24,32 @@ export class LibManifestPlugin {
     path: "dll"
   };
   constructor(public injector: Injector) {}
+
+  async uploadRes(compilation: compilation.Compilation, outputName: string) {
+    let ipfs = await this.injector.get(IpfsApi);
+    const assets = compilation.assets;
+    const chunk = assets[outputName];
+    if (chunk) {
+      delete assets[outputName];
+      let results = await ipfs.add([
+        {
+          path: outputName,
+          content: chunk.source()
+        }
+      ]);
+      let res = results[0];
+      return res.hash;
+    }
+    return void 0;
+  }
   apply(compiler: Compiler) {
     compiler.hooks.emit.tapAsync(
       "LibManifestPlugin",
       async (compilation: compilation.Compilation, callback: Function) => {
-        this.options =
-          (await this.injector.get(LibManifestPluginOptions)) || this.options;
-        let ipfs = await this.injector.get(IpfsApi);
-        asyncLib.forEach(
-          compilation.chunks,
-          async (chunk: any, callback: any) => {
-            if (!chunk.isOnlyInitial()) {
-              callback();
-              return;
-            }
-            const targetPath = compilation.getPath(this.options.path!, {
-              hash: compilation.hash,
-              chunk
-            });
-            const name =
-              this.options.name &&
-              compilation.getPath(this.options.name, {
-                hash: compilation.hash,
-                chunk
-              });
-            const manifest = {
-              name,
-              type: this.options.type,
-              content: Array.from(chunk.modulesIterable, (module: any) => {
-                if (
-                  this.options.entryOnly &&
-                  !module.reasons.some(
-                    r => r.dependency instanceof SingleEntryDependency
-                  )
-                ) {
-                  return;
-                }
-                if (module.libIdent) {
-                  const ident = module.libIdent({
-                    context: this.options.context || compiler.options.context
-                  });
-                  if (ident) {
-                    return {
-                      ident,
-                      data: {
-                        id: module.id,
-                        buildMeta: module.buildMeta
-                      }
-                    };
-                  }
-                }
-              })
-                .filter(Boolean)
-                .reduce((obj, item: any) => {
-                  obj[item.ident] = item.data;
-                  return obj;
-                }, Object.create(null))
-            };
-            // Apply formatting to content if format flag is true;
-            const manifestContent = this.options.format
-              ? JSON.stringify(manifest, null, 2)
-              : JSON.stringify(manifest);
-            let result = await ipfs.add([
-              {
-                path: targetPath,
-                content: manifestContent
-              }
-            ]);
-            let dll = config.get<string[]>("dll") || [];
-            dll.push(result[0].hash);
-            config.set("dll", dll);
-            callback();
-          },
-          callback
-        );
+        let res = await this.uploadRes(compilation, "react.js");
+        let dll = config.get<string[]>("dll") || [];
+        dll.push(res);
+        config.set("dll", dll);
       }
     );
   }

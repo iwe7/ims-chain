@@ -1,0 +1,23 @@
+{
+  "name": "ims-starter",
+  "version": "0.1.13",
+  "description": "> TODO: description",
+  "author": "meepobrother <1037483576@qq.com>",
+  "homepage": "https://github.com/iwe7/ims-chain#readme",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iwe7/ims-chain.git"
+  },
+  "scripts": {
+    "start": "ims start -p 3200 -h localhost",
+    "pm2": "pm2 start npm -- run start"
+  },
+  "dependencies": {
+    "ims-cli": "*",
+    "pm2": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/iwe7/ims-chain/issues"
+  }
+}

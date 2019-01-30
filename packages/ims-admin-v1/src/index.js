@@ -8,7 +8,6 @@ const react_redux_1 = require("react-redux");
 const ims_router_redux_1 = require("ims-router-redux");
 const pages = require("./pages/index");
 require("./index.scss");
-console.log("load admin success");
 const store = redux_1.createStore(redux_1.combineReducers({
     routing: ims_router_redux_1.routerReducer
 }));

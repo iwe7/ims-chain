@@ -16,7 +16,7 @@ import config from "./config/index";
         let imsWebpackDllPlugin = new LibManifestPlugin(injector);
         const cfg: Configuration = {
           entry: {
-            react: ["react", "react-dom", "react-router-dom", "ipfs"]
+            react: ["react", "react-dom", "react-router-dom", "redux", "ipfs"]
           },
           output: {
             filename: `[name].js`

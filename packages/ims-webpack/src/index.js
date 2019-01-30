@@ -47,8 +47,7 @@ ImsWebpackModule = tslib_1.__decorate([
                         watch: dev ? true : false,
                         target: "web",
                         entry: {
-                            main,
-                            react: ["react", "react-dom", "react-router-dom", "redux"]
+                            main
                         },
                         output: {
                             path: path.join(__dirname, "dist"),

@@ -20,7 +20,7 @@ ImsWebpackDllModule = tslib_1.__decorate([
                     let imsWebpackDllPlugin = new dll_plugin_1.LibManifestPlugin(injector);
                     const cfg = {
                         entry: {
-                            react: ["react", "react-dom", "react-router-dom", "ipfs"]
+                            react: ["react", "react-dom", "react-router-dom", "redux", "ipfs"]
                         },
                         output: {
                             filename: `[name].js`
