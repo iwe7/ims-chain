@@ -1,6 +1,7 @@
 import { Module, bootstrapModule } from "ims-common";
 import { ImsWebpackModule, WebpackMain } from "ims-webpack";
 import path = require("path");
+
 @Module({
   imports: [ImsWebpackModule],
   providers: [
@@ -11,4 +12,5 @@ import path = require("path");
   ]
 })
 export class ImsAdminBuildModule {}
+
 bootstrapModule(ImsAdminBuildModule);

@@ -1,21 +1,18 @@
 {
-  "name": "ims-store",
-  "version": "0.1.11",
+  "name": "ims-ipfs-core",
+  "version": "0.1.17",
   "description": "> TODO: description",
   "author": "meepobrother <1037483576@qq.com>",
   "homepage": "https://github.com/iwe7/ims-chain#readme",
   "license": "ISC",
-  "main": "src/index.js",
+  "main": "lib/ims-ipfs-core.js",
   "directories": {
-    "lib": "src",
+    "lib": "lib",
     "test": "__tests__"
   },
   "files": [
-    "src"
+    "lib"
   ],
-  "dependencies": {
-    "ims-core": "^0.1.11"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iwe7/ims-chain.git"

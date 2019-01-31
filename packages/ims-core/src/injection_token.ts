@@ -1,6 +1,5 @@
 const cids = require("cids");
 const multihashing = require("multihashing-async");
-
 export class InjectionToken<T = any> {
   get hash(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
@@ -33,6 +32,7 @@ export class InjectionToken<T = any> {
 
   static fromType<T = any>(token: any, multi: boolean = false) {
     if (token instanceof InjectionToken) return token;
+    if (typeof token === "string") return this.fromString(token, token, multi);
     return new InjectionToken<T>(token.name, `${stringify(token)}`, multi);
   }
 }

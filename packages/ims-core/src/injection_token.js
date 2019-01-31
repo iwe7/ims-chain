@@ -28,6 +28,8 @@ class InjectionToken {
     static fromType(token, multi = false) {
         if (token instanceof InjectionToken)
             return token;
+        if (typeof token === "string")
+            return this.fromString(token, token, multi);
         return new InjectionToken(token.name, `${stringify(token)}`, multi);
     }
 }

@@ -1,4 +1,11 @@
-import { isNumber, isUndefined } from "./util";
+import {
+  isNumber,
+  isUndefined,
+  getDesignParamTypes,
+  getDesignType,
+  getDesignReturnType
+} from "./util";
+import "reflect-metadata";
 /**
  * 执行顺讯
  * [(property)...]->[(parameter->method)...]->constructor->class
@@ -30,15 +37,17 @@ interface MakeDecoratorItem {
 }
 const MakeDecoratorCache: Map<any, MakeDecoratorItem> = new Map();
 
+const constructorMap: Map<any, Set<ConstructorMetadata>> = new Map();
+const parametersMap: Map<any, Set<ParameterMetadata>> = new Map();
+const propertysMap: Map<any, Set<PropertyMetadata>> = new Map();
+const methodsMap: Map<any, Set<MethodMetadata>> = new Map();
+const classMap: Map<any, Set<ClassMetadata>> = new Map();
+
 export function makeDecorator<T>(
   token: InjectionToken<MetadataFactory>,
   getDef?: (def: MetadataDef) => T,
   factory?: MetadataFactory
 ): IDecorator<T> {
-  let constructorParameter: ConstructorMetadata[] = [];
-  let parameters: ParameterMetadata[] = [];
-  let propertys: PropertyMetadata[] = [];
-  let methods: MethodMetadata[] = [];
   // 设置解析器
   let item: any = (metadataDef?: T) => {
     return <T>(
@@ -49,123 +58,121 @@ export function makeDecorator<T>(
       let res: any;
       if (isNumber(descriptorOrParameterIndex)) {
         if (isUndefined(propertyKey)) {
-          if (!MakeDecoratorCache.has(target)) {
-            MakeDecoratorCache.set(target, {
-              constructorParameter,
-              parameters,
-              propertys,
-              methods
-            });
+          let paramTypes = getDesignParamTypes(target);
+          if (!constructorMap.has(target)) {
+            constructorMap.set(target, new Set());
           }
           // constructor
-          let config = MakeDecoratorCache.get(target) as MakeDecoratorItem;
           let def: ConstructorMetadata = {
             metadataType: MetadataType.constructor,
             metadataDef,
             target,
             token,
-            parameterIndex: descriptorOrParameterIndex
+            parameterIndex: descriptorOrParameterIndex,
+            parameterType: paramTypes[descriptorOrParameterIndex]
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
-          // 收集constructor 装饰器
-          config.constructorParameter.push(def);
-          MakeDecoratorCache.set(target, config);
+          constructorMap.set(target, constructorMap.get(target).add(def));
         } else {
           // parameter
+          let paramTypes = getDesignParamTypes(target, propertyKey) || [];
           target = target.constructor;
-          if (!MakeDecoratorCache.has(target)) {
-            MakeDecoratorCache.set(target, {
-              constructorParameter,
-              parameters,
-              propertys,
-              methods
-            });
+          if (!parametersMap.has(target)) {
+            parametersMap.set(target, new Set());
           }
-          let config = MakeDecoratorCache.get(target) as MakeDecoratorItem;
           let def: ParameterMetadata = {
             metadataType: MetadataType.parameter,
             metadataDef,
             target,
             token,
             propertyKey,
-            parameterIndex: descriptorOrParameterIndex
+            parameterIndex: descriptorOrParameterIndex,
+            parameterType: paramTypes[descriptorOrParameterIndex]
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
           // 收集方法参数装饰器
-          config.parameters.push(def);
-          MakeDecoratorCache.set(target, config);
+          parametersMap.set(target, parametersMap.get(target).add(def));
         }
       } else if (isUndefined(descriptorOrParameterIndex)) {
         if (isUndefined(propertyKey)) {
           // class
-          if (!MakeDecoratorCache.has(target)) {
-            MakeDecoratorCache.set(target, {
-              constructorParameter,
-              parameters,
-              propertys,
-              methods
-            });
+          let parameters: any[] = getDesignParamTypes(target) || [];
+          parameters = parameters.map((param, index) => {
+            return {
+              parameterIndex: index,
+              parameterType: param
+            } as ConstructorMetadata;
+          });
+          if (!classMap.has(target)) {
+            classMap.set(target, new Set());
           }
-          let config = MakeDecoratorCache.get(target) as MakeDecoratorItem;
+          let propertys = [];
+          let methods = [];
+          constructorMap.has(target) &&
+            constructorMap.get(target).forEach(item => {
+              parameters[item.parameterIndex] = item;
+            });
+          propertysMap.has(target) &&
+            propertysMap.get(target).forEach(item => {
+              propertys.push(item);
+            });
+          methodsMap.has(target) &&
+            methodsMap.get(target).forEach(item => {
+              methods.push(item);
+            });
           let def: ClassMetadata = {
             metadataType: MetadataType.class,
             metadataDef,
             target,
             token,
-            parameters: config.constructorParameter,
-            propertys: config.propertys,
-            methods: config.methods
+            parameters,
+            propertys,
+            methods
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
           res = factory && factory.type(def);
         } else {
           // property
+          let designType = getDesignType(target, propertyKey);
           target = target.constructor;
-          if (!MakeDecoratorCache.has(target)) {
-            MakeDecoratorCache.set(target, {
-              constructorParameter,
-              parameters,
-              propertys,
-              methods
-            });
+          if (!propertysMap.has(target)) {
+            propertysMap.set(target, new Set());
           }
-          let config = MakeDecoratorCache.get(target) as MakeDecoratorItem;
           let def: PropertyMetadata = {
             metadataType: MetadataType.class,
             metadataDef,
             target,
             token,
-            propertyKey
+            propertyKey,
+            propertyType: designType
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
-          config.propertys.push(def);
-          MakeDecoratorCache.set(target, config);
+          propertysMap.set(target, propertysMap.get(target).add(def));
         }
       } else {
         // method
         target = target.constructor;
-        if (!MakeDecoratorCache.has(target)) {
-          MakeDecoratorCache.set(target, {
-            constructorParameter,
-            parameters,
-            propertys,
-            methods
-          });
+        if (!methodsMap.has(target)) {
+          methodsMap.set(target, new Set());
         }
-        let config = MakeDecoratorCache.get(target) as MakeDecoratorItem;
+        let parameters = [];
+        parametersMap.get(target).forEach(parameter => {
+          if (parameter.propertyKey === propertyKey) {
+            parameters.push(parameter);
+          }
+        });
+        let returnType = getDesignReturnType(target, propertyKey);
         let def: MethodMetadata = {
           metadataType: MetadataType.method,
           metadataDef,
           target,
           token,
-          parameters: config.parameters,
-          propertyKey: propertyKey as PropertyKey
+          parameters,
+          propertyKey: propertyKey as PropertyKey,
+          returnType: returnType
         };
         def.metadataDef = !!getDef ? getDef(def) : metadataDef;
-        // 清空
-        config.methods.push(def);
-        config.parameters = [];
-        MakeDecoratorCache.set(target, config);
+        methodsMap.set(target, methodsMap.get(target).add(def));
       }
       return res;
     };

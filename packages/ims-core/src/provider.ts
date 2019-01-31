@@ -22,3 +22,5 @@ export type StaticProvider = FactoryProvider | StaticProviderFn;
 export function isFactoryProvider(val: any): val is FactoryProvider {
   return Reflect.has(val, "provide") && Reflect.has(val, "useFactory");
 }
+
+export type Provider = FactoryProvider;

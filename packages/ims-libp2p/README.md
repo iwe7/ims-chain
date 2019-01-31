@@ -1,11 +1,11 @@
-# `ims-store`
+# `ims-libp2p`
 
 > TODO: description
 
 ## Usage
 
 ```
-const imsStore = require('ims-store');
+const imsLibp2p = require('ims-libp2p');
 
 // TODO: DEMONSTRATE API
 ```

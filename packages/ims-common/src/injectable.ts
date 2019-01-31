@@ -4,12 +4,13 @@ export const INJECTABLE = InjectionToken.fromString("injectable");
 export interface Injectable {
   provide?: InjectionToken;
   useFactory?: (injector: Injector) => Promise<any>;
-  deps?: [];
+  deps?: any[];
   useCache?: boolean;
 }
 export class InjectableMetadataFactory extends MetadataFactory {
   type(def: ClassMetadata<Injectable>): any {
     let opt = def.metadataDef || {};
+    let params = new Array(def.target.length);
     let token = opt.provide || InjectionToken.fromType(def.target);
     if (opt && opt.useFactory) {
       let provider = <StaticProvider>{
@@ -25,7 +26,14 @@ export class InjectableMetadataFactory extends MetadataFactory {
       };
       let provider = <StaticProvider>{
         provide: token,
-        useFactory: (injector: Injector) => new def.target(injector),
+        useFactory: async (injector: Injector) => {
+          for (let param of def.parameters) {
+            params[param.parameterIndex] = await injector.get(
+              param.metadataDef || param.parameterType
+            );
+          }
+          return new def.target(...params);
+        },
         deps: opt.deps || [],
         cache: !!opt.useCache
       };

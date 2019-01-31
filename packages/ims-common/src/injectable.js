@@ -6,6 +6,7 @@ exports.INJECTABLE = ims_core_1.InjectionToken.fromString("injectable");
 class InjectableMetadataFactory extends ims_decorator_1.MetadataFactory {
     type(def) {
         let opt = def.metadataDef || {};
+        let params = new Array(def.target.length);
         let token = opt.provide || ims_core_1.InjectionToken.fromType(def.target);
         if (opt && opt.useFactory) {
             let provider = {
@@ -22,7 +23,12 @@ class InjectableMetadataFactory extends ims_decorator_1.MetadataFactory {
             };
             let provider = {
                 provide: token,
-                useFactory: (injector) => new def.target(injector),
+                useFactory: async (injector) => {
+                    for (let param of def.parameters) {
+                        params[param.parameterIndex] = await injector.get(param.metadataDef || param.parameterType);
+                    }
+                    return new def.target(...params);
+                },
                 deps: opt.deps || [],
                 cache: !!opt.useCache
             };

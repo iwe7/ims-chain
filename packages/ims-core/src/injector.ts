@@ -5,6 +5,7 @@ import {
   FactoryProvider,
   isFactoryProvider
 } from "./provider";
+import { Type } from "./type";
 import { stringify } from "querystring";
 
 export interface Record<T = any> {
@@ -122,7 +123,18 @@ export class Injector {
     return notFound;
   }
 
-  async get<T>(token: InjectionToken<T>, notFound?: T): Promise<T> {
+  async has(token: InjectionToken<any> | Type<any> | string) {
+    token = InjectionToken.fromType(token);
+    let hash = await token.hash;
+    let record = this.getRecordByHash(hash);
+    return !!record;
+  }
+
+  async get<T>(
+    token: InjectionToken<T> | Type<T> | string,
+    notFound?: T
+  ): Promise<T> {
+    token = InjectionToken.fromType(token);
     let hash = await token.hash;
     return await this.getByHash(hash, notFound);
   }

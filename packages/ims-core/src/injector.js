@@ -99,7 +99,14 @@ class Injector {
         }
         return notFound;
     }
+    async has(token) {
+        token = injection_token_1.InjectionToken.fromType(token);
+        let hash = await token.hash;
+        let record = this.getRecordByHash(hash);
+        return !!record;
+    }
     async get(token, notFound) {
+        token = injection_token_1.InjectionToken.fromType(token);
         let hash = await token.hash;
         return await this.getByHash(hash, notFound);
     }
