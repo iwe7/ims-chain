@@ -1,0 +1,1 @@
+{"version":3,"file":"bind-domain.d.ts","sourceRoot":"","sources":["bind-domain.ts"],"names":[],"mappings":"AAGA,8BAAsB,mBAAmB;IACvC,QAAQ,CAAC,UAAU,IAAI,OAAO,CAAC,GAAG,CAAC;IACnC,QAAQ,CAAC,MAAM,IAAI,OAAO,CAAC,GAAG,CAAC;IAC/B,QAAQ,CAAC,aAAa,IAAI,OAAO,CAAC,GAAG,CAAC;CACvC"}

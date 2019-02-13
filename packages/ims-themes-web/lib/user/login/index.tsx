@@ -2,16 +2,33 @@ import { Component, createElement } from "react";
 import "./index.scss";
 import { Injector, InjectionToken } from "ims-core";
 import { ImsUser } from "ims-web";
+import { fromEvent } from "rxjs";
+import { Link } from "react-router-dom";
 
-export class ImsUserLogin extends Component {
+export class ImsUserLogin extends Component<any, any> {
+  get user(): Promise<ImsUser> {
+    return Injector.get<ImsUser>(InjectionToken.fromType(ImsUser));
+  }
+
   constructor(props: any) {
     super(props);
   }
 
   async componentDidMount() {
-    const user = await Injector.get<ImsUser>(InjectionToken.fromType(ImsUser));
-    let res = await user.login();
-    console.log(user);
+    fromEvent(this.refs.username as any, "change").subscribe((res: any) => {
+      let username = res.target.value;
+      this.setState({ username });
+    });
+
+    fromEvent(this.refs.password as any, "change").subscribe((res: any) => {
+      let password = res.target.value;
+      this.setState({ password });
+    });
+  }
+
+  async login() {
+    const user = await this.user;
+    await user.login(this.state.username, this.state.password);
   }
   render() {
     return (
@@ -32,23 +49,31 @@ export class ImsUserLogin extends Component {
                 <div className="ims-user-login-header-title">密码登录</div>
               </div>
               <div className="ims-user-login-username">
-                <input type="text" placeholder="邮箱/会员名/8位ID" />
+                <input
+                  type="text"
+                  ref="username"
+                  placeholder="邮箱/会员名/8位ID"
+                />
               </div>
               <div className="ims-user-login-password">
-                <input type="text" placeholder="请输入登录密码" />
+                <input
+                  type="password"
+                  ref="password"
+                  placeholder="请输入登录密码"
+                />
               </div>
               <div className="ims-user-login-btn">
-                <button>登录</button>
+                <button onClick={() => this.login()}>登录</button>
               </div>
               <div className="ims-user-login-links">
-                <a href="">忘记密码</a>
-                <a href="">忘记会员名</a>
-                <a href="">免费注册</a>
+                <Link to={"/user/findPassword"}>忘记密码</Link>
+                <Link to={"/user/findUsername"}>忘记会员名</Link>
+                <Link to={"/user/register"}>免费注册</Link>
               </div>
               <div className="ims-user-login-third">
                 <div>其他方式登录</div>
                 <div className="content">
-                  <a href="">游客登录</a>
+                  <a href="javascript:;">游客登录</a>
                 </div>
               </div>
             </div>

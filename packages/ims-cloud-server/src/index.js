@@ -5,6 +5,22 @@ const ims_common_1 = require("ims-common");
 const express = require("express");
 const ims_cloud_1 = require("ims-cloud");
 const util_1 = require("./util");
+function get(key, obj) {
+    let keys = key.split(".");
+    if (keys.length === 1) {
+        return obj[keys[0]];
+    }
+    else {
+        let _keys = keys.reverse();
+        let key = _keys.pop();
+        while (_keys.length > 0) {
+            obj = obj[key];
+            key = _keys.pop();
+        }
+        obj = obj[key];
+        return obj;
+    }
+}
 let ImsCloudServerModule = class ImsCloudServerModule {
 };
 ImsCloudServerModule = tslib_1.__decorate([
@@ -21,7 +37,6 @@ ImsCloudServerModule = tslib_1.__decorate([
                             }
                             else {
                                 let hash = await route.hash;
-                                console.log(hash);
                                 router.post(`/${hash}/:method`, async (req, res, next) => {
                                     res.writeHead(200, {
                                         "Content-Type": "text/html;charset=utf-8"
@@ -40,10 +55,10 @@ ImsCloudServerModule = tslib_1.__decorate([
                                         }
                                         let instance = await injector.get(route);
                                         let params = req.params;
-                                        if (Reflect.has(instance, params.method)) {
+                                        if (instance) {
                                             try {
-                                                console.log(args);
-                                                let json = await instance[params.method](...args);
+                                                const method = get(params.method, instance);
+                                                let json = await method(...args);
                                                 res.end(util_1.toString(json));
                                                 return;
                                             }

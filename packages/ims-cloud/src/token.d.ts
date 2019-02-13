@@ -6,9 +6,5 @@ export interface Config {
 }
 export declare const Config: InjectionToken<Config>;
 export declare const Fetch: InjectionToken<typeof fetch>;
-export interface Get {
-    path: string;
-    handler: (req: any, res: any, next: any) => any;
-}
-export declare const Get: InjectionToken<Get[]>;
+export declare const Router: InjectionToken<any>;
 //# sourceMappingURL=token.d.ts.map

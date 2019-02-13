@@ -4,14 +4,28 @@ const react_1 = require("react");
 require("./index.scss");
 const ims_core_1 = require("ims-core");
 const ims_web_1 = require("ims-web");
+const rxjs_1 = require("rxjs");
+const react_router_dom_1 = require("react-router-dom");
 class ImsUserLogin extends react_1.Component {
+    get user() {
+        return ims_core_1.Injector.get(ims_core_1.InjectionToken.fromType(ims_web_1.ImsUser));
+    }
     constructor(props) {
         super(props);
     }
     async componentDidMount() {
-        const user = await ims_core_1.Injector.get(ims_core_1.InjectionToken.fromType(ims_web_1.ImsUser));
-        let res = await user.login();
-        console.log(user);
+        rxjs_1.fromEvent(this.refs.username, "change").subscribe((res) => {
+            let username = res.target.value;
+            this.setState({ username });
+        });
+        rxjs_1.fromEvent(this.refs.password, "change").subscribe((res) => {
+            let password = res.target.value;
+            this.setState({ password });
+        });
+    }
+    async login() {
+        const user = await this.user;
+        await user.login(this.state.username, this.state.password);
     }
     render() {
         return (react_1.createElement("div", { className: "ims-user-login" },
@@ -28,19 +42,19 @@ class ImsUserLogin extends react_1.Component {
                         react_1.createElement("div", { className: "ims-user-login-header" },
                             react_1.createElement("div", { className: "ims-user-login-header-title" }, "\u5BC6\u7801\u767B\u5F55")),
                         react_1.createElement("div", { className: "ims-user-login-username" },
-                            react_1.createElement("input", { type: "text", placeholder: "\u90AE\u7BB1/\u4F1A\u5458\u540D/8\u4F4DID" })),
+                            react_1.createElement("input", { type: "text", ref: "username", placeholder: "\u90AE\u7BB1/\u4F1A\u5458\u540D/8\u4F4DID" })),
                         react_1.createElement("div", { className: "ims-user-login-password" },
-                            react_1.createElement("input", { type: "text", placeholder: "\u8BF7\u8F93\u5165\u767B\u5F55\u5BC6\u7801" })),
+                            react_1.createElement("input", { type: "password", ref: "password", placeholder: "\u8BF7\u8F93\u5165\u767B\u5F55\u5BC6\u7801" })),
                         react_1.createElement("div", { className: "ims-user-login-btn" },
-                            react_1.createElement("button", null, "\u767B\u5F55")),
+                            react_1.createElement("button", { onClick: () => this.login() }, "\u767B\u5F55")),
                         react_1.createElement("div", { className: "ims-user-login-links" },
-                            react_1.createElement("a", { href: "" }, "\u5FD8\u8BB0\u5BC6\u7801"),
-                            react_1.createElement("a", { href: "" }, "\u5FD8\u8BB0\u4F1A\u5458\u540D"),
-                            react_1.createElement("a", { href: "" }, "\u514D\u8D39\u6CE8\u518C")),
+                            react_1.createElement(react_router_dom_1.Link, { to: "/user/findPassword" }, "\u5FD8\u8BB0\u5BC6\u7801"),
+                            react_1.createElement(react_router_dom_1.Link, { to: "/user/findUsername" }, "\u5FD8\u8BB0\u4F1A\u5458\u540D"),
+                            react_1.createElement(react_router_dom_1.Link, { to: "/user/register" }, "\u514D\u8D39\u6CE8\u518C")),
                         react_1.createElement("div", { className: "ims-user-login-third" },
                             react_1.createElement("div", null, "\u5176\u4ED6\u65B9\u5F0F\u767B\u5F55"),
                             react_1.createElement("div", { className: "content" },
-                                react_1.createElement("a", { href: "" }, "\u6E38\u5BA2\u767B\u5F55"))))))));
+                                react_1.createElement("a", { href: "javascript:;" }, "\u6E38\u5BA2\u767B\u5F55"))))))));
     }
 }
 exports.ImsUserLogin = ImsUserLogin;

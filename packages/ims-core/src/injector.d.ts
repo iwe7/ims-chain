@@ -7,6 +7,7 @@ export interface Record<T = any> {
     useCache?: boolean;
     value: T;
 }
+export declare function getCurrentInjector(): Injector;
 export declare class Injector {
     providers: StaticProvider[];
     private parent;
@@ -22,6 +23,7 @@ export declare class Injector {
     getByHash<T>(hash: string, notFound?: T): Promise<any>;
     has(token: InjectionToken<any> | Type<any> | string): Promise<boolean>;
     get<T>(token: InjectionToken<T> | Type<T> | string, notFound?: T): Promise<T>;
+    static get<T>(token: InjectionToken<T> | Type<T> | string, notFound?: T): Promise<T>;
     set<T>(token: InjectionToken<T>, factory: Record): Promise<void>;
 }
 //# sourceMappingURL=injector.d.ts.map

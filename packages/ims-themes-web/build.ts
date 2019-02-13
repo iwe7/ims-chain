@@ -12,8 +12,20 @@ import { Router, Routes } from "ims-cloud";
 import { Injector, InjectionToken } from "ims-core";
 import { ImsUser } from "ims-web";
 import bodyParser = require("body-parser");
+import { ImsUserImpl } from "ims-web-impl";
+import cookieParser = require("cookie-parser");
+import session = require("express-session");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "secret",
+    cookie: {
+      maxAge: 1000 * 60 * 30
+    }
+  })
+);
 
 @Module({
   imports: [ImsCloudServerModule],
@@ -26,12 +38,8 @@ app.use(bodyParser.json());
     },
     {
       provide: InjectionToken.fromType(ImsUser),
-      useFactory: async () => {
-        return {
-          login() {
-            return "login";
-          }
-        };
+      useFactory: async (injector: Injector) => {
+        return await injector.get(ImsUserImpl);
       }
     },
     {
@@ -70,18 +78,13 @@ app.use(bodyParser.json());
           ]
         };
         const compiler = webpack(config);
-        app.use(
-          middleware(compiler, {
-            // webpack-dev-middleware options
-            disableHostCheck: true,
-            watch: true
-          })
-        );
         const router = await injector.get(Router);
         app.use("/api", router);
+        app.use(middleware(compiler));
         const httpServer = http.createServer(app);
         httpServer.listen(4203, "127.0.0.1", () => {
           console.log("start 4203");
+          // 启动成功通知其他节点
         });
       }
     }

@@ -12,6 +12,7 @@ const user_1 = require("./user");
 const ims_web_1 = require("ims-web");
 const ims_cloud_client_1 = require("ims-cloud-client");
 const ims_cloud_1 = require("ims-cloud");
+const react_router_dom_1 = require("react-router-dom");
 let ImsThemesWeb = class ImsThemesWeb {
 };
 ImsThemesWeb = tslib_1.__decorate([
@@ -24,11 +25,16 @@ ImsThemesWeb = tslib_1.__decorate([
             {
                 provide: ims_common_1.AppInitialization,
                 useFactory: async (injector) => {
-                    react_dom_1.render(react_1.createElement("div", { className: "app" },
-                        react_1.createElement(index_1.ImsCommonTopBar, null),
-                        react_1.createElement(index_1.ImsCommonContent, null,
-                            react_1.createElement(user_1.ImsUserLogin, null)),
-                        react_1.createElement(index_1.ImsCommonFooter, null)), document.getElementById("app"));
+                    react_dom_1.render(react_1.createElement(react_router_dom_1.BrowserRouter, null,
+                        react_1.createElement("div", { className: "app" },
+                            react_1.createElement(index_1.ImsCommonTopBar, null),
+                            react_1.createElement(react_router_dom_1.Switch, null,
+                                react_1.createElement(index_1.ImsCommonContent, null,
+                                    react_1.createElement(react_router_dom_1.Route, { path: "/", exact: true, component: user_1.ImsUserLogin }),
+                                    react_1.createElement(react_router_dom_1.Route, { path: "/user/login", component: user_1.ImsUserLogin }),
+                                    react_1.createElement(react_router_dom_1.Route, { path: "/user/register", component: user_1.ImsUserRegister }),
+                                    react_1.createElement(react_router_dom_1.Route, { path: "/user/findPassword", component: user_1.ImsUserFindPassword }))),
+                            react_1.createElement(index_1.ImsCommonFooter, null))), document.getElementById("app"));
                 }
             }
         ],

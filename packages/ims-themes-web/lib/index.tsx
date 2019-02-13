@@ -9,11 +9,11 @@ import {
   ImsCommonFooter,
   ImsCommonContent
 } from "./common/index";
-import { ImsUserLogin } from "./user";
+import { ImsUserLogin, ImsUserRegister, ImsUserFindPassword } from "./user";
 import { ImsUser } from "ims-web";
 import { ImsCloudClientModule } from "ims-cloud-client";
 import { Routes } from "ims-cloud";
-
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 @Module({
   providers: [
     {
@@ -24,13 +24,23 @@ import { Routes } from "ims-cloud";
       provide: AppInitialization,
       useFactory: async (injector: Injector) => {
         render(
-          <div className="app">
-            <ImsCommonTopBar />
-            <ImsCommonContent>
-              <ImsUserLogin />
-            </ImsCommonContent>
-            <ImsCommonFooter />
-          </div>,
+          <BrowserRouter>
+            <div className="app">
+              <ImsCommonTopBar />
+              <Switch>
+                <ImsCommonContent>
+                  <Route path="/" exact component={ImsUserLogin} />
+                  <Route path="/user/login" component={ImsUserLogin} />
+                  <Route path="/user/register" component={ImsUserRegister} />
+                  <Route
+                    path="/user/findPassword"
+                    component={ImsUserFindPassword}
+                  />
+                </ImsCommonContent>
+              </Switch>
+              <ImsCommonFooter />
+            </div>
+          </BrowserRouter>,
           document.getElementById("app")
         );
       }

@@ -4,6 +4,22 @@ import express = require("express");
 import { Routes, Router } from "ims-cloud";
 import { toString } from "./util";
 
+function get(key: string, obj: any) {
+  let keys: string[] = key.split(".");
+  if (keys.length === 1) {
+    return obj[keys[0]];
+  } else {
+    let _keys = keys.reverse();
+    let key = _keys.pop();
+    while (_keys.length > 0) {
+      obj = obj[key];
+      key = _keys.pop();
+    }
+    obj = obj[key];
+    return obj;
+  }
+}
+
 @Module({
   providers: [
     {
@@ -16,7 +32,6 @@ import { toString } from "./util";
             if (Array.isArray(route)) {
             } else {
               let hash = await route.hash;
-              console.log(hash);
               router.post(`/${hash}/:method`, async (req, res, next) => {
                 res.writeHead(200, {
                   "Content-Type": "text/html;charset=utf-8"
@@ -35,10 +50,10 @@ import { toString } from "./util";
                   }
                   let instance = await injector.get(route);
                   let params = req.params;
-                  if (Reflect.has(instance, params.method)) {
+                  if (instance) {
                     try {
-                      console.log(args);
-                      let json = await instance[params.method](...args);
+                      const method = get(params.method, instance);
+                      let json = await method(...args);
                       res.end(toString(json));
                       return;
                     } catch (e) {

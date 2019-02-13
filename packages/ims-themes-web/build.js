@@ -14,8 +14,18 @@ const ims_cloud_1 = require("ims-cloud");
 const ims_core_1 = require("ims-core");
 const ims_web_1 = require("ims-web");
 const bodyParser = require("body-parser");
+const ims_web_impl_1 = require("ims-web-impl");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(session({
+    secret: "secret",
+    cookie: {
+        maxAge: 1000 * 60 * 30
+    }
+}));
 let ImsAdminBuildModule = class ImsAdminBuildModule {
 };
 ImsAdminBuildModule = tslib_1.__decorate([
@@ -30,12 +40,8 @@ ImsAdminBuildModule = tslib_1.__decorate([
             },
             {
                 provide: ims_core_1.InjectionToken.fromType(ims_web_1.ImsUser),
-                useFactory: async () => {
-                    return {
-                        login() {
-                            return "login";
-                        }
-                    };
+                useFactory: async (injector) => {
+                    return await injector.get(ims_web_impl_1.ImsUserImpl);
                 }
             },
             {
@@ -74,12 +80,9 @@ ImsAdminBuildModule = tslib_1.__decorate([
                         ]
                     };
                     const compiler = webpack(config);
-                    app.use(middleware(compiler, {
-                        disableHostCheck: true,
-                        watch: true
-                    }));
                     const router = await injector.get(ims_cloud_1.Router);
                     app.use("/api", router);
+                    app.use(middleware(compiler));
                     const httpServer = http.createServer(app);
                     httpServer.listen(4203, "127.0.0.1", () => {
                         console.log("start 4203");

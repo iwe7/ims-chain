@@ -1,3 +1,4 @@
+/// <reference types="webpack-dev-server" />
 import { InjectionToken } from "ims-core";
 import { Configuration } from "webpack";
 export declare const WebpackConfiguration: InjectionToken<Configuration[]>;

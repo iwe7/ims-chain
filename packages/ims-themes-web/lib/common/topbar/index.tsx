@@ -1,25 +1,27 @@
 import { Component, createElement } from "react";
 import "./index.scss";
+import { Link } from "react-router-dom";
+
 export class ImsCommonTopBar extends Component {
   render() {
     return (
       <div className="common-topbar">
         <div className="common-topbar-wrapper">
-          <div className="common-topbar-wrapper-all-nav">
+          <Link className="common-topbar-wrapper-all-nav" to={"/"}>
             <span>IMS</span>
-          </div>
+          </Link>
           <div className="common-topbar-wrapper-content">
-            <a className="common-topbar-register-btn" href="">
+            <Link to={"/user/register"} className="common-topbar-register-btn">
               免费注册
-            </a>
+            </Link>
             <div className="common-topbar-menu">
               <div className="common-topbar-menu-link">
-                <a href="">登录</a>
+                <Link to={"/user/login"}>登录</Link>
               </div>
             </div>
           </div>
         </div>
-        <div className="common-topbar-line"></div>
+        <div className="common-topbar-line" />
       </div>
     );
   }

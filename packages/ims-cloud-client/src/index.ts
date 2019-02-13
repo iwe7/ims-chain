@@ -22,6 +22,37 @@ import { Config, Routes, Fetch } from "ims-cloud";
                       return void 0;
                     }
                     return new Proxy(function() {}, {
+                      get(target: any, p1: PropertyKey, receiver: any) {
+                        if (p === "then") {
+                          return void 0;
+                        }
+                        return new Proxy(function() {}, {
+                          apply(target: any, thisArg: any, argArray?: any) {
+                            let url = ``;
+                            if (config) {
+                              if (config.host) {
+                                url += config.host;
+                              } else {
+                                url += ".";
+                              }
+                              if (config.port) {
+                                url += `:` + config.port;
+                              }
+                            }
+                            url += `/${hash}/${p as string}.${p1 as string}`;
+                            return fetch(url, {
+                              method: "POST",
+                              body: JSON.stringify(argArray)
+                            }).then(res => {
+                              try {
+                                return res.json();
+                              } catch (e) {
+                                return res.text();
+                              }
+                            });
+                          }
+                        });
+                      },
                       apply(target: any, thisArg: any, argArray?: any) {
                         let url = ``;
                         if (config) {

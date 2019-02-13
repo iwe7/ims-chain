@@ -29,7 +29,7 @@ export abstract class ImsUser {
   /**
    * 登录
    */
-  abstract login(): Promise<any>;
+  abstract login(username: string, password: string): Promise<any>;
 
   /**
    * 退出登录

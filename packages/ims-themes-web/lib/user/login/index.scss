@@ -2,10 +2,12 @@
     &-login{
         width: 100%;
         background: #1F2325;
-        padding-top: 50px;
-        padding-bottom: 50px;
         height: 100%;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         &-adv{
             position: absolute;
             left: 0;
