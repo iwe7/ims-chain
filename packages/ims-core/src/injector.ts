@@ -15,6 +15,12 @@ export interface Record<T = any> {
   value: T;
 }
 
+let currentInjector: Injector;
+
+export function getCurrentInjector() {
+  return currentInjector;
+}
+
 export class Injector {
   static top: Injector = new Injector([], null);
 
@@ -32,7 +38,9 @@ export class Injector {
   constructor(
     public providers: StaticProvider[] = [],
     private parent: Injector | null
-  ) {}
+  ) {
+    currentInjector = this;
+  }
 
   async init() {
     let token = InjectionToken.fromType(Injector);
@@ -137,6 +145,10 @@ export class Injector {
     token = InjectionToken.fromType(token);
     let hash = await token.hash;
     return await this.getByHash(hash, notFound);
+  }
+
+  static get<T>(token: InjectionToken<T> | Type<T> | string, notFound?: T) {
+    return currentInjector && currentInjector.get(token, notFound);
   }
 
   async set<T>(token: InjectionToken<T>, factory: Record) {

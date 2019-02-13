@@ -23,10 +23,18 @@ import { Config, Routes, Fetch } from "ims-cloud";
                     }
                     return new Proxy(function() {}, {
                       apply(target: any, thisArg: any, argArray?: any) {
-                        let url = `http://${config.host}:${
-                          config.port
-                        }/${hash}/${p as string}`;
-                        console.log(url);
+                        let url = ``;
+                        if (config) {
+                          if (config.host) {
+                            url += config.host;
+                          } else {
+                            url += ".";
+                          }
+                          if (config.port) {
+                            url += `:` + config.port;
+                          }
+                        }
+                        url += `/${hash}/${p as string}`;
                         return fetch(url, {
                           method: "POST",
                           body: JSON.stringify(argArray)
@@ -48,6 +56,18 @@ import { Config, Routes, Fetch } from "ims-cloud";
             });
           }
         }
+      }
+    },
+    {
+      provide: Fetch,
+      useFactory: () => fetch
+    },
+    {
+      provide: Config,
+      useFactory: () => {
+        return {
+          host: "./api"
+        };
       }
     }
   ]

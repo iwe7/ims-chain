@@ -8,11 +8,14 @@ import { Inject } from "./inject";
 export class InjectableTest2 {}
 
 @Injectable()
+export class InjectableTest3 {}
+
+@Injectable()
 export class InjectableTest {
   @Inject(InjectableTest2)
   test3: InjectableTest2;
 
-  constructor(public test2: InjectableTest2) {}
+  constructor(@Inject(InjectableTest3) public test2: InjectableTest2) {}
 
   add(
     @Inject(InjectableTest2)

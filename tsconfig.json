@@ -45,8 +45,14 @@
     "baseUrl": "." /* Base directory to resolve non-absolute module names. */,
     "paths": {
       "ims-core": ["packages/ims-core/src/index"],
+      "ims-oauth": ["packages/ims-oauth/lib/index"],
+      "ims-web": ["packages/ims-web/lib/index"],
+      "ims-fs": ["packages/ims-fs/lib/index"],
+      "ims-exec": ["packages/ims-exec/lib/index"],
+      "ims-fs-level": ["packages/ims-fs-level/lib/index"],
       "ims-decorator": ["packages/ims-decorator/src/index"],
       "ims-common": ["packages/ims-common/src/index"],
+      "ims-connection": ["packages/ims-connection/src/index"],
       "ims-ipfs": ["packages/ims-ipfs/src/index"],
       "ims-ipfs-server": ["packages/ims-ipfs-server/src/index"],
       "ims-ipfs-client": ["packages/ims-ipfs-client/src/index"],
@@ -58,7 +64,21 @@
       "ims-webpack": ["packages/ims-webpack/src/index"],
       "ims-config": ["packages/ims-config/src/index"],
       "ims-router-redux": ["packages/ims-router-redux/src/index"],
-      "ims-webpack-dll": ["packages/ims-webpack-dll/src/index"]
+      "ims-webpack-dll": ["packages/ims-webpack-dll/src/index"],
+      "ims-peer-id": ["packages/ims-peer-id/src/index"],
+      "ims-cid": ["packages/ims-cid/src/index"],
+      "ims-proxy": ["packages/ims-proxy/lib/index"],
+      "ims-close-port": ["packages/ims-close-port/lib/index"],
+      "ims-openid": ["packages/ims-openid/src/index"],
+      "ims-tools": ["packages/ims-tools/lib/index"],
+      "ims-multihash": ["packages/ims-multihash/src/index"],
+      "ims-http": ["packages/ims-http/src/index"],
+      "ims-ws-client": ["packages/ims-ws-client/src/index"],
+      "ims-ws-server": ["packages/ims-ws-server/src/index"],
+      "ims-multiaddr": ["packages/ims-multiaddr/src/index"],
+      "ims-nat": ["packages/ims-nat/lib/index"],
+      "ims-transport": ["packages/ims-transport/src/index"],
+      "ims-discovery": ["packages/ims-discovery/lib/index"]
     } /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */,
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     "typeRoots": [
@@ -79,6 +99,6 @@
     "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
     "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */
   },
-  "include": ["packages"],
-  "exclude": ["node_modules"]
+  "include": ["packages", "src"],
+  "exclude": ["node_modules", "packages/**/__test__"]
 }

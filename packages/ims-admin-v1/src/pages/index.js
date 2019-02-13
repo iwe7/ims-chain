@@ -19,9 +19,5 @@ class IndexPage2 extends react_1.Component {
     }
 }
 exports.IndexPage2 = IndexPage2;
-var login_1 = require("./login/login");
-exports.LoginPage = login_1.LoginPage;
-var home_1 = require("./home/home");
-exports.HomePage = home_1.HomePage;
 var welcome_1 = require("./welcome/welcome");
 exports.WelcomePage = welcome_1.WelcomePage;

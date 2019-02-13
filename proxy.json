@@ -1,0 +1,8 @@
+{
+  "fs.meepo.com.cn": {
+    "host": "localhost",
+    "port": "4203",
+    "key": "./certs/1792891_fs.meepo.com.cn.key",
+    "cert": "./certs/1792891_fs.meepo.com.cn.pem"
+  }
+}

@@ -29,13 +29,6 @@ export interface IDecorator<T> extends Function {
   (o?: T): any;
   new (o?: T): any;
 }
-interface MakeDecoratorItem {
-  constructorParameter: ConstructorMetadata[];
-  parameters: ParameterMetadata[];
-  propertys: PropertyMetadata[];
-  methods: MethodMetadata[];
-}
-const MakeDecoratorCache: Map<any, MakeDecoratorItem> = new Map();
 
 const constructorMap: Map<any, Set<ConstructorMetadata>> = new Map();
 const parametersMap: Map<any, Set<ParameterMetadata>> = new Map();

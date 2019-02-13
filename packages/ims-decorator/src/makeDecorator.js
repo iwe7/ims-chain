@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = require("./util");
 require("reflect-metadata");
 const type_1 = require("./type");
-const MakeDecoratorCache = new Map();
 const constructorMap = new Map();
 const parametersMap = new Map();
 const propertysMap = new Map();

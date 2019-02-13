@@ -3,11 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const injection_token_1 = require("./injection_token");
 const provider_1 = require("./provider");
 const querystring_1 = require("querystring");
+let currentInjector;
+function getCurrentInjector() {
+    return currentInjector;
+}
+exports.getCurrentInjector = getCurrentInjector;
 class Injector {
     constructor(providers = [], parent) {
         this.providers = providers;
         this.parent = parent;
         this.records = new Map();
+        currentInjector = this;
     }
     static async create(providers = [], parent = Injector.top) {
         let injector = new Injector(providers, parent);
@@ -109,6 +115,9 @@ class Injector {
         token = injection_token_1.InjectionToken.fromType(token);
         let hash = await token.hash;
         return await this.getByHash(hash, notFound);
+    }
+    static get(token, notFound) {
+        return currentInjector && currentInjector.get(token, notFound);
     }
     async set(token, factory) {
         let hash = await token.hash;

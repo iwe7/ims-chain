@@ -1,0 +1,83 @@
+.common-topbar{
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    a{
+        color: #fff;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    &-menu{
+        float: right;
+        font-size: 14px;
+        &-link{
+            float: left;
+            height: 50px;
+            line-height: 50px;
+            padding: 0 12px;
+        }
+    }
+
+    &-login-btn{
+        float: left;
+        height: 50px;
+        line-height: 50px;
+        padding: 0 12px;
+    }
+
+    &-register-btn {
+        float: right;
+        height: 50px;
+        line-height: 50px;
+        background: #ff3300;
+        padding: 0 30px;
+        font-size: 14px;
+    }
+    &-wrapper{
+        position: relative;
+        background: #1c2327;
+        border-bottom: none;
+        height: 50px;
+        min-width: 1000px;
+        width: 100%;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        transition: background .3s cubic-bezier(0,0,.2,1) .15s;
+
+        &:after{
+            content: " ";
+            height: 1px;
+            transform: scaleY(0.5);
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        &-all-nav{
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 50px;
+            width: 50px;
+            color: #fff;
+            cursor: default;
+            text-align: center;
+            border-right: 1px solid hsla(0,0%,100%,.15);
+            transition: all .2s ease-in-out;
+            span{
+                line-height: 50px;
+            }
+        }
+        &-content{
+            margin: 0 auto;
+            position: relative;
+            box-sizing: content-box;
+        }
+
+    }
+}

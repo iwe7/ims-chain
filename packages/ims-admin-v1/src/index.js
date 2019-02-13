@@ -20,6 +20,4 @@ react_dom_1.render(react_1.createElement(react_redux_1.Provider, { store: store 
         react_1.createElement("div", null,
             react_1.createElement(react_router_dom_1.Route, { path: "/", exact: true, component: pages.WelcomePage }),
             react_1.createElement(react_router_dom_1.Route, { path: "/page1", component: pages.IndexPage1 }),
-            react_1.createElement(react_router_dom_1.Route, { path: "/page2", component: pages.IndexPage2 }),
-            react_1.createElement(react_router_dom_1.Route, { path: "/login", component: pages.LoginPage }),
-            react_1.createElement(react_router_dom_1.Route, { path: "/home", component: pages.HomePage })))), app);
+            react_1.createElement(react_router_dom_1.Route, { path: "/page2", component: pages.IndexPage2 })))), app);

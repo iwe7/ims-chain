@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const ims_nat_1 = require("ims-nat");
+async function bootstrap() {
+    let pmp = new ims_nat_1.NatPMP();
+    let port = ~~(Math.random() * 65536);
+    let natmapping = await pmp.addMapping(8088, 80, 0);
+    console.log(natmapping);
+    debugger;
+}
+bootstrap();

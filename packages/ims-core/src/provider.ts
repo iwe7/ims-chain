@@ -1,5 +1,7 @@
 import { InjectionToken } from "./injection_token";
 import { Injector } from "./injector";
+import { Type } from "./type";
+
 export interface FactorySansProvider {
   useFactory: (injector: Injector) => any;
   cache?: boolean;
@@ -23,4 +25,4 @@ export function isFactoryProvider(val: any): val is FactoryProvider {
   return Reflect.has(val, "provide") && Reflect.has(val, "useFactory");
 }
 
-export type Provider = FactoryProvider;
+export type Provider = FactoryProvider | Type<any>;

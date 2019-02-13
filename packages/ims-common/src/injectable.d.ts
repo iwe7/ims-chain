@@ -4,7 +4,7 @@ export declare const INJECTABLE: InjectionToken<any>;
 export interface Injectable {
     provide?: InjectionToken;
     useFactory?: (injector: Injector) => Promise<any>;
-    deps?: [];
+    deps?: any[];
     useCache?: boolean;
 }
 export declare class InjectableMetadataFactory extends MetadataFactory {

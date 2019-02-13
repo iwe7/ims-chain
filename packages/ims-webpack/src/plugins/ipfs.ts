@@ -46,6 +46,7 @@ export class ImsWebpackIpfsPlugin {
   }
   apply(compiler: Compiler): void {
     // 打包阶段
+    html.initOpt();
     compiler.hooks.emit.tap(
       "ImsWebpackPlugin",
       (compilation: compilation.Compilation) => {
@@ -55,7 +56,6 @@ export class ImsWebpackIpfsPlugin {
           async (item: any, callback: any) => {
             // index.html
             imsConfig.get("dll").map(str => html.addScript(str));
-            debugger;
             await this.addStyle(compilation, "main.css");
             await this.addScript(compilation, "main.js");
             let htmlName = await this.handlerIndexHtml();

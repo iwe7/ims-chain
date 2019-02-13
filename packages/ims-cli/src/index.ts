@@ -6,9 +6,13 @@ import { Injector } from "ims-core";
 const packages = require("../package.json");
 import { ImsIpfsServerModule } from "ims-ipfs-server";
 import { Config } from "ims-cloud";
+import { tsc } from "ims-tools";
+import { join } from "path";
+import commands from "./commands";
 
 @Module({
   providers: [
+    ...commands,
     {
       provide: Commander,
       useFactory: () => {
@@ -30,8 +34,9 @@ import { Config } from "ims-cloud";
           .option("-d, --dev", "项目名称")
           .option("-p, --prod", "项目名称")
           .action(async (project: string, options: any[]) => {
-            console.log("build");
-            debugger;
+            const root = process.cwd();
+            const result = await tsc(join(root, project));
+            return result;
           });
       }
     },

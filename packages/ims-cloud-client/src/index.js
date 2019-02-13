@@ -28,8 +28,19 @@ ImsCloudClientModule = tslib_1.__decorate([
                                             }
                                             return new Proxy(function () { }, {
                                                 apply(target, thisArg, argArray) {
-                                                    let url = `http://${config.host}:${config.port}/${hash}/${p}`;
-                                                    console.log(url);
+                                                    let url = ``;
+                                                    if (config) {
+                                                        if (config.host) {
+                                                            url += config.host;
+                                                        }
+                                                        else {
+                                                            url += ".";
+                                                        }
+                                                        if (config.port) {
+                                                            url += `:` + config.port;
+                                                        }
+                                                    }
+                                                    url += `/${hash}/${p}`;
                                                     return fetch(url, {
                                                         method: "POST",
                                                         body: JSON.stringify(argArray)
@@ -52,6 +63,18 @@ ImsCloudClientModule = tslib_1.__decorate([
                             });
                         }
                     }
+                }
+            },
+            {
+                provide: ims_cloud_1.Fetch,
+                useFactory: () => fetch
+            },
+            {
+                provide: ims_cloud_1.Config,
+                useFactory: () => {
+                    return {
+                        host: "./api"
+                    };
                 }
             }
         ]

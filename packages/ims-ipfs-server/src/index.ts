@@ -2,7 +2,7 @@ import { ImsCloudServerModule } from "ims-cloud-server";
 import { Module, AppInitialization } from "ims-common";
 import { Ipfs, IpfsConfig, IpfsApi } from "ims-ipfs";
 import { Injector, InjectionToken } from "ims-core";
-import { Routes, Get } from "ims-cloud";
+import { Routes } from "ims-cloud";
 
 import { ImsFsServer } from "./fs";
 const IPFS = require("ipfs");
@@ -13,24 +13,24 @@ const IPFS = require("ipfs");
       provide: IpfsApi,
       useFactory: (injector: Injector) => new ImsFsServer(injector)
     },
-    {
-      provide: Get,
-      useFactory: async (injector: Injector) => {
-        let api = await injector.get(
-          InjectionToken.fromType<ImsFsServer>(ImsFsServer)
-        );
-        return {
-          path: "/:hash/:method?",
-          handler: async (req: any, res: any, next: any) => {
-            let params = req.params;
-            if (params.hash) {
-              return await api.cat(params.hash);
-            }
-            next();
-          }
-        };
-      }
-    },
+    // {
+    //   provide: Get,
+    //   useFactory: async (injector: Injector) => {
+    //     let api = await injector.get(
+    //       InjectionToken.fromType<ImsFsServer>(ImsFsServer)
+    //     );
+    //     return {
+    //       path: "/:hash/:method?",
+    //       handler: async (req: any, res: any, next: any) => {
+    //         let params = req.params;
+    //         if (params.hash) {
+    //           return await api.cat(params.hash);
+    //         }
+    //         next();
+    //       }
+    //     };
+    //   }
+    // },
     {
       provide: IpfsConfig,
       useFactory: () => {

@@ -16,7 +16,7 @@ export interface ImsHtml {
   inlineScript: ImsHtmlHeaderScript[];
 }
 
-const opt: ImsHtml = {
+let opt: ImsHtml = {
   header: {
     title: "demo",
     meta: [
@@ -72,17 +72,23 @@ const opt: ImsHtml = {
   inlineScript: []
 };
 
+const oldOpt = opt;
+
+export function initOpt() {
+  opt = oldOpt;
+}
+
 export function addStyle(style: string) {
-  opt.styles.push(style);
+  if (!opt.styles.includes(style)) opt.styles.push(style);
 }
 export function addScript(script: string) {
-  opt.script.push(script);
+  if (!opt.script.includes(script)) opt.script.push(script);
 }
 export function addInlineStyle(style: string) {
-  opt.inlineStyles.push(style);
+  if (!opt.inlineStyles.includes(style)) opt.inlineStyles.push(style);
 }
 export function addInlineScript(script: string) {
-  opt.inlineScript.push(script);
+  if (!opt.inlineScript.includes(script)) opt.inlineScript.push(script);
 }
 
 function handlerHeaderMeta() {

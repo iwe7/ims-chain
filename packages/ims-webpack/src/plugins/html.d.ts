@@ -14,6 +14,7 @@ export interface ImsHtml {
     script: ImsHtmlHeaderScript[];
     inlineScript: ImsHtmlHeaderScript[];
 }
+export declare function initOpt(): void;
 export declare function addStyle(style: string): void;
 export declare function addScript(script: string): void;
 export declare function addInlineStyle(style: string): void;

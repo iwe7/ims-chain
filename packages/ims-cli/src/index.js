@@ -8,11 +8,15 @@ const tokens_1 = require("./tokens");
 const packages = require("../package.json");
 const ims_ipfs_server_1 = require("ims-ipfs-server");
 const ims_cloud_1 = require("ims-cloud");
+const ims_tools_1 = require("ims-tools");
+const path_1 = require("path");
+const commands_1 = require("./commands");
 let ImsCliModule = class ImsCliModule {
 };
 ImsCliModule = tslib_1.__decorate([
     ims_common_1.Module({
         providers: [
+            ...commands_1.default,
             {
                 provide: tokens_1.Commander,
                 useFactory: () => {
@@ -34,8 +38,9 @@ ImsCliModule = tslib_1.__decorate([
                         .option("-d, --dev", "项目名称")
                         .option("-p, --prod", "项目名称")
                         .action(async (project, options) => {
-                        console.log("build");
-                        debugger;
+                        const root = process.cwd();
+                        const result = await ims_tools_1.tsc(path_1.join(root, project));
+                        return result;
                     });
                 }
             },

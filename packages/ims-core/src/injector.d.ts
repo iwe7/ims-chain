@@ -1,5 +1,6 @@
 import { InjectionToken } from "./injection_token";
 import { StaticProvider } from "./provider";
+import { Type } from "./type";
 export interface Record<T = any> {
     fn: (injector: Injector) => Promise<T>;
     token: any;
@@ -19,7 +20,8 @@ export declare class Injector {
     getRecord(token: InjectionToken<any>): Promise<Record<any>>;
     getRecordByHash(hash: string): Record;
     getByHash<T>(hash: string, notFound?: T): Promise<any>;
-    get<T>(token: InjectionToken<T>, notFound?: T): Promise<T>;
+    has(token: InjectionToken<any> | Type<any> | string): Promise<boolean>;
+    get<T>(token: InjectionToken<T> | Type<T> | string, notFound?: T): Promise<T>;
     set<T>(token: InjectionToken<T>, factory: Record): Promise<void>;
 }
 //# sourceMappingURL=injector.d.ts.map

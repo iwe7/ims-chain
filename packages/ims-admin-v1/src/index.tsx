@@ -12,6 +12,7 @@ const store = createStore(
     routing: routerReducer
   })
 );
+
 const app = document.getElementById("app");
 let getBaseHash = () => {
   return location.pathname.split("/")[1];
@@ -23,8 +24,6 @@ render(
         <Route path="/" exact component={pages.WelcomePage} />
         <Route path="/page1" component={pages.IndexPage1} />
         <Route path="/page2" component={pages.IndexPage2} />
-        <Route path="/login" component={pages.LoginPage} />
-        <Route path="/home" component={pages.HomePage} />
       </div>
     </Router>
   </Provider>,

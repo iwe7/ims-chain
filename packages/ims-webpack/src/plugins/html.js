@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const opt = {
+let opt = {
     header: {
         title: "demo",
         meta: [
@@ -54,20 +54,29 @@ const opt = {
     script: [],
     inlineScript: []
 };
+const oldOpt = opt;
+function initOpt() {
+    opt = oldOpt;
+}
+exports.initOpt = initOpt;
 function addStyle(style) {
-    opt.styles.push(style);
+    if (!opt.styles.includes(style))
+        opt.styles.push(style);
 }
 exports.addStyle = addStyle;
 function addScript(script) {
-    opt.script.push(script);
+    if (!opt.script.includes(script))
+        opt.script.push(script);
 }
 exports.addScript = addScript;
 function addInlineStyle(style) {
-    opt.inlineStyles.push(style);
+    if (!opt.inlineStyles.includes(style))
+        opt.inlineStyles.push(style);
 }
 exports.addInlineStyle = addInlineStyle;
 function addInlineScript(script) {
-    opt.inlineScript.push(script);
+    if (!opt.inlineScript.includes(script))
+        opt.inlineScript.push(script);
 }
 exports.addInlineScript = addInlineScript;
 function handlerHeaderMeta() {

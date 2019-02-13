@@ -1,0 +1,1 @@
+export { tsc } from "./tsc";

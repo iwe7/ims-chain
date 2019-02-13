@@ -1,0 +1,65 @@
+.topbar{
+    background-color: #252a2f;
+    height: 50px;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: 1030!important;
+
+    a{
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        letter-spacing: .02em;
+    }
+
+    .regionbar-new{
+        position: relative;
+        .vertical {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .console-regionbar-global {
+            margin-left: 0;
+        }
+        .topbar-btn {
+            color: #fff;
+            line-height: 50px;
+            height: 50px;
+            padding: 0 16px;
+            display: block;
+            text-decoration: none;
+            i{
+                vertical-align: middle;
+                color: inherit;
+                margin-right: 6px;
+            }
+        }
+    }
+
+    .ims-logo{
+        height: 50px;
+
+        .ims-icon{
+            margin-right: 1px;
+            text-align: center;
+            font-size: 24px;
+            color: #fff;
+            line-height: 50px;
+            height: 100%;
+            text-decoration: none;
+            width: 50px!important;
+        }
+
+        .console-link{
+            color: #fff;
+            font-size: 14px;
+            line-height: 50px;
+            margin-right: 1px;
+            text-align: center;
+            padding: 0 12px;
+            text-decoration: none;
+        }
+    }
+
+}

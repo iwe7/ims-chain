@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { MetadataFactory, MetadataDef } from "./type";
 import { InjectionToken } from "ims-core";
 export interface IDecorator<T> extends Function {

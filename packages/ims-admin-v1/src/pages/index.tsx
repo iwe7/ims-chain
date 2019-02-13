@@ -15,6 +15,4 @@ export class IndexPage2 extends Component {
   }
 }
 
-export { LoginPage } from "./login/login";
-export { HomePage } from "./home/home";
 export { WelcomePage } from "./welcome/welcome";

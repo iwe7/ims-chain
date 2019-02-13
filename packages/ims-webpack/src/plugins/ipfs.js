@@ -46,11 +46,11 @@ class ImsWebpackIpfsPlugin {
         hash && html.addStyle(`/${hash}`);
     }
     apply(compiler) {
+        html.initOpt();
         compiler.hooks.emit.tap("ImsWebpackPlugin", (compilation) => {
             let hooks = compilation.hooks;
             hooks.htmlWebpackPluginAfterEmit.tapAsync("ImsWebpackPlugin", async (item, callback) => {
                 ims_webpack_dll_1.imsConfig.get("dll").map(str => html.addScript(str));
-                debugger;
                 await this.addStyle(compilation, "main.css");
                 await this.addScript(compilation, "main.js");
                 let htmlName = await this.handlerIndexHtml();
