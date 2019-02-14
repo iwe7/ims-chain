@@ -4,16 +4,15 @@ import { createElement } from "react";
 import { render } from "react-dom";
 import "antd/dist/antd.css";
 import "./index.scss";
-import {
-  ImsCommonTopBar,
-  ImsCommonFooter,
-  ImsCommonContent
-} from "./common/index";
+import { ImsCommonContent } from "./common/index";
 import { ImsUserLogin, ImsUserRegister, ImsUserFindPassword } from "./user";
+import * as home from "./home";
 import { ImsUser } from "ims-web";
 import { ImsCloudClientModule } from "ims-cloud-client";
 import { Routes } from "ims-cloud";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React= require("react");
+
 @Module({
   providers: [
     {
@@ -26,10 +25,9 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
         render(
           <BrowserRouter>
             <div className="app">
-              <ImsCommonTopBar />
               <Switch>
                 <ImsCommonContent>
-                  <Route path="/" exact component={ImsUserLogin} />
+                  <Route path="/" exact component={home.ImsHomeWelcome} />
                   <Route path="/user/login" component={ImsUserLogin} />
                   <Route path="/user/register" component={ImsUserRegister} />
                   <Route
@@ -38,7 +36,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
                   />
                 </ImsCommonContent>
               </Switch>
-              <ImsCommonFooter />
             </div>
           </BrowserRouter>,
           document.getElementById("app")

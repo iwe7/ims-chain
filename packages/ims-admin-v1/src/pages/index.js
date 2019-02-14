@@ -1,21 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
+const React = require("react");
 class IndexPage extends react_1.Component {
     render() {
-        return react_1.createElement("div", null, "page");
+        return React.createElement("div", null, "page");
     }
 }
 exports.IndexPage = IndexPage;
 class IndexPage1 extends react_1.Component {
     render() {
-        return react_1.createElement("div", null, "page1");
+        return React.createElement("div", null, "page1");
     }
 }
 exports.IndexPage1 = IndexPage1;
 class IndexPage2 extends react_1.Component {
     render() {
-        return react_1.createElement("div", null, "page2");
+        return React.createElement("div", null, "page2");
     }
 }
 exports.IndexPage2 = IndexPage2;

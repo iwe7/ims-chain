@@ -1,7 +1,8 @@
 import { Component, createElement } from "react";
 import "./index.scss";
-import { Link } from "react-router-dom";
+import React= require("react");
 
+import { Link } from "react-router-dom";
 export class ImsCommonTopBar extends Component {
   render() {
     return (

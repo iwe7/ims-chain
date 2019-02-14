@@ -16,16 +16,9 @@ const ims_web_1 = require("ims-web");
 const bodyParser = require("body-parser");
 const ims_web_impl_1 = require("ims-web-impl");
 const cookieParser = require("cookie-parser");
-const session = require("express-session");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(session({
-    secret: "secret",
-    cookie: {
-        maxAge: 1000 * 60 * 30
-    }
-}));
 let ImsAdminBuildModule = class ImsAdminBuildModule {
 };
 ImsAdminBuildModule = tslib_1.__decorate([
@@ -62,11 +55,18 @@ ImsAdminBuildModule = tslib_1.__decorate([
                                 { test: /\.tsx?$/, loader: "ts-loader" },
                                 {
                                     test: /\.scss$/,
-                                    use: ["style-loader", "css-loader", "sass-loader"]
+                                    use: [
+                                        "style-loader",
+                                        "css-loader",
+                                        "sass-loader"
+                                    ]
                                 },
                                 {
                                     test: /\.css/,
-                                    use: ["style-loader", "css-loader"]
+                                    use: [
+                                        "style-loader",
+                                        "css-loader"
+                                    ]
                                 }
                             ]
                         },

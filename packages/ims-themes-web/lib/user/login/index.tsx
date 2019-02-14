@@ -4,6 +4,7 @@ import { Injector, InjectionToken } from "ims-core";
 import { ImsUser } from "ims-web";
 import { fromEvent } from "rxjs";
 import { Link } from "react-router-dom";
+import React = require("react");
 
 export class ImsUserLogin extends Component<any, any> {
   get user(): Promise<ImsUser> {

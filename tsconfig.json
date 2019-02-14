@@ -11,7 +11,7 @@
     // "allowJs": true /* Allow javascript files to be compiled. */,
     "checkJs": false /* Report errors in .js files. */,
     "jsx": "react" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
-    "jsxFactory": "createElement",
+    "jsxFactory": "React.createElement",
     "declaration": true /* Generates corresponding '.d.ts' file. */,
     "declarationMap": true /* Generates a sourcemap for each corresponding '.d.ts' file. */,
     "sourceMap": true /* Generates corresponding '.map' file. */,
@@ -100,6 +100,6 @@
     "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
     "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */
   },
-  "include": ["packages", "src"],
+  "include": ["packages", "src", "./typing.d.ts"],
   "exclude": ["node_modules", "packages/**/__test__"]
 }

@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import React= require("react");
 import { render } from "react-dom";
 import "./index.scss";
 const app = document.getElementById("app");

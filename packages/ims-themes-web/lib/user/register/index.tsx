@@ -1,5 +1,7 @@
 import { Component, createElement } from "react";
 import "./index.scss";
+import React = require("react");
+
 export class ImsUserRegister extends Component {
   render() {
     return (

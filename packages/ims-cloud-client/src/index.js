@@ -3,6 +3,42 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const ims_common_1 = require("ims-common");
 const ims_cloud_1 = require("ims-cloud");
+function create(config, hash, pro) {
+    return new Proxy(function () { }, {
+        get(target, p, receiver) {
+            if (p === "then") {
+                return void 0;
+            }
+            return create(config, hash, `${pro}.${p}`);
+        },
+        apply(target, thisArg, argArray) {
+            let url = ``;
+            if (config) {
+                if (config.host) {
+                    url += config.host;
+                }
+                else {
+                    url += ".";
+                }
+                if (config.port) {
+                    url += `:` + config.port;
+                }
+            }
+            url += `/${hash}/${pro}`;
+            return fetch(url, {
+                method: "POST",
+                body: JSON.stringify(argArray)
+            }).then(res => {
+                try {
+                    return res.json();
+                }
+                catch (e) {
+                    return res.text();
+                }
+            });
+        }
+    });
+}
 let ImsCloudClientModule = class ImsCloudClientModule {
 };
 ImsCloudClientModule = tslib_1.__decorate([
@@ -20,73 +56,12 @@ ImsCloudClientModule = tslib_1.__decorate([
                             injector.set(route, {
                                 fn: async (injector) => {
                                     let hash = await route.hash;
-                                    let fetch = await injector.get(ims_cloud_1.Fetch);
                                     return new Proxy(function () { }, {
                                         get(target, p, receiver) {
                                             if (p === "then") {
                                                 return void 0;
                                             }
-                                            return new Proxy(function () { }, {
-                                                get(target, p1, receiver) {
-                                                    if (p === "then") {
-                                                        return void 0;
-                                                    }
-                                                    return new Proxy(function () { }, {
-                                                        apply(target, thisArg, argArray) {
-                                                            let url = ``;
-                                                            if (config) {
-                                                                if (config.host) {
-                                                                    url += config.host;
-                                                                }
-                                                                else {
-                                                                    url += ".";
-                                                                }
-                                                                if (config.port) {
-                                                                    url += `:` + config.port;
-                                                                }
-                                                            }
-                                                            url += `/${hash}/${p}.${p1}`;
-                                                            return fetch(url, {
-                                                                method: "POST",
-                                                                body: JSON.stringify(argArray)
-                                                            }).then(res => {
-                                                                try {
-                                                                    return res.json();
-                                                                }
-                                                                catch (e) {
-                                                                    return res.text();
-                                                                }
-                                                            });
-                                                        }
-                                                    });
-                                                },
-                                                apply(target, thisArg, argArray) {
-                                                    let url = ``;
-                                                    if (config) {
-                                                        if (config.host) {
-                                                            url += config.host;
-                                                        }
-                                                        else {
-                                                            url += ".";
-                                                        }
-                                                        if (config.port) {
-                                                            url += `:` + config.port;
-                                                        }
-                                                    }
-                                                    url += `/${hash}/${p}`;
-                                                    return fetch(url, {
-                                                        method: "POST",
-                                                        body: JSON.stringify(argArray)
-                                                    }).then(res => {
-                                                        try {
-                                                            return res.json();
-                                                        }
-                                                        catch (e) {
-                                                            return res.text();
-                                                        }
-                                                    });
-                                                }
-                                            });
+                                            return create(config, hash, `${p}`);
                                         }
                                     });
                                 },

@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import { routerReducer } from "ims-router-redux";
 import * as pages from "./pages/index";
 import "./index.scss";
+import React= require("react");
+
 
 const store = createStore(
   combineReducers({

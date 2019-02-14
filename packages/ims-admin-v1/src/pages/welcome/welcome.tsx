@@ -1,5 +1,7 @@
 import { Component, createElement } from "react";
 const PeerId = require("peer-id");
+import React= require("react");
+
 export interface WelcomeState {
   id: string;
   privKey: string;

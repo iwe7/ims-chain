@@ -1,4 +1,6 @@
 import { Component, createElement } from "react";
+import React= require("react");
+
 export class IndexPage extends Component {
   render() {
     return <div>page</div>;

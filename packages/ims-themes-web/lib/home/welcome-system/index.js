@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const react_1 = require("react");
 require("./index.scss");
-class ImsHomeWelcomeSystem extends react_1.Component {
+const React = require("react");
+class ImsHomeWelcomeSystem extends React.Component {
     render() {
-        return react_1.createElement("div", null);
+        return React.createElement("div", null);
     }
 }
 exports.ImsHomeWelcomeSystem = ImsHomeWelcomeSystem;

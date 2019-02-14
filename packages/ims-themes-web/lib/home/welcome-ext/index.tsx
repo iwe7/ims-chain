@@ -1,7 +1,7 @@
-import { Component, createElement } from "react";
 import "./index.scss";
+import React = require("react");
 
-export class ImsHomeWelcomeExt extends Component<any, any> {
+export class ImsHomeWelcomeExt extends React.Component<any, any> {
   render() {
     return <div />;
   }
