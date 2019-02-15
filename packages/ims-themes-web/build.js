@@ -19,6 +19,7 @@ const cookieParser = require("cookie-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+const ims_close_port_1 = require("ims-close-port");
 let ImsAdminBuildModule = class ImsAdminBuildModule {
 };
 ImsAdminBuildModule = tslib_1.__decorate([
@@ -28,7 +29,16 @@ ImsAdminBuildModule = tslib_1.__decorate([
             {
                 provide: ims_cloud_1.Routes,
                 useFactory: () => {
-                    return [ims_core_1.InjectionToken.fromType(ims_web_1.ImsUser)];
+                    return [
+                        ims_core_1.InjectionToken.fromType(ims_web_1.ImsUser),
+                        ims_core_1.InjectionToken.fromType(ims_web_1.ImsIpfs)
+                    ];
+                }
+            },
+            {
+                provide: ims_core_1.InjectionToken.fromType(ims_web_1.ImsIpfs),
+                useFactory: async (injector) => {
+                    return await injector.get(ims_web_impl_1.ImsIpfsImpl);
                 }
             },
             {
@@ -55,18 +65,11 @@ ImsAdminBuildModule = tslib_1.__decorate([
                                 { test: /\.tsx?$/, loader: "ts-loader" },
                                 {
                                     test: /\.scss$/,
-                                    use: [
-                                        "style-loader",
-                                        "css-loader",
-                                        "sass-loader"
-                                    ]
+                                    use: ["style-loader", "css-loader", "sass-loader"]
                                 },
                                 {
                                     test: /\.css/,
-                                    use: [
-                                        "style-loader",
-                                        "css-loader"
-                                    ]
+                                    use: ["style-loader", "css-loader"]
                                 }
                             ]
                         },
@@ -84,6 +87,7 @@ ImsAdminBuildModule = tslib_1.__decorate([
                     app.use("/api", router);
                     app.use(middleware(compiler));
                     const httpServer = http.createServer(app);
+                    await ims_close_port_1.close(4203);
                     httpServer.listen(4203, "127.0.0.1", () => {
                         console.log("start 4203");
                     });

@@ -9,6 +9,9 @@ require("./index.scss");
 const index_1 = require("./common/index");
 const user_1 = require("./user");
 const home = require("./home");
+const docs = require("./docs");
+const store = require("./store");
+const ipfs = require("./ipfs");
 const ims_web_1 = require("ims-web");
 const ims_cloud_client_1 = require("ims-cloud-client");
 const ims_cloud_1 = require("ims-cloud");
@@ -21,16 +24,23 @@ ImsThemesWeb = tslib_1.__decorate([
         providers: [
             {
                 provide: ims_cloud_1.Routes,
-                useFactory: () => [ims_core_1.InjectionToken.fromType(ims_web_1.ImsUser)]
+                useFactory: () => [
+                    ims_core_1.InjectionToken.fromType(ims_web_1.ImsUser),
+                    ims_core_1.InjectionToken.fromType(ims_web_1.ImsIpfs)
+                ]
             },
             {
                 provide: ims_common_1.AppInitialization,
                 useFactory: async (injector) => {
-                    react_dom_1.render(React.createElement(react_router_dom_1.BrowserRouter, null,
+                    react_dom_1.render(React.createElement(react_router_dom_1.HashRouter, null,
                         React.createElement("div", { className: "app" },
                             React.createElement(react_router_dom_1.Switch, null,
                                 React.createElement(index_1.ImsCommonContent, null,
                                     React.createElement(react_router_dom_1.Route, { path: "/", exact: true, component: home.ImsHomeWelcome }),
+                                    React.createElement(react_router_dom_1.Route, { path: "/home/install", exact: true, component: home.ImsHomeInstall }),
+                                    React.createElement(react_router_dom_1.Route, { path: "/store/home", exact: true, component: store.ImsStoreHome }),
+                                    React.createElement(react_router_dom_1.Route, { path: "/docs/home", exact: true, component: docs.ImsDocsHome }),
+                                    React.createElement(react_router_dom_1.Route, { path: "/ipfs/home", exact: true, component: ipfs.ImsIpfsHome }),
                                     React.createElement(react_router_dom_1.Route, { path: "/user/login", component: user_1.ImsUserLogin }),
                                     React.createElement(react_router_dom_1.Route, { path: "/user/register", component: user_1.ImsUserRegister }),
                                     React.createElement(react_router_dom_1.Route, { path: "/user/findPassword", component: user_1.ImsUserFindPassword }))))), document.getElementById("app"));

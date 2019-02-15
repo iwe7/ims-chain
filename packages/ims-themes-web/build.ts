@@ -10,21 +10,30 @@ const app = express();
 import { ImsCloudServerModule } from "ims-cloud-server";
 import { Router, Routes } from "ims-cloud";
 import { Injector, InjectionToken } from "ims-core";
-import { ImsUser } from "ims-web";
+import { ImsUser, ImsIpfs } from "ims-web";
 import bodyParser = require("body-parser");
-import { ImsUserImpl } from "ims-web-impl";
+import { ImsUserImpl, ImsIpfsImpl } from "ims-web-impl";
 import cookieParser = require("cookie-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-
+import { close } from "ims-close-port";
 @Module({
   imports: [ImsCloudServerModule],
   providers: [
     {
       provide: Routes,
       useFactory: () => {
-        return [InjectionToken.fromType(ImsUser)];
+        return [
+          InjectionToken.fromType(ImsUser),
+          InjectionToken.fromType(ImsIpfs)
+        ];
+      }
+    },
+    {
+      provide: InjectionToken.fromType(ImsIpfs),
+      useFactory: async (injector: Injector) => {
+        return await injector.get(ImsIpfsImpl);
       }
     },
     {
@@ -51,18 +60,11 @@ app.use(cookieParser());
               { test: /\.tsx?$/, loader: "ts-loader" },
               {
                 test: /\.scss$/,
-                use: [
-                  "style-loader",
-                  "css-loader",
-                  "sass-loader"
-                ]
+                use: ["style-loader", "css-loader", "sass-loader"]
               },
               {
                 test: /\.css/,
-                use: [
-                  "style-loader",
-                  "css-loader"
-                ]
+                use: ["style-loader", "css-loader"]
               }
             ]
           },
@@ -77,9 +79,10 @@ app.use(cookieParser());
         };
         const compiler = webpack(config);
         const router = await injector.get(Router);
-        app.use("/api", router);
+        app.use("/api", router as any);
         app.use(middleware(compiler));
         const httpServer = http.createServer(app);
+        await close(4203);
         httpServer.listen(4203, "127.0.0.1", () => {
           console.log("start 4203");
           // 启动成功通知其他节点
@@ -89,5 +92,4 @@ app.use(cookieParser());
   ]
 })
 export class ImsAdminBuildModule {}
-
 bootstrapModule(ImsAdminBuildModule);

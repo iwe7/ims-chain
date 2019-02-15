@@ -26,4 +26,3 @@ UtpModule = tslib_1.__decorate([
     tslib_1.__metadata("design:paramtypes", [])
 ], UtpModule);
 exports.UtpModule = UtpModule;
-let _utp = new UtpModule();

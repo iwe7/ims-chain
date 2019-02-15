@@ -6,17 +6,22 @@ import { toString } from "./util";
 
 function get(key: string, obj: any) {
   let keys: string[] = key.split(".");
+  let instance = obj;
   if (keys.length === 1) {
-    return obj[keys[0]];
+    return {
+      value: obj[keys[0]],
+      instance
+    };
   } else {
     let _keys = keys.reverse();
     let key = _keys.pop();
     while (_keys.length > 0) {
       obj = obj[key];
+      instance = obj;
       key = _keys.pop();
     }
     obj = obj[key];
-    return obj;
+    return { value: obj, instance };
   }
 }
 
@@ -53,13 +58,18 @@ function get(key: string, obj: any) {
                   if (instance) {
                     try {
                       const method = get(params.method, instance);
-                      let json = await method(...args);
+                      let json = await method.value.bind(method.instance)(
+                        ...args
+                      );
                       res.end(toString(json));
                       return;
                     } catch (e) {
+                      let err: Error = e;
                       res.end(
                         toString({
-                          message: e.message
+                          message: err.message,
+                          name: err.name,
+                          stack: err.stack
                         })
                       );
                       return;

@@ -7,18 +7,23 @@ const ims_cloud_1 = require("ims-cloud");
 const util_1 = require("./util");
 function get(key, obj) {
     let keys = key.split(".");
+    let instance = obj;
     if (keys.length === 1) {
-        return obj[keys[0]];
+        return {
+            value: obj[keys[0]],
+            instance
+        };
     }
     else {
         let _keys = keys.reverse();
         let key = _keys.pop();
         while (_keys.length > 0) {
             obj = obj[key];
+            instance = obj;
             key = _keys.pop();
         }
         obj = obj[key];
-        return obj;
+        return { value: obj, instance };
     }
 }
 let ImsCloudServerModule = class ImsCloudServerModule {
@@ -58,13 +63,16 @@ ImsCloudServerModule = tslib_1.__decorate([
                                         if (instance) {
                                             try {
                                                 const method = get(params.method, instance);
-                                                let json = await method(...args);
+                                                let json = await method.value.bind(method.instance)(...args);
                                                 res.end(util_1.toString(json));
                                                 return;
                                             }
                                             catch (e) {
+                                                let err = e;
                                                 res.end(util_1.toString({
-                                                    message: e.message
+                                                    message: err.message,
+                                                    name: err.name,
+                                                    stack: err.stack
                                                 }));
                                                 return;
                                             }

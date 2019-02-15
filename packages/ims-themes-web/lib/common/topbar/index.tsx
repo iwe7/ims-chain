@@ -1,9 +1,7 @@
-import { Component, createElement } from "react";
 import "./index.scss";
-import React= require("react");
-
+import React = require("react");
 import { Link } from "react-router-dom";
-export class ImsCommonTopBar extends Component {
+export class ImsCommonTopBar extends React.Component {
   render() {
     return (
       <div className="common-topbar">
@@ -16,6 +14,21 @@ export class ImsCommonTopBar extends Component {
               免费注册
             </Link>
             <div className="common-topbar-menu">
+              <div className="common-topbar-menu-link">
+                <Link to={"/"}>首页</Link>
+              </div>
+              <div className="common-topbar-menu-link">
+                <Link to={"/home/install"}>安装</Link>
+              </div>
+              <div className="common-topbar-menu-link">
+                <Link to={"/docs/home"}>文档</Link>
+              </div>
+              <div className="common-topbar-menu-link">
+                <Link to={"/ipfs/home"}>存储</Link>
+              </div>
+              <div className="common-topbar-menu-link">
+                <Link to={"/store/home"}>应用</Link>
+              </div>
               <div className="common-topbar-menu-link">
                 <Link to={"/user/login"}>登录</Link>
               </div>

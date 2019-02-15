@@ -6,6 +6,8 @@ async function bootstrap() {
     await ims_close_port_1.close(80);
     await ims_close_port_1.close(443);
     const manager = new ims_nat_1.NatManager();
+    await manager.deleteMapping(80);
+    await manager.deleteMapping(443);
     await manager.addMapping(80, 80, 0);
     await manager.addMapping(443, 443, 0);
 }

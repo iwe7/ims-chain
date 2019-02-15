@@ -11,3 +11,4 @@ export * from "./home/index";
 export * from "./module/index";
 export * from "./utility/index";
 export * from "./webapp/index";
+export * from "./ipfs/index";

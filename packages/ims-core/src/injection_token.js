@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const cids = require("cids");
 const multihashing = require("multihashing-async");
+const type_1 = require("./type");
 class InjectionToken {
     constructor(name, desc, multi = false) {
         this.name = name;
@@ -30,6 +31,8 @@ class InjectionToken {
             return token;
         if (typeof token === "string")
             return this.fromString(token, token, multi);
+        if (type_1.isType(token))
+            return new InjectionToken(token.name, `${stringify(token)}`, multi);
         return new InjectionToken(token.name, `${stringify(token)}`, multi);
     }
 }

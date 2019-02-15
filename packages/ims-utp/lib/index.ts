@@ -20,5 +20,3 @@ export class UtpModule {
     });
   }
 }
-
-let _utp = new UtpModule();

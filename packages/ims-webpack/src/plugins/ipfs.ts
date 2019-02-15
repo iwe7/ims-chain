@@ -8,7 +8,7 @@ import { imsConfig } from "ims-webpack-dll";
 export class ImsWebpackIpfsPlugin {
   constructor(public injector: Injector) {}
   async uploadRes(compilation: compilation.Compilation, outputName: string) {
-    let ipfs = await this.injector.get(IpfsApi);
+    let ipfs = await this.injector.get<IpfsApi>(IpfsApi);
     const assets = compilation.assets;
     const chunk = assets[outputName];
     if (chunk) {
@@ -25,7 +25,7 @@ export class ImsWebpackIpfsPlugin {
     return void 0;
   }
   async handlerIndexHtml() {
-    let ipfs = await this.injector.get(IpfsApi);
+    let ipfs = await this.injector.get<IpfsApi>(IpfsApi);
     let outputName = "index.html";
     let results = await ipfs.add([
       {

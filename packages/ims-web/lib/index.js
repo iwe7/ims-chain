@@ -14,3 +14,4 @@ tslib_1.__exportStar(require("./home/index"), exports);
 tslib_1.__exportStar(require("./module/index"), exports);
 tslib_1.__exportStar(require("./utility/index"), exports);
 tslib_1.__exportStar(require("./webapp/index"), exports);
+tslib_1.__exportStar(require("./ipfs/index"), exports);

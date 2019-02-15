@@ -57,16 +57,3 @@ export class Node<T = any> {
     this.close();
   }
 }
-
-const node = new Node("/ip4/127.0.0.1/udp/134");
-const node2 = new Node("/ip/127.0.0.1/udp/135");
-node.next({
-  to: node2.addr.value,
-  type: "message",
-  payload: {
-    data: "hello"
-  }
-});
-node.subscribe(res => {
-  console.log(res);
-});

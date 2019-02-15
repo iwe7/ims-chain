@@ -1,4 +1,4 @@
-import { InjectionToken, StaticProvider, Injector } from "ims-core";
+import { InjectionToken, StaticProvider, Injector, Type } from "ims-core";
 import { WsUrl, providers as wsUrlProviders } from "./ws-url";
 import { WebSocketToken, providers as webSocketProviders } from "./web-socket";
 import { Module } from "ims-common";
@@ -12,8 +12,8 @@ export const providers: StaticProvider[] = [
   {
     provide: WsClientFactory,
     useFactory: async (injector: Injector) => {
-      const wsurl = await injector.get(WsUrl);
-      const WsSocket = await injector.get(WebSocketToken);
+      const wsurl = await injector.get<WsUrl>(WsUrl);
+      const WsSocket = await injector.get<Type<WebSocket>>(WebSocketToken);
       return (addr: string) => {
         const loc: Location =
           typeof window === "undefined"
