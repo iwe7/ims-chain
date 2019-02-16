@@ -17,9 +17,10 @@ import cookieParser = require("cookie-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
+import { AppRouter, ImsAppModule, IpnsRouter } from 'ims-app';
 import { close } from "ims-close-port";
 @Module({
-  imports: [ImsCloudServerModule],
+  imports: [ImsCloudServerModule, ImsAppModule],
   providers: [
     {
       provide: Routes,
@@ -79,7 +80,14 @@ import { close } from "ims-close-port";
         };
         const compiler = webpack(config);
         const router = await injector.get(Router);
-        app.use("/api", router as any);
+        router && app.use("/api", router as any);
+
+        const appRouter = await injector.get(AppRouter);
+        appRouter && app.use("/app", appRouter as any);
+
+        const ipnsRouter = await injector.get(IpnsRouter);
+        appRouter && app.use("/ipns", ipnsRouter as any);
+
         app.use(middleware(compiler));
         const httpServer = http.createServer(app);
         await close(4203);
@@ -91,5 +99,5 @@ import { close } from "ims-close-port";
     }
   ]
 })
-export class ImsAdminBuildModule {}
+export class ImsAdminBuildModule { }
 bootstrapModule(ImsAdminBuildModule);

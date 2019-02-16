@@ -138,6 +138,7 @@ export class Injector {
     return !!record;
   }
 
+  get<T = any>(token: any, notFound?: T): Promise<T>;
   async get<T = any>(
     token: InjectionToken<T> | Type<T> | T | string,
     notFound?: any
@@ -147,7 +148,7 @@ export class Injector {
     return await this.getByHash(hash, notFound);
   }
 
-  static get<T = any>(token: any,notFound?: T): Promise<T>;
+  static get<T = any>(token: any, notFound?: T): Promise<T>;
   static get<T = any>(
     token: InjectionToken<T> | Type<T> | T | string,
     notFound?: T

@@ -46,6 +46,7 @@
     "paths": {
       "ims-core": ["packages/ims-core/src/index"],
       "ims-oauth": ["packages/ims-oauth/lib/index"],
+      "ims-app": ["packages/ims-app/lib/index"],
       "ims-web": ["packages/ims-web/lib/index"],
       "ims-web-impl": ["packages/ims-web-impl/lib/index"],
       "ims-fs": ["packages/ims-fs/lib/index"],

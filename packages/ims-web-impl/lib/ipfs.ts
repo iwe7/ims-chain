@@ -77,6 +77,8 @@ export class ImsIpfsImpl extends ImsIpfs {
     this.key = new ImsIpfsKeyImpl(this.api);
   }
 
+  addZip() { }
+
   add(files: IpfsAddFile[]): Promise<ImsIpfsAdd[]> {
     const _fs = files.map(file => {
       return {
