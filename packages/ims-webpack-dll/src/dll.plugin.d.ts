@@ -13,7 +13,7 @@ export declare class LibManifestPlugin {
     injector: Injector;
     options: LibManifestPluginOptions;
     constructor(injector: Injector);
-    uploadRes(compilation: compilation.Compilation, outputName: string): Promise<string>;
+    uploadRes(compilation: compilation.Compilation, outputName: string): Promise<any>;
     apply(compiler: Compiler): void;
 }
 //# sourceMappingURL=dll.plugin.d.ts.map

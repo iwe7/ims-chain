@@ -84,7 +84,7 @@ ImsAdminBuildModule = tslib_1.__decorate([
                     };
                     const compiler = webpack(config);
                     const router = await injector.get(ims_cloud_1.Router);
-                    app.use("/api", router);
+                    router && app.use("/api", router);
                     app.use(middleware(compiler));
                     const httpServer = http.createServer(app);
                     await ims_close_port_1.close(4203);

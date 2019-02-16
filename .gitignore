@@ -7,3 +7,4 @@ yarn-error.log
 lerna-*.json
 data
 we7
+dist

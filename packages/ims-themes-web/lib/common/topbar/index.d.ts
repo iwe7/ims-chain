@@ -1,6 +1,6 @@
-import { Component } from "react";
 import "./index.scss";
-export declare class ImsCommonTopBar extends Component {
+import React = require("react");
+export declare class ImsCommonTopBar extends React.Component {
     render(): JSX.Element;
 }
 //# sourceMappingURL=index.d.ts.map

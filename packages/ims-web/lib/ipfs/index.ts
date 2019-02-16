@@ -92,7 +92,7 @@ export interface ImsIpfsNamePublishOptions {
   key?: string;
 }
 export abstract class ImsIpfsName {
-  abstract publish(addr: string,options?: ImsIpfsNamePublishOptions): Promise<any>;
+  abstract publish(addr: string, options?: ImsIpfsNamePublishOptions): Promise<any>;
   abstract resolve(name: string): Promise<any>;
   pubsub: ImsIpfsNamePubsub;
 }
@@ -104,8 +104,9 @@ export abstract class ImsIpfsNamePubsub {
 }
 
 export abstract class ImsIpfsKey {
-  abstract gen(name: string): Promise<any>;
-  abstract list(): Promise<any>;
+  abstract gen(name: string): Promise<{ id: string, name: string }>;
+  abstract get(name: string): Promise<{ id: string, name: string }>;
+  abstract list(): Promise<{ id: string, name: string }[]>;
   abstract rm(name: string): Promise<any>;
   abstract rename(oldName: string, newName: string): Promise<any>;
   abstract export(name: string, password: string): Promise<any>;

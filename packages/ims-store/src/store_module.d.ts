@@ -19,13 +19,13 @@ export declare type StoreConfig<T, V extends Action = Action> = {
     reducerFactory?: ActionReducerFactory<T, V>;
     metaReducers?: MetaReducer<T, V>[];
 };
-export declare function _createStoreReducers(injector: Injector, reducers: ActionReducerMap<any, any>, tokenReducers: ActionReducerMap<any, any>): Promise<{}> | ActionReducerMap<any, any>;
+export declare function _createStoreReducers(injector: Injector, reducers: ActionReducerMap<any, any>, tokenReducers: ActionReducerMap<any, any>): Promise<any> | ActionReducerMap<any, any>;
 export declare function _createFeatureStore(injector: Injector, configs: StoreConfig<any, any>[] | InjectionToken<StoreConfig<any, any>>[], featureStores: StoreFeature<any, any>[]): Promise<StoreFeature<any, any> | {
     key: string;
     reducerFactory: ActionReducerFactory<any, any>;
     metaReducers: MetaReducer<any, any>[];
     initialState: InitialState<any>;
 }>[];
-export declare function _createFeatureReducers(injector: Injector, reducerCollection: ActionReducerMap<any, any>[], tokenReducerCollection: ActionReducerMap<any, any>[]): (Promise<{}> | ActionReducerMap<any, any>)[];
+export declare function _createFeatureReducers(injector: Injector, reducerCollection: ActionReducerMap<any, any>[], tokenReducerCollection: ActionReducerMap<any, any>[]): (Promise<any> | ActionReducerMap<any, any>)[];
 export declare function _initialStateFactory(initialState: any): any;
 //# sourceMappingURL=store_module.d.ts.map

@@ -15,6 +15,13 @@ class ImsIpfsKeyImpl extends ims_web_1.ImsIpfsKey {
             size: 2048
         });
     }
+    async get(name) {
+        const list = await this.list();
+        let it = list.find(item => item.name === name);
+        if (it)
+            return it;
+        return this.gen(name);
+    }
     list() {
         return this.api.key.list();
     }
@@ -69,6 +76,7 @@ let ImsIpfsImpl = class ImsIpfsImpl extends ims_web_1.ImsIpfs {
         this.name = new ImsIpfsNameImpl(this.api);
         this.key = new ImsIpfsKeyImpl(this.api);
     }
+    addZip() { }
     add(files) {
         const _fs = files.map(file => {
             return {

@@ -24,7 +24,6 @@ export class ImsStoreHome extends React.Component<any, any> {
     this.setState({
       keys
     })
-
     const appFile = this.refs.app as HTMLInputElement;
     fromEvent(appFile, 'change').subscribe(async res => {
       const files = (res.target as any).files;

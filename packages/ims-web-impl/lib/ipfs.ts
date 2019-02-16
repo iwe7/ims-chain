@@ -22,6 +22,12 @@ export class ImsIpfsKeyImpl extends ImsIpfsKey {
       size: 2048
     });
   }
+  async get(name: string): Promise<{ id: string, name: string }> {
+    const list = await this.list();
+    let it = list.find(item => item.name === name);
+    if (it) return it;
+    return this.gen(name);
+  }
   list(): Promise<any> {
     return this.api.key.list();
   }

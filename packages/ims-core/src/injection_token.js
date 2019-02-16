@@ -27,13 +27,18 @@ class InjectionToken {
         return new InjectionToken(name, desc || "", multi);
     }
     static fromType(token, multi = false) {
-        if (token instanceof InjectionToken)
-            return token;
-        if (typeof token === "string")
-            return this.fromString(token, token, multi);
-        if (type_1.isType(token))
+        try {
+            if (token instanceof InjectionToken)
+                return token;
+            if (typeof token === "string")
+                return this.fromString(token, token, multi);
+            if (type_1.isType(token))
+                return new InjectionToken(token.name, `${stringify(token)}`, multi);
             return new InjectionToken(token.name, `${stringify(token)}`, multi);
-        return new InjectionToken(token.name, `${stringify(token)}`, multi);
+        }
+        catch (e) {
+            console.log(token);
+        }
     }
 }
 exports.InjectionToken = InjectionToken;
