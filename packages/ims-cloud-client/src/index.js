@@ -2,18 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const ims_common_1 = require("ims-common");
-const ims_cloud_1 = require("ims-cloud");
 const rxjs_1 = require("rxjs");
 const operators_1 = require("rxjs/operators");
+const path_1 = require("path");
+const root = process.cwd();
+const cfg = require(path_1.join(root, 'config/ipns.json'));
 const obs = new rxjs_1.Subject();
 let ws;
-function create(config, hash, pro) {
+function create(hash, pro) {
     return new Proxy(function () { }, {
         get(target, p, receiver) {
             if (p === "then") {
                 return void 0;
             }
-            return create(config, hash, `${pro}.${p}`);
+            return create(hash, `${pro}.${p}`);
         },
         apply(target, thisArg, argArray) {
             ws.send(JSON.stringify({
@@ -27,17 +29,16 @@ function create(config, hash, pro) {
         }
     });
 }
-let ImsCloudClientModule = class ImsCloudClientModule {
+let ImsCloudClient = class ImsCloudClient {
 };
-ImsCloudClientModule = tslib_1.__decorate([
+ImsCloudClient = tslib_1.__decorate([
     ims_common_1.Module({
         providers: [
             {
                 provide: ims_common_1.AppInitialization,
                 useFactory: async (injector) => {
-                    let routes = await injector.get(ims_cloud_1.Routes);
-                    let config = await injector.get(ims_cloud_1.Config);
-                    ws = new WebSocket(`wss://viveka.cn/ws/`);
+                    let routes = await injector.get(ims_common_1.Routes);
+                    ws = new WebSocket(`wss://${cfg.wsUrl}`);
                     ws.onmessage = (evt) => {
                         const data = JSON.parse(evt.data);
                         obs.next(data);
@@ -47,8 +48,6 @@ ImsCloudClientModule = tslib_1.__decorate([
                             resolve();
                         };
                     });
-                    if (!config)
-                        config = { port: 4801, host: "localhost" };
                     if (Array.isArray(routes)) {
                         for (let route of routes) {
                             injector.set(route, {
@@ -59,7 +58,7 @@ ImsCloudClientModule = tslib_1.__decorate([
                                             if (p === "then") {
                                                 return void 0;
                                             }
-                                            return create(config, hash, `${p}`);
+                                            return create(hash, `${p}`);
                                         }
                                     });
                                 },
@@ -70,20 +69,8 @@ ImsCloudClientModule = tslib_1.__decorate([
                         }
                     }
                 }
-            },
-            {
-                provide: ims_cloud_1.Fetch,
-                useFactory: () => fetch
-            },
-            {
-                provide: ims_cloud_1.Config,
-                useFactory: () => {
-                    return {
-                        host: "./api"
-                    };
-                }
             }
         ]
     })
-], ImsCloudClientModule);
-exports.ImsCloudClientModule = ImsCloudClientModule;
+], ImsCloudClient);
+exports.ImsCloudClient = ImsCloudClient;

@@ -11,4 +11,5 @@ tslib_1.__exportStar(require("./query_string"), exports);
 tslib_1.__exportStar(require("./getPath"), exports);
 tslib_1.__exportStar(require("./toString"), exports);
 tslib_1.__exportStar(require("./entry"), exports);
+tslib_1.__exportStar(require("./routes"), exports);
 tslib_1.__exportStar(require("ims-core"), exports);

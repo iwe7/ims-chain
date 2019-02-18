@@ -8,6 +8,7 @@ export * from "./query_string";
 export * from "./getPath";
 export * from "./toString";
 export * from "./entry";
+export * from "./routes";
 
 export * from "ims-core";
 
