@@ -22,8 +22,7 @@
 
 ## 用到技术技能
 
-*. typescript/typeorm/react/jsx/ipfs等
-
+*. typescript/typeorm/react/jsx/ipfs/webpack等
 
 ## 系统模块
 
