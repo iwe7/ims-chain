@@ -7,23 +7,16 @@ export interface ImsOrmGetRepository {
 }
 export const ImsOrmGetRepository = InjectionToken.fromString<ImsOrmGetRepository>('ImsOrmGetRepository');
 import { ConstructorMetadata } from 'ims-decorator';
+import { join } from 'path';
+
+const root = process.cwd();
 
 @Module({
     imports: [],
     providers: [{
         provide: ImsOrmConnectionOptions,
         useFactory: () => {
-            return {
-                type: "mysql",
-                host: "localhost",
-                port: 3306,
-                username: "root",
-                password: "yang1989.",
-                database: "meepo",
-                entities: [],
-                synchronize: true,
-                logging: false
-            } as ConnectionOptions;
+            return require(join(root, 'config/db.json'))
         }
     }, {
         provide: ImsOrmConnection,

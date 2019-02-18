@@ -6,6 +6,8 @@ const ims_common_1 = require("ims-common");
 exports.ImsOrmConnection = ims_common_1.InjectionToken.fromString('ImsOrmConnection');
 exports.ImsOrmConnectionOptions = ims_common_1.InjectionToken.fromString('ImsOrmConnectionOptions', 'ImsOrmConnectionOptions', true);
 exports.ImsOrmGetRepository = ims_common_1.InjectionToken.fromString('ImsOrmGetRepository');
+const path_1 = require("path");
+const root = process.cwd();
 let ImsOrm = class ImsOrm {
 };
 ImsOrm = tslib_1.__decorate([
@@ -14,17 +16,7 @@ ImsOrm = tslib_1.__decorate([
         providers: [{
                 provide: exports.ImsOrmConnectionOptions,
                 useFactory: () => {
-                    return {
-                        type: "mysql",
-                        host: "localhost",
-                        port: 3306,
-                        username: "root",
-                        password: "yang1989.",
-                        database: "meepo",
-                        entities: [],
-                        synchronize: true,
-                        logging: false
-                    };
+                    return require(path_1.join(root, 'config/db.json'));
                 }
             }, {
                 provide: exports.ImsOrmConnection,
