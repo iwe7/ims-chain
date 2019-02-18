@@ -16,8 +16,7 @@ tslib_1.__decorate([
 ], ImsModulesRecycle.prototype, "name", void 0);
 tslib_1.__decorate([
     typeorm_1.Column({
-        type: 'tinyint',
-        length: 4
+        type: 'tinyint'
     }),
     tslib_1.__metadata("design:type", Number)
 ], ImsModulesRecycle.prototype, "type", void 0);

@@ -14,8 +14,7 @@ export class ImsModulesRecycle {
     name: string;
 
     @Column({
-        type: 'tinyint',
-        length: 4
+        type: 'tinyint'
     })
     type: number;
 }

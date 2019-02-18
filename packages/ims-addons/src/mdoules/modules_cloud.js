@@ -38,7 +38,6 @@ tslib_1.__decorate([
 ], ImsModulesCloud.prototype, "version", void 0);
 tslib_1.__decorate([
     typeorm_1.Column({
-        length: 4,
         type: 'tinyint'
     }),
     tslib_1.__metadata("design:type", Number)
@@ -72,9 +71,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", Boolean)
 ], ImsModulesCloud.prototype, "aliapp_support", void 0);
 tslib_1.__decorate([
-    typeorm_1.Column({
-        length: 11
-    }),
+    typeorm_1.Column(),
     tslib_1.__metadata("design:type", Number)
 ], ImsModulesCloud.prototype, "cloud_id", void 0);
 tslib_1.__decorate([
@@ -102,9 +99,7 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", Boolean)
 ], ImsModulesCloud.prototype, "is_ban", void 0);
 tslib_1.__decorate([
-    typeorm_1.Column({
-        length: 11
-    }),
+    typeorm_1.Column(),
     tslib_1.__metadata("design:type", Number)
 ], ImsModulesCloud.prototype, "lastupdatetime", void 0);
 ImsModulesCloud = tslib_1.__decorate([

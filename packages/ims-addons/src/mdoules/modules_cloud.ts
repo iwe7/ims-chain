@@ -32,7 +32,6 @@ export class ImsModulesCloud {
     version: string;
 
     @Column({
-        length: 4,
         type: 'tinyint'
     })
     install_status: number;
@@ -59,9 +58,7 @@ export class ImsModulesCloud {
     aliapp_support: boolean;
 
 
-    @Column({
-        length: 11
-    })
+    @Column()
     cloud_id: number;
 
     @Column({
@@ -83,8 +80,6 @@ export class ImsModulesCloud {
     @Column()
     is_ban: boolean;
 
-    @Column({
-        length: 11
-    })
+    @Column()
     lastupdatetime: number;
 }
