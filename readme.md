@@ -23,6 +23,9 @@
 
 ## 系统模块
 
-| 模块名     | 说明             | 文档                       |
-|---------|----------------|--------------------------|
-| ims-orm | typeorm数据库操作封装 | [查看](./packages/ims-orm) |
+| 模块名           | 说明             | 文档                       |
+|---------------|----------------|--------------------------|
+| ims-core      | 依赖注入核心框架       | [查看](./packages/ims-core) |
+| ims-decorator | 装饰器相关          | [查看](./packages/ims-decorator) |
+| ims-common    | 提供常用装饰器        | [查看](./packages/ims-common) |
+| ims-orm       | typeorm数据库操作封装 | [查看](./packages/ims-orm) |
