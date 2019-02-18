@@ -13,10 +13,7 @@
 * /addons 应用层
     * /第三方插件
 * /node_modules 第三方库
-* index.html
-* index.ts
-* install.ts
-
+* index.html 首页模板
 
 ## 功能
 1. 查找发现插件
