@@ -1,5 +1,6 @@
 const cids = require("cids");
 const multihashing = require("multihashing-async");
+
 import { isType } from "./type";
 export class InjectionToken<T = any> {
   get hash(): Promise<string> {
