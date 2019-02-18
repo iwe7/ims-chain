@@ -28,9 +28,14 @@ export class InjectableMetadataFactory extends MetadataFactory {
         provide: token,
         useFactory: async (injector: Injector) => {
           for (let param of def.parameters) {
-            params[param.parameterIndex] = await injector.get(
-              param.metadataDef || param.parameterType
-            );
+            const token = await injector.get(param.token)
+            if (token) {
+              params[param.parameterIndex] = await token(param)
+            } else {
+              params[param.parameterIndex] = await injector.get(
+                param.metadataDef || param.parameterType
+              );
+            }
           }
           return new def.target(...params);
         },

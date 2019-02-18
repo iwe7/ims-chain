@@ -4,6 +4,10 @@ export * from "./tokens";
 export * from "./bootstrap";
 export * from "./inject";
 export * from "./app";
+export * from "./query_string";
+export * from "./getPath";
+export * from "./toString";
+export * from "./entry";
 
 export * from "ims-core";
 

@@ -11,6 +11,7 @@ export interface BaseMetadata<D = any> {
   metadataDef?: D;
   target: Type<any>;
   token: InjectionToken<MetadataFactory>;
+  factory: any;
 }
 
 export interface ClassMetadata<T = any> extends BaseMetadata<T> {

@@ -1,19 +1,18 @@
 # 说明文档
 
-QmUxa7SUbHu4p2TtwDYLcHjQn2HqdMYpQn1paKpsP7tKao
+基于区块链的开放生态系统，
+集微信公众平台，微信小程序，h5网页端，pc端，app及ios端，百度小程序，阿里小程序等与一体的开发框架。
+完善的区块链更新系统，应用发布系统及售后维护系统，为整个生态助力。
 
-开放文档系统设计
+## 目录结构设计
 
-文件权限:
-分组
-
-1. owner(拥有者),group(分组),other(其他)
-2. w(可写)|r(可读)|x(可执行)
-
-技术：
-
-桌面端-electron
-app 端-native script
-微信端-微信
-
-分平台，打包到各种平台
+/data 数据层
+    /config.json 配置
+/attachment 附件层
+    /leveldb管理
+/addons 应用层
+    /第三方插件
+/node_modules 第三方库
+index.html
+index.ts
+install.ts

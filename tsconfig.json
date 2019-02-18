@@ -157,6 +157,9 @@
       "ims-sdk": [
         "packages/ims-sdk/lib/index"
       ],
+      "ims-store": [
+        "packages/ims-store/lib/index"
+      ],
       "ims-sdk-h5": [
         "packages/ims-sdk-h5/lib/index"
       ]

@@ -1,4 +1,5 @@
 export declare abstract class ImsSdk {
+    abstract ready(): Promise<any>;
     abstract switchTab(url: string): Promise<any>;
     abstract reLaunch(url: string): Promise<any>;
     abstract redirectTo(url: string): Promise<any>;
@@ -11,7 +12,7 @@ export declare abstract class ImsSdk {
     abstract hideToast(): Promise<any>;
     abstract hideLoading(): Promise<any>;
     abstract showNavigationBarLoading(): Promise<any>;
-    abstract setNavigationBarTitle(): Promise<any>;
+    abstract setNavigationBarTitle(title: string): Promise<any>;
     abstract setNavigationBarColor(): Promise<any>;
     abstract hideNavigationBarLoading(): Promise<any>;
     abstract setBackgroundTextStyle(): Promise<any>;

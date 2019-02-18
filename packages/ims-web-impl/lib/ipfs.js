@@ -4,77 +4,14 @@ const tslib_1 = require("tslib");
 const ipfsClient = require("ipfs-http-client");
 const ims_common_1 = require("ims-common");
 const ims_web_1 = require("ims-web");
-class ImsIpfsKeyImpl extends ims_web_1.ImsIpfsKey {
-    constructor(api) {
-        super();
-        this.api = api;
-    }
-    gen(name) {
-        return this.api.key.gen(name, {
-            type: "rsa",
-            size: 2048
-        });
-    }
-    async get(name) {
-        const list = await this.list();
-        let it = list.find(item => item.name === name);
-        if (it)
-            return it;
-        return this.gen(name);
-    }
-    list() {
-        return this.api.key.list();
-    }
-    rm(name) {
-        return this.api.key.rm(name);
-    }
-    rename(oldName, newName) {
-        return this.api.key.rename(oldName, newName);
-    }
-    export(name, password) {
-        return this.api.key.export(name, password);
-    }
-    import(name, pem, password) {
-        return this.api.key.import(name, pem, password);
-    }
-}
-exports.ImsIpfsKeyImpl = ImsIpfsKeyImpl;
-class ImsIpfsNamePubsubImpl extends ims_web_1.ImsIpfsNamePubsub {
-    constructor(api) {
-        super();
-        this.api = api;
-    }
-    cancel() {
-        return this.api.name.pubsub.cancel();
-    }
-    state() {
-        return this.api.name.pubsub.state();
-    }
-    subs() {
-        return this.api.name.pubsub.subs();
-    }
-}
-exports.ImsIpfsNamePubsubImpl = ImsIpfsNamePubsubImpl;
-class ImsIpfsNameImpl extends ims_web_1.ImsIpfsName {
-    constructor(api) {
-        super();
-        this.api = api;
-        this.pubsub = new ImsIpfsNamePubsubImpl(api);
-    }
-    publish(addr, options) {
-        return this.api.name.publish(addr, options);
-    }
-    async resolve(name) {
-        return { name: await this.api.name.resolve(name) };
-    }
-}
-exports.ImsIpfsNameImpl = ImsIpfsNameImpl;
+const index_1 = require("./ipfs/index");
 let ImsIpfsImpl = class ImsIpfsImpl extends ims_web_1.ImsIpfs {
     constructor() {
         super();
         this.api = ipfsClient("/ip4/127.0.0.1/tcp/5001");
-        this.name = new ImsIpfsNameImpl(this.api);
-        this.key = new ImsIpfsKeyImpl(this.api);
+        this.name = new index_1.ImsIpfsNameImpl(this.api);
+        this.key = new index_1.ImsIpfsKeyImpl(this.api);
+        this.pubsub = new index_1.ImsIpfsPubsubImpl(this.api);
     }
     addZip() { }
     add(files) {

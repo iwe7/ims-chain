@@ -81,14 +81,12 @@ export const AppConfig = InjectionToken.fromString('AppConfig')
                         ]
                     };
                     const compiler = webpack(config);
-                    compiler.watch({}, async (err: Error, stats: Stats) => {
+                    compiler.watch({},async (err: Error, stats: Stats) => {
                         if (err) throw err;
                         if (stats.hasErrors()) {
                             const errors = stats.toJson().errors;
                             errors.map(err => console.log(err))
                         }
-                        // if (stats.hasWarnings()) console.warn(stats.toJson().warnings)
-                        // 发布到网上
                         const files = fs.readdirSync(outputPath).map(file => {
                             const content = fs.readFileSync(path.join(outputPath, file)).toString()
                             return {

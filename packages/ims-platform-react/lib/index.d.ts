@@ -1,4 +1,5 @@
 import React = require('react');
+import "./index.scss";
 export declare class AppIndex extends React.Component {
     go(): Promise<void>;
     render(): JSX.Element;

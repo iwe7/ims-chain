@@ -1,4 +1,5 @@
 /// <reference types="node" />
+import { Observable } from 'rxjs';
 export interface ImsIpfsFileLs {
     depth: number;
     name: string;
@@ -62,12 +63,20 @@ export declare abstract class ImsIpfsPin {
     abstract ls(hash?: string): Promise<any>;
     abstract rm(hash: string): Promise<any>;
 }
+export interface ImsIpfsPubsubHandlerOptions {
+    from: string;
+    seqno: Buffer | string;
+    data: Buffer | string;
+    topicIDs: string[];
+}
+export interface ImsIpfsPubsubHandler {
+    (opt: ImsIpfsPubsubHandlerOptions): any;
+}
 export declare abstract class ImsIpfsPubsub {
-    abstract subscribe(): Promise<any>;
-    abstract unsubscribe(): Promise<any>;
-    abstract publish(): Promise<any>;
-    abstract ls(): Promise<any>;
-    abstract peers(): Promise<any>;
+    abstract subscribe(topic: string): Observable<any>;
+    abstract publish(topic: string, data: any): Observable<any>;
+    abstract ls(): Observable<any>;
+    abstract peers(topic: string): Observable<any>;
 }
 export declare abstract class ImsIpfsRepo {
     abstract gc(): Promise<any>;

@@ -1,29 +1,7 @@
-import { Module } from "ims-common";
+import { Module, getPath, toString } from "ims-common";
 import { Injector } from "ims-core";
 import express = require("express");
 import { Routes, Router } from "ims-cloud";
-import { toString } from "./util";
-
-function get(key: string, obj: any) {
-  let keys: string[] = key.split(".");
-  let instance = obj;
-  if (keys.length === 1) {
-    return {
-      value: obj[keys[0]],
-      instance
-    };
-  } else {
-    let _keys = keys.reverse();
-    let key = _keys.pop();
-    while (_keys.length > 0) {
-      obj = obj[key];
-      instance = obj;
-      key = _keys.pop();
-    }
-    obj = obj[key];
-    return { value: obj, instance };
-  }
-}
 
 @Module({
   providers: [
@@ -57,7 +35,7 @@ function get(key: string, obj: any) {
                   let params = req.params;
                   if (instance) {
                     try {
-                      const method = get(params.method, instance);
+                      const method = getPath(params.method, instance);
                       let json = await method.value.bind(method.instance)(
                         ...args
                       );
@@ -87,4 +65,4 @@ function get(key: string, obj: any) {
     }
   ]
 })
-export class ImsCloudServerModule {}
+export class ImsCloudServerModule { }

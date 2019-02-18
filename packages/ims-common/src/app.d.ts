@@ -14,6 +14,7 @@ export interface Page {
     sensitive?: boolean;
     strict?: boolean;
     component?: any;
+    title?: string;
 }
 export declare const Page: InjectionToken<Page[]>;
 //# sourceMappingURL=app.d.ts.map

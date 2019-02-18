@@ -12,4 +12,5 @@ export * from "./module/index";
 export * from "./utility/index";
 export * from "./webapp/index";
 export * from "./ipfs/index";
+export * from "./store/index";
 //# sourceMappingURL=index.d.ts.map

@@ -62,7 +62,8 @@ export function makeDecorator<T>(
             target,
             token,
             parameterIndex: descriptorOrParameterIndex,
-            parameterType: paramTypes[descriptorOrParameterIndex]
+            parameterType: paramTypes[descriptorOrParameterIndex],
+            factory
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
           constructorMap.set(target, constructorMap.get(target).add(def));
@@ -80,7 +81,8 @@ export function makeDecorator<T>(
             token,
             propertyKey,
             parameterIndex: descriptorOrParameterIndex,
-            parameterType: paramTypes[descriptorOrParameterIndex]
+            parameterType: paramTypes[descriptorOrParameterIndex],
+            factory
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
           // 收集方法参数装饰器
@@ -120,7 +122,8 @@ export function makeDecorator<T>(
             token,
             parameters,
             propertys,
-            methods
+            methods,
+            factory
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
           res = factory && factory.type(def);
@@ -137,7 +140,8 @@ export function makeDecorator<T>(
             target,
             token,
             propertyKey,
-            propertyType: designType
+            propertyType: designType,
+            factory
           };
           def.metadataDef = !!getDef ? getDef(def) : metadataDef;
           propertysMap.set(target, propertysMap.get(target).add(def));
@@ -162,7 +166,8 @@ export function makeDecorator<T>(
           token,
           parameters,
           propertyKey: propertyKey as PropertyKey,
-          returnType: returnType
+          returnType: returnType,
+          factory
         };
         def.metadataDef = !!getDef ? getDef(def) : metadataDef;
         methodsMap.set(target, methodsMap.get(target).add(def));

@@ -1,4 +1,5 @@
 export abstract class ImsSdk {
+    abstract ready(): Promise<any>;
     /**
      * 路由
      */
@@ -36,7 +37,7 @@ export abstract class ImsSdk {
      * 导航栏
      */
     abstract showNavigationBarLoading(): Promise<any>;
-    abstract setNavigationBarTitle(): Promise<any>;
+    abstract setNavigationBarTitle(title: string): Promise<any>;
     abstract setNavigationBarColor(): Promise<any>;
     abstract hideNavigationBarLoading(): Promise<any>;
 
@@ -163,8 +164,6 @@ export abstract class ImsSdk {
     abstract getStorage(): Promise<any>;
     abstract clearStorageSync(): Promise<any>;
     abstract clearStorage(): Promise<any>;
-
-
     /**
      * 媒体
      */

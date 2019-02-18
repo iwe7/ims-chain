@@ -1,0 +1,29 @@
+.root{
+    width: 100vw;
+    height: 100vh;
+    user-select: none;
+    .footer{
+        display: flex;
+        height: 60px;
+        flex-direction: row;
+        background: #f4f4f4;
+        color: #333;
+        border-top: 1px solid #d3d3d3;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        &_item{
+            flex:1;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+    }
+}
+
+body,
+html{
+    margin: 0px;
+    padding: 0px;
+}

@@ -3,21 +3,44 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const ims_common_1 = require("ims-common");
 const ims_core_1 = require("ims-core");
-const ims_web_1 = require("ims-web");
 const path_1 = require("path");
-const ims_web_impl_1 = require("ims-web-impl");
+const ims_cloud_1 = require("ims-cloud");
 const express = require("express");
+const http = require("http");
 const app = express();
 const ims_close_port_1 = require("ims-close-port");
+const ims_web_1 = require("ims-web");
+const ims_web_impl_1 = require("ims-web-impl");
+const ims_cloud_server_1 = require("ims-cloud-server");
+const WebSocket = require("ws");
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 let ImsIpnsModule = class ImsIpnsModule {
 };
 ImsIpnsModule = tslib_1.__decorate([
     ims_common_1.Module({
+        imports: [
+            ims_cloud_server_1.ImsCloudServerModule
+        ],
         providers: [{
-                provide: ims_core_1.InjectionToken.fromType(ims_web_1.ImsIpfs),
+                provide: ims_cloud_1.Routes,
                 useFactory: () => {
-                    return new ims_web_impl_1.ImsIpfsImpl();
-                },
+                    return [
+                        ims_core_1.InjectionToken.fromType(ims_web_1.ImsUser),
+                        ims_core_1.InjectionToken.fromType(ims_web_1.ImsIpfs)
+                    ];
+                }
+            }, {
+                provide: ims_core_1.InjectionToken.fromType(ims_web_1.ImsIpfs),
+                useFactory: async (injector) => {
+                    return await injector.get(ims_web_impl_1.ImsIpfsImpl);
+                }
+            },
+            {
+                provide: ims_core_1.InjectionToken.fromType(ims_web_1.ImsUser),
+                useFactory: async (injector) => {
+                    return await injector.get(ims_web_impl_1.ImsUserImpl);
+                }
             }, {
                 provide: ims_common_1.AppInitialization,
                 useFactory: async (injector) => {
@@ -37,8 +60,26 @@ ImsIpnsModule = tslib_1.__decorate([
                     app.get('/favicon.ico', (req, res, next) => {
                         res.sendFile(path_1.join(__dirname, 'favicon.ico'));
                     });
+                    const router = await injector.get(ims_cloud_1.Router);
+                    router && app.use("/api", router);
                     await ims_close_port_1.close(6001);
-                    app.listen(6001, () => {
+                    wss.on('connection', (ws) => {
+                        ws.on('message', async (data) => {
+                            data = JSON.parse(data);
+                            const { hash, method, params } = data;
+                            const instance = await injector.getByHash(hash);
+                            const res = ims_common_1.getPath(method, instance);
+                            res.value.bind(res.instance)(...params).subscribe(data => {
+                                try {
+                                    data = data || {};
+                                    ws.send(JSON.stringify({ type: `${hash}.${method}`, data }));
+                                }
+                                catch (e) {
+                                }
+                            });
+                        });
+                    });
+                    server.listen(6001, () => {
                         console.log('ipns start');
                     });
                 }

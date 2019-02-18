@@ -14,5 +14,6 @@ export interface Page {
     sensitive?: boolean;
     strict?: boolean;
     component?: any;
+    title?: string;
 }
 export const Page = InjectionToken.fromString<Page[]>('Page', 'Page', true)

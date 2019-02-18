@@ -24,7 +24,8 @@ function makeDecorator(token, getDef, factory) {
                         target,
                         token,
                         parameterIndex: descriptorOrParameterIndex,
-                        parameterType: paramTypes[descriptorOrParameterIndex]
+                        parameterType: paramTypes[descriptorOrParameterIndex],
+                        factory
                     };
                     def.metadataDef = !!getDef ? getDef(def) : metadataDef;
                     constructorMap.set(target, constructorMap.get(target).add(def));
@@ -42,7 +43,8 @@ function makeDecorator(token, getDef, factory) {
                         token,
                         propertyKey,
                         parameterIndex: descriptorOrParameterIndex,
-                        parameterType: paramTypes[descriptorOrParameterIndex]
+                        parameterType: paramTypes[descriptorOrParameterIndex],
+                        factory
                     };
                     def.metadataDef = !!getDef ? getDef(def) : metadataDef;
                     parametersMap.set(target, parametersMap.get(target).add(def));
@@ -81,7 +83,8 @@ function makeDecorator(token, getDef, factory) {
                         token,
                         parameters,
                         propertys,
-                        methods
+                        methods,
+                        factory
                     };
                     def.metadataDef = !!getDef ? getDef(def) : metadataDef;
                     res = factory && factory.type(def);
@@ -98,7 +101,8 @@ function makeDecorator(token, getDef, factory) {
                         target,
                         token,
                         propertyKey,
-                        propertyType: designType
+                        propertyType: designType,
+                        factory
                     };
                     def.metadataDef = !!getDef ? getDef(def) : metadataDef;
                     propertysMap.set(target, propertysMap.get(target).add(def));
@@ -123,7 +127,8 @@ function makeDecorator(token, getDef, factory) {
                     token,
                     parameters,
                     propertyKey: propertyKey,
-                    returnType: returnType
+                    returnType: returnType,
+                    factory
                 };
                 def.metadataDef = !!getDef ? getDef(def) : metadataDef;
                 methodsMap.set(target, methodsMap.get(target).add(def));

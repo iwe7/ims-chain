@@ -1,1 +1,1 @@
-{"version":3,"file":"bootstrap.d.ts","sourceRoot":"","sources":["bootstrap.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,GAAG,QAAQ,OAAO,CAAC,CAAC;AAEhC,OAAO,EAAE,IAAI,EAAE,QAAQ,EAAsB,MAAM,YAAY,CAAC;AAGhE,qBAAa,OAAQ,SAAQ,KAAK,CAAC,SAAS;IACxC,MAAM;CAGT;AAED,wBAAsB,SAAS,CAAC,KAAK,EAAE,IAAI,EAAE,EAAE,QAAQ,EAAE,QAAQ,EAAE,EAAE,EAAE,GAAG,iBAMzE"}
+{"version":3,"file":"bootstrap.d.ts","sourceRoot":"","sources":["bootstrap.tsx"],"names":[],"mappings":""}

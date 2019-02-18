@@ -1,10 +1,28 @@
 import { ImsSdk } from 'ims-sdk';
-import { QueryString } from './query_string';
+import { QueryString, Injector } from 'ims-common';
 import { History } from 'history';
+import React = require('react');
+export declare class Page404 extends React.Component {
+    render(): JSX.Element;
+}
+export interface AppFooterProps {
+    list: any[];
+}
+export declare class AppFooter extends React.Component<AppFooterProps, any> {
+    click(e: any): Promise<void>;
+    render(): JSX.Element;
+}
 export declare class ImsSdkH5 extends ImsSdk {
     ps: QueryString;
+    injector: Injector;
     history: History;
-    constructor(ps: QueryString);
+    pages: string[];
+    window: any;
+    title: string;
+    tabBar: any;
+    constructor(ps: QueryString, injector: Injector);
+    ready(): Promise<void>;
+    private renderTo;
     switchTab(url: string): Promise<any>;
     reLaunch(path: string): Promise<any>;
     redirectTo(path: string): Promise<any>;
@@ -17,7 +35,7 @@ export declare class ImsSdkH5 extends ImsSdk {
     hideToast(): Promise<any>;
     hideLoading(): Promise<any>;
     showNavigationBarLoading(): Promise<any>;
-    setNavigationBarTitle(): Promise<any>;
+    setNavigationBarTitle(title: string): Promise<any>;
     setNavigationBarColor(): Promise<any>;
     hideNavigationBarLoading(): Promise<any>;
     setBackgroundTextStyle(): Promise<any>;

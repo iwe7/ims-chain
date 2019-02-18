@@ -4,28 +4,6 @@ const tslib_1 = require("tslib");
 const ims_common_1 = require("ims-common");
 const express = require("express");
 const ims_cloud_1 = require("ims-cloud");
-const util_1 = require("./util");
-function get(key, obj) {
-    let keys = key.split(".");
-    let instance = obj;
-    if (keys.length === 1) {
-        return {
-            value: obj[keys[0]],
-            instance
-        };
-    }
-    else {
-        let _keys = keys.reverse();
-        let key = _keys.pop();
-        while (_keys.length > 0) {
-            obj = obj[key];
-            instance = obj;
-            key = _keys.pop();
-        }
-        obj = obj[key];
-        return { value: obj, instance };
-    }
-}
 let ImsCloudServerModule = class ImsCloudServerModule {
 };
 ImsCloudServerModule = tslib_1.__decorate([
@@ -62,14 +40,14 @@ ImsCloudServerModule = tslib_1.__decorate([
                                         let params = req.params;
                                         if (instance) {
                                             try {
-                                                const method = get(params.method, instance);
+                                                const method = ims_common_1.getPath(params.method, instance);
                                                 let json = await method.value.bind(method.instance)(...args);
-                                                res.end(util_1.toString(json));
+                                                res.end(ims_common_1.toString(json));
                                                 return;
                                             }
                                             catch (e) {
                                                 let err = e;
-                                                res.end(util_1.toString({
+                                                res.end(ims_common_1.toString({
                                                     message: err.message,
                                                     name: err.name,
                                                     stack: err.stack

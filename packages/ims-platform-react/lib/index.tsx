@@ -4,7 +4,10 @@ import { ImsSdk } from 'ims-sdk'
 import { ImsSdkH5 } from 'ims-sdk-h5'
 import { InjectionToken } from 'ims-common'
 import React = require('react');
-import { bootstrap } from './bootstrap';
+import "./index.scss";
+import { ImsIpfs, ImsUser } from 'ims-web';
+import { Routes } from 'ims-cloud'
+import { ImsCloudClientModule } from 'ims-cloud-client';
 
 export class AppIndex extends React.Component {
     async go() {
@@ -34,8 +37,19 @@ export class AppHome extends React.Component {
     }
 }
 
+
 @Module({
+    imports: [
+        ImsCloudClientModule
+    ],
     providers: [
+        {
+            provide: Routes,
+            useFactory: () => [
+                InjectionToken.fromType(ImsUser),
+                InjectionToken.fromType(ImsIpfs)
+            ]
+        },
         {
             provide: InjectionToken.fromType(ImsSdk),
             useFactory: async (injector: Injector) => {
@@ -47,7 +61,8 @@ export class AppHome extends React.Component {
             useFactory: () => {
                 return {
                     path: '/',
-                    component: AppIndex
+                    component: AppIndex,
+                    title: '首页'
                 } as Page
             }
         },
@@ -56,15 +71,16 @@ export class AppHome extends React.Component {
             useFactory: () => {
                 return {
                     path: '/home',
-                    component: AppHome
+                    component: AppHome,
+                    title: '我的'
                 } as Page
             }
         },
         {
             provide: AppInitialization,
             useFactory: async (injector: Injector) => {
-                const pages = await injector.get<Page[]>(Page);
-                bootstrap(pages, injector, document.getElementById('app'))
+                const sdk = await injector.get<ImsSdk>(ImsSdk);
+                await sdk.ready();
             }
         }
     ]
