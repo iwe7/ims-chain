@@ -6,13 +6,13 @@
 
 ## 目录结构设计
 
-/data 数据层
-    /config.json 配置
-/attachment 附件层
-    /leveldb管理
-/addons 应用层
-    /第三方插件
-/node_modules 第三方库
-index.html
-index.ts
-install.ts
+* /data 数据层
+    * /config.json 配置
+* /attachment 附件层
+    * /leveldb管理
+* /addons 应用层
+    * /第三方插件
+* /node_modules 第三方库
+* index.html
+* index.ts
+* install.ts
