@@ -127,6 +127,9 @@
       "ims-openid": [
         "packages/ims-openid/src/index"
       ],
+      "ims-orm": [
+        "packages/ims-orm/lib/index"
+      ],
       "ims-tools": [
         "packages/ims-tools/lib/index"
       ],

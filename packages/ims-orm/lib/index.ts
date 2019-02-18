@@ -39,7 +39,7 @@ const root = process.cwd();
         provide: ENTRY,
         useFactory: async (injector: Injector) => {
             const connection = await injector.get<Connection>(ImsOrmConnection);
-            return (param: ConstructorMetadata) => {
+            return async (param: ConstructorMetadata) => {
                 return connection.getRepository(param.metadataDef)
             }
         }

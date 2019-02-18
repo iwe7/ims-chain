@@ -40,7 +40,7 @@ ImsOrmModule = tslib_1.__decorate([
                 provide: ims_common_1.ENTRY,
                 useFactory: async (injector) => {
                     const connection = await injector.get(exports.ImsOrmConnection);
-                    return (param) => {
+                    return async (param) => {
                         return connection.getRepository(param.metadataDef);
                     };
                 }
