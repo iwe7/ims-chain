@@ -1,5 +1,5 @@
 import { createConnection, Connection, ConnectionOptions, ObjectType, EntitySchema, Repository } from "typeorm";
-import { Module, InjectionToken, Injector, ENTERY } from 'ims-common';
+import { Module, InjectionToken, Injector, ENTRY } from 'ims-common';
 export const ImsOrmConnection = InjectionToken.fromString<Connection>('ImsOrmConnection');
 export const ImsOrmConnectionOptions = InjectionToken.fromString<ConnectionOptions[]>('ImsOrmConnectionOptions', 'ImsOrmConnectionOptions', true);
 export interface ImsOrmGetRepository {
@@ -8,7 +8,6 @@ export interface ImsOrmGetRepository {
 export const ImsOrmGetRepository = InjectionToken.fromString<ImsOrmGetRepository>('ImsOrmGetRepository');
 import { ConstructorMetadata } from 'ims-decorator';
 import { join } from 'path';
-
 const root = process.cwd();
 
 @Module({
@@ -37,7 +36,7 @@ const root = process.cwd();
             return await createConnection(config);
         }
     }, {
-        provide: ENTERY,
+        provide: ENTRY,
         useFactory: async (injector: Injector) => {
             const connection = await injector.get<Connection>(ImsOrmConnection);
             return (param: ConstructorMetadata) => {
@@ -46,4 +45,4 @@ const root = process.cwd();
         }
     }]
 })
-export class ImsOrm { }
+export class ImsOrmModule { }

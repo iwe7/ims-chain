@@ -8,9 +8,9 @@ exports.ImsOrmConnectionOptions = ims_common_1.InjectionToken.fromString('ImsOrm
 exports.ImsOrmGetRepository = ims_common_1.InjectionToken.fromString('ImsOrmGetRepository');
 const path_1 = require("path");
 const root = process.cwd();
-let ImsOrm = class ImsOrm {
+let ImsOrmModule = class ImsOrmModule {
 };
-ImsOrm = tslib_1.__decorate([
+ImsOrmModule = tslib_1.__decorate([
     ims_common_1.Module({
         imports: [],
         providers: [{
@@ -37,7 +37,7 @@ ImsOrm = tslib_1.__decorate([
                     return await typeorm_1.createConnection(config);
                 }
             }, {
-                provide: ims_common_1.ENTERY,
+                provide: ims_common_1.ENTRY,
                 useFactory: async (injector) => {
                     const connection = await injector.get(exports.ImsOrmConnection);
                     return (param) => {
@@ -46,5 +46,5 @@ ImsOrm = tslib_1.__decorate([
                 }
             }]
     })
-], ImsOrm);
-exports.ImsOrm = ImsOrm;
+], ImsOrmModule);
+exports.ImsOrmModule = ImsOrmModule;
