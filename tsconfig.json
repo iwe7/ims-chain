@@ -52,6 +52,9 @@
       "ims-app": [
         "packages/ims-app/lib/index"
       ],
+      "ims-app-impl": [
+        "packages/ims-app-impl/lib/index"
+      ],
       "ims-web": [
         "packages/ims-web/lib/index"
       ],

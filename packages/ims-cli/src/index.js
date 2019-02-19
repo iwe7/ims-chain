@@ -6,11 +6,10 @@ const ims_common_1 = require("ims-common");
 const program = require("commander");
 const tokens_1 = require("./tokens");
 const packages = require("../package.json");
-const ims_ipfs_server_1 = require("ims-ipfs-server");
-const ims_cloud_1 = require("ims-cloud");
 const ims_tools_1 = require("ims-tools");
 const path_1 = require("path");
 const commands_1 = require("./commands");
+const ims_cloud_server_1 = require("ims-cloud-server");
 let ImsCliModule = class ImsCliModule {
 };
 ImsCliModule = tslib_1.__decorate([
@@ -50,23 +49,8 @@ ImsCliModule = tslib_1.__decorate([
                     let commander = await injector.get(tokens_1.Commander);
                     return commander
                         .command("start")
-                        .option("-p, --port", "端口号")
-                        .option("-h, --host", "地址")
                         .action((port, host) => {
-                        ims_common_1.bootstrapModule(ims_ipfs_server_1.ImsIpfsServerModule, [
-                            {
-                                provide: ims_cloud_1.Config,
-                                useFactory: () => {
-                                    return {
-                                        host: host || "0.0.0.0",
-                                        port: port || 80
-                                    };
-                                }
-                            }
-                        ]).then(async (res) => {
-                            let config = await res.injector.get(ims_cloud_1.Config);
-                            console.log(config);
-                        });
+                        ims_common_1.bootstrapModule(ims_cloud_server_1.ImsCloudServer, []).then();
                     });
                 }
             },

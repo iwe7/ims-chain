@@ -6,14 +6,15 @@
         "ts": "ts-node -r tsconfig-paths/register ",
         "tsc": "tsc -p tsconfig.build.json --w",
         "tscp": "tsc --w -p ",
-        "cli": "pm2 start yarn --watch --name cli -- ts packages/ims-cli/src/index.ts",
+        "cli": "yarn ts packages/ims-cli/src/index.ts",
+        "proxy": "pm2 start yarn --watch --name cli -- ts packages/ims-cli/src/index.ts proxy",
+        "ipns": "pm2 start yarn --watch --name ipns -- ts packages/ims-cli/src/index.ts start",
         "ipfs": "ipfs",
         "build": "pm2 start yarn --watch --name build -- ts packages/ims-themes-web/build.ts",
-        "start": "pm2 start yarn --name tsc -- tsc && yarn cli proxy &&  pm2 start yarn --name daemon -- daemon && yarn ipns",
+        "start": "pm2 start yarn --name tsc -- tsc && yarn proxy &&  pm2 start yarn --name daemon -- daemon && yarn ipns",
         "build:nat:desktop": "webpack -p packages/ims-nat-desktop/lib/webpack.config.js",
         "dev:nat:desktop": "webpack-dev-server -p packages/ims-nat-desktop/lib/webpack.config.js --progress --colors",
         "daemon": "ipfs daemon --enable-namesys-pubsub --enable-pubsub-experiment",
-        "ipns": "pm2 start yarn --name ipns -- ts packages/ims-ipns/lib/index.ts",
         "build:react": "pm2 start yarn --name buildReact -- ts packages/ims-platform-react/lib/build.ts"
     },
     "devDependencies": {

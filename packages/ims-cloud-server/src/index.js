@@ -78,6 +78,10 @@ ImsCloudServer = tslib_1.__decorate([
                     server.listen(cfg.port, () => {
                         console.log('ipns start');
                     });
+                    process.on('uncaughtException', function (err) {
+                        console.log(err);
+                        console.log(err.stack);
+                    });
                 }
             }]
     })
